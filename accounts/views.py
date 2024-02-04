@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login as auth_login
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 
 # Create your views here.
@@ -23,12 +24,13 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        login_form = CustomAuthenticationForm(request.POST)
+        login_form = CustomAuthenticationForm(request, data=request.POST)
         if login_form.is_valid():
+            user = authenticate(request, username=login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
+            if user is not None:
+                auth_login(request, user)
             return redirect('dashboard')
-        else:
-            return redirect('login')
-        
+
     login_form = CustomAuthenticationForm()
     context = {'login_form': login_form}
     return render(request, 'login.html', context)

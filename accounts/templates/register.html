@@ -6,8 +6,23 @@
 
         <form method="POST" action="register">
             {% csrf_token %}
-            {{ register_form.as_p }}
+
+            {{ register_form.username.label }}
+            {{ register_form.username }}
+            {{ register_form.email.label }}
+            {{ register_form.email }}
+            {{ register_form.first_name.label }}
+            {{ register_form.first_name }}
+            {{ register_form.last_name.label }}
+            {{ register_form.last_name }}
+            {{ register_form.password1.label }}
+            {{ register_form.password1 }}
+            {{ register_form.password2.label }}
+            {{ register_form.password2 }}
+
             <input type="submit" name="register" value="Register"></input>
         </form>
+
+        <a href="login"><button>Returning Grappler</button></a>
     </div>
 {% endblock %}
