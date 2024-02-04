@@ -14,7 +14,8 @@ def register(request):
     if request.method == 'POST':
         register_form = CustomUserCreationForm(request.POST)
         if register_form.is_valid():
-            register_form.save()
+            user = register_form.save()
+            auth_login(request, user)
             return redirect('dashboard')
         else:
             return redirect('login')
@@ -38,7 +39,10 @@ def login(request):
 
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    if request.user.is_authenticated:
+        return render(request, 'dashboard.html')
+    else:
+        return redirect('index')
 
 def logout(request):
     auth.logout(request)
