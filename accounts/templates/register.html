@@ -4,6 +4,12 @@
     <div>
         <h2>New Grappler</h2>
 
+        <div class="error-message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+
         <form method="POST" action="register">
             {% csrf_token %}
 
@@ -23,6 +29,6 @@
             <input type="submit" name="register" value="Register"></input>
         </form>
 
-        <a href="login"><button>Returning Grappler</button></a>
+        <a href="login"><button>I have an account</button></a>
     </div>
 {% endblock %}

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import auth
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -31,7 +32,10 @@ def login(request):
             user = authenticate(request, username=login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
             if user is not None:
                 auth_login(request, user)
-            return redirect('dashboard')
+                return redirect('dashboard')
+        else:
+            messages.error(request, 'Invalid credentials. Please try again.')
+            return redirect('login')
 
     login_form = CustomAuthenticationForm()
     context = {'login_form': login_form}
