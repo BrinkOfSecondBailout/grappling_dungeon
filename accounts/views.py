@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.models import auth
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 
 # Create your views here.
@@ -38,3 +39,7 @@ def login(request):
 
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('index')
