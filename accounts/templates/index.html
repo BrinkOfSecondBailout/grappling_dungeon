@@ -2,22 +2,7 @@
 
 {% block content %}
     <div>
-        <h2>Returning Grappler</h2>
-    
-        <form method="post" action="">
-            {% csrf_token %}
-            {{ login_form.as_p }}
-            <input type="submit" name="login" value="Login"></input>
-        </form>
-    </div>
-
-    <div>
-        <h2>New Grappler</h2>
-
-        <form method="post" action="">
-            {% csrf_token %}
-            {{ register_form.as_p }}
-            <input type="submit" name="register" value="Register">Register</input>
-        </form>
+        <a href="login"><button>Returning Grappler</button></a>
+        <a href="register"><button>New Grappler</button></a>
     </div>
 {% endblock %}
