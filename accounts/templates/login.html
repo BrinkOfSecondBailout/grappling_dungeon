@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div>
+    <div class="login-wrapper">
         <h2>Returning User</h2>
 
         <div class="error-message">
@@ -9,22 +9,24 @@
                 <p>{{ message }}</p>
             {% endfor %}
         </div>
+        
+        <div class="login-form">
+            <form method="POST" action="login">
+                {% csrf_token %}
 
-        <form method="POST" action="login">
-            {% csrf_token %}
+                <div class="form-label-and-field">
+                    <div>{{ login_form.username.label }}</div>
+                    <div>{{ login_form.username }}</div>
+                </div>
+                <div class="form-label-and-field">
+                    <div>{{ login_form.password.label }}</div>
+                    <div>{{ login_form.password }}</div>
+                </div>
 
-            <div>
-                <div>{{ login_form.username.label }}</div>
-                <div>{{ login_form.username }}</div>
-            </div>
-            <div>
-                <div>{{ login_form.password.label }}</div>
-                <div>{{ login_form.password }}</div>
-            </div>
+                <input type="submit" name="login" value="Login" class="submit-button"></input>
+            </form>
+        </div>
 
-            <input type="submit" name="login" value="Login"></input>
-        </form>
-
-        <a href="register"><button>I don't have an account</button></a>
+        <a href="register"><button class="long-button">I don't have an account</button></a>
     </div>
 {% endblock %}

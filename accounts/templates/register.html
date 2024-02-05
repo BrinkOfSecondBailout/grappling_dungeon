@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div>
+    <div class="register-wrapper">
         <h2>New User</h2>
 
         <div class="error-message">
@@ -10,28 +10,28 @@
             {% endfor %}
         </div>
         
-        <div class="standard-form">
+        <div class="register-form">
             <form method="POST" action="register">
                 {% csrf_token %}
                 
-                <div>
+                <div class="form-label-and-field">
                     <div>{{ register_form.username.label }}</div>
                     <div>{{ register_form.username }}</div>
                 </div>
-                <div>
+                <div class="form-label-and-field">
                     <div>{{ register_form.email.label }}</div>
                     <div>{{ register_form.email }}</div>
                 </div>
-                <div>
+                <div class="form-label-and-field">
                     <div>{{ register_form.first_name.label }}</div>
                     <div>{{ register_form.first_name }}</div>
                 </div>
-                <div>
+                <div class="form-label-and-field">
                     <div>{{ register_form.last_name.label }}</div>
                     <div>{{ register_form.last_name }}</div>
                 </div>
-                <div>
-                    <div>
+                <div class="form-label-and-field">
+                    <div class="pw-requirements">
                         <p>Your password:</p>
                         <p>can’t be too similar to your other personal information.</p>
                         <p>must contain at least 8 characters.</p>
@@ -41,15 +41,15 @@
                     <div>{{ register_form.password1.label }}</div>
                     <div>{{ register_form.password1 }}</div>
                 </div>
-                <div>
+                <div class="form-label-and-field">
                     <div>{{ register_form.password2.label }}</div>
                     <div>{{ register_form.password2 }}</div>
                 </div>
     
-                <input type="submit" name="register" value="Register"></input>
+                <input type="submit" name="register" value="Register" class="submit-button"></input>
             </form>
         </div>
 
-        <a href="login"><button>I have an account</button></a>
+        <a href="login"><button class="long-button">I have an account</button></a>
     </div>
 {% endblock %}

@@ -12,19 +12,21 @@
 </head>
 
 <body>
-    <header>
-        <h1>Grappling Dungeon</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="dashboard">Home</a></li>
-            <li><a href="logout">Logout</a></li>
-        </ul>
-    </nav>
-    <div id="content">
+    <div class="nav-bar">
+        <header>
+            <h1>Grappling Dungeon</h1>
+        </header>
+        <nav class="nav-links">
+            <a href="dashboard">Home</a>
+            <a href="logout">Logout</a>
+        </nav>
+    </div>
+
+    <div>
         {% block content %}{% endblock %}
     </div>
-    <footer>
+
+    <footer class="footer-bar">
         &copy; 2024 Danny Nguyen Duong
     </footer>
 </body>
