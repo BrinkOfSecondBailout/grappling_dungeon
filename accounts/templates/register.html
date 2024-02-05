@@ -15,28 +15,35 @@
                 {% csrf_token %}
                 
                 <div>
-                    {{ register_form.username.label }}
-                    {{ register_form.username }}
+                    <div>{{ register_form.username.label }}</div>
+                    <div>{{ register_form.username }}</div>
                 </div>
                 <div>
-                    {{ register_form.email.label }}
-                    {{ register_form.email }}
+                    <div>{{ register_form.email.label }}</div>
+                    <div>{{ register_form.email }}</div>
                 </div>
                 <div>
-                    {{ register_form.first_name.label }}
-                    {{ register_form.first_name }}
+                    <div>{{ register_form.first_name.label }}</div>
+                    <div>{{ register_form.first_name }}</div>
                 </div>
                 <div>
-                    {{ register_form.last_name.label }}
-                    {{ register_form.last_name }}
+                    <div>{{ register_form.last_name.label }}</div>
+                    <div>{{ register_form.last_name }}</div>
                 </div>
                 <div>
-                    {{ register_form.password1.label }}
-                    {{ register_form.password1 }}
+                    <div>
+                        <p>Your password:</p>
+                        <p>can’t be too similar to your other personal information.</p>
+                        <p>must contain at least 8 characters.</p>
+                        <p>can’t be a commonly used password.</p>
+                        <p>can’t be entirely numeric.</p>
+                    </div>
+                    <div>{{ register_form.password1.label }}</div>
+                    <div>{{ register_form.password1 }}</div>
                 </div>
                 <div>
-                    {{ register_form.password2.label }}
-                    {{ register_form.password2 }}
+                    <div>{{ register_form.password2.label }}</div>
+                    <div>{{ register_form.password2 }}</div>
                 </div>
     
                 <input type="submit" name="register" value="Register"></input>

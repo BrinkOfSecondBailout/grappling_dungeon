@@ -17,9 +17,13 @@ def register(request):
         if register_form.is_valid():
             user = register_form.save()
             auth_login(request, user)
+            print(user.email)
             return redirect('dashboard')
         else:
-            return redirect('login')
+            for field, errors in register_form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+            return redirect('register')
 
     register_form = CustomUserCreationForm()
     context = {'register_form': register_form}
@@ -32,6 +36,7 @@ def login(request):
             user = authenticate(request, username=login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
             if user is not None:
                 auth_login(request, user)
+                print(user.email)
                 return redirect('dashboard')
         else:
             messages.error(request, 'Invalid credentials. Please try again.')

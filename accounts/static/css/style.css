@@ -6,3 +6,7 @@
 .error-message {
     color: red;
 }
+
+.display-block {
+    display: block;
+}

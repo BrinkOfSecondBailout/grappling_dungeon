@@ -14,12 +14,12 @@
             {% csrf_token %}
 
             <div>
-                {{ login_form.username.label }}
-                {{ login_form.username }}
+                <div>{{ login_form.username.label }}</div>
+                <div>{{ login_form.username }}</div>
             </div>
             <div>
-                {{ login_form.password.label }}
-                {{ login_form.password }}
+                <div>{{ login_form.password.label }}</div>
+                <div>{{ login_form.password }}</div>
             </div>
 
             <input type="submit" name="login" value="Login"></input>
