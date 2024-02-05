@@ -17,10 +17,6 @@
     gap: 20px;
 }
 
-#user-buttons {
-    margin-top: 10px;
-}
-
 .footer-bar {
     display: flex;
     font-size: 14px;
@@ -31,11 +27,12 @@
     padding: 10px;
 }
 
-.register-wrapper {
+.index-wrapper {
     text-align: center;
 }
 
-.index-wrapper {
+
+.register-wrapper {
     text-align: center;
 }
 
@@ -45,6 +42,10 @@
 
 .dashboard-wrapper {
     text-align: center;
+}
+
+#user-buttons {
+    margin-top: 10px;
 }
 
 .pw-requirements {

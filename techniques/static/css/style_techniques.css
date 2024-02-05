@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0 auto;
+}
+
+#main-logo {
+    height: 140px;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bar {
+    display: flex;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+}
+
+.add-technique-wrapper {
+    text-align: center;
+}
