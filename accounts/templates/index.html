@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="index-wrapper">
-        <a href="login"><button>Returning User</button></a>
-        <a href="register"><button>New User</button></a>
+        <h1>Welcome!</h1>
+        <img src="{% static 'images/ryu-and-ken.gif' %}" alt="Ryu Ken Gif">
+        <div id="user-buttons">
+            <a href="login"><button class="returning-user-button">Returning User</button></a>
+            <a href="register"><button class="new-user-button">New User</button></a>
+        </div>
     </div>
 {% endblock %}
