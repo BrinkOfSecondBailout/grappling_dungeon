@@ -6,8 +6,8 @@
         <h1>Welcome!</h1>
         <img src="{% static 'images/ryu-and-ken.gif' %}" alt="Ryu Ken Gif">
         <div id="user-buttons">
-            <a href="login"><button class="returning-user-button">Returning User</button></a>
-            <a href="register"><button class="new-user-button">New User</button></a>
+            <a href="{% url 'login' %}"><button class="returning-user-button">Returning User</button></a>
+            <a href="{% url 'register' %}"><button class="new-user-button">New User</button></a>
         </div>
     </div>
 {% endblock %}
