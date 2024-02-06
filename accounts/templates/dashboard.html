@@ -10,5 +10,16 @@
         <div>
             <a href="{% url 'public' %}"><button class="long-button">Public Archive</button></a>
         </div>
+
+        <div>
+            <h2>All Grapplers</h2>
+            <div>
+                {% for user in all_users %}
+                    <div>
+                        {{ user.username|title }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import auth
+from accounts.models import User
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib import messages
 
@@ -49,7 +50,8 @@ def login(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
-        return render(request, 'dashboard.html')
+        all_users = User.objects.exclude(username='admin')
+        return render(request, 'dashboard.html', {'all_users': all_users})
     else:
         return redirect('index')
 
