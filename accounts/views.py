@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import auth
 from accounts.models import User
@@ -52,6 +52,13 @@ def dashboard(request):
     if request.user.is_authenticated:
         all_users = User.objects.exclude(username='admin')
         return render(request, 'dashboard.html', {'all_users': all_users})
+    else:
+        return redirect('index')
+    
+def user(request, user_id):
+    if request.user.is_authenticated:
+        user = get_object_or_404(User, id=user_id)
+        return render(request, 'user.html', {'user': user})
     else:
         return redirect('index')
 

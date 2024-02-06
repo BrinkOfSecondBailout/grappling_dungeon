@@ -16,7 +16,7 @@
             <div>
                 {% for user in all_users %}
                     <div>
-                        {{ user.username|title }}
+                        <a href="{% url 'user' user.id %}">{{ user.username|title }}</a>
                     </div>
                 {% endfor %}
             </div>

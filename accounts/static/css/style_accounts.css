@@ -44,6 +44,10 @@
     text-align: center;
 }
 
+.user-profile-wrapper {
+    text-align: center;
+}
+
 #user-buttons {
     margin-top: 10px;
 }
