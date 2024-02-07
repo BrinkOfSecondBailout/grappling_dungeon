@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import auth
 from accounts.models import User
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 from django.contrib import messages
 
 # Create your views here.
@@ -65,7 +65,16 @@ def user(request, user_id):
 def edit(request):
     if request.user.is_authenticated:
         user = request.user
-        return render(request, 'edit.html', {'user': user})
+
+        if (request.method == 'POST'):
+            form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
+            if form.is_valid():
+                form.save()
+                return redirect('edit')
+        else:
+            form = CustomUserChangeForm(instance=user)
+
+        return render(request, 'edit.html', {'form': form})
     else:
         return redirect('index')
 

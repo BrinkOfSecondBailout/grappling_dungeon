@@ -3,6 +3,11 @@
 {% block content %}
     <div class="edit-profile-wrapper">
         <h1>Edit Profile</h1>
-        {{ user.username }}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save Changes">
+        </form>
     </div>
 {% endblock %}
