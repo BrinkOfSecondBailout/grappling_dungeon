@@ -4,6 +4,12 @@
     <div class="edit-profile-wrapper">
         <h1>Edit Profile</h1>
 
+        <div class="error-message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-label-and-field">
@@ -29,5 +35,9 @@
 
             <input type="submit" value="Save Changes" class="submit-button">
         </form>
+
+        <div>
+            <a href="{% url 'password' %}">Change Password</a>
+        </div>
     </div>
 {% endblock %}

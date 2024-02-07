@@ -70,6 +70,7 @@ def edit(request):
             form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
             if form.is_valid():
                 form.save()
+                messages.info(request, 'All changes successfully saved.')
                 return redirect('edit')
         else:
             form = CustomUserChangeForm(instance=user)
@@ -80,7 +81,7 @@ def edit(request):
     
 def password(request):
     if request.user.is_authenticated:
-        return render(request, 'password.html')
+        return redirect('password_change')
     else:
         return redirect('index')
 
