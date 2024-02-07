@@ -1,21 +1,15 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def add(request):
-    if request.user.is_authenticated:
-        return render(request, 'add_new.html')
-    else:
-        return redirect('index')
+    return render(request, 'add_new.html')
 
+@login_required
 def private(request):
-    if request.user.is_authenticated:
-        return render(request, 'private_archive.html')
-    else:
-        return redirect('index')
-    
+    return render(request, 'private_archive.html')
+
+@login_required
 def public(request):
-    if request.user.is_authenticated:
-        return render(request, 'public_archive.html')
-    else:
-        return redirect('index')
+    return render(request, 'public_archive.html')

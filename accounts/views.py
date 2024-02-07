@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import auth
+from django.contrib.auth.decorators import login_required
 from accounts.models import User
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 from django.contrib import messages
@@ -47,43 +48,39 @@ def login(request):
     context = {'login_form': login_form}
     return render(request, 'login.html', context)
 
-
+@login_required
 def dashboard(request):
-    if request.user.is_authenticated:
-        all_users = User.objects.exclude(username='admin')
-        return render(request, 'dashboard.html', {'all_users': all_users})
-    else:
-        return redirect('index')
-    
+    all_users = User.objects.exclude(username='admin')
+    return render(request, 'dashboard.html', {'all_users': all_users})
+
+@login_required
 def user(request, user_id):
-    if request.user.is_authenticated:
-        user = get_object_or_404(User, id=user_id)
-        return render(request, 'user.html', {'user': user})
-    else:
-        return redirect('index')
-    
+    user = get_object_or_404(User, id=user_id)
+    return render(request, 'user.html', {'user': user})
+
+@login_required
 def edit(request):
-    if request.user.is_authenticated:
-        user = request.user
+    user = request.user
 
-        if (request.method == 'POST'):
-            form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
-            if form.is_valid():
-                form.save()
-                messages.info(request, 'All changes successfully saved.')
-                return redirect('edit')
-        else:
-            form = CustomUserChangeForm(instance=user)
-
-        return render(request, 'edit.html', {'form': form})
+    if (request.method == 'POST'):
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'All changes successfully saved.')
+            return redirect('edit')
     else:
-        return redirect('index')
-    
+        form = CustomUserChangeForm(instance=user)
+
+    return render(request, 'edit.html', {'form': form})
+
+@login_required
 def password(request):
-    if request.user.is_authenticated:
-        return redirect('password_change')
-    else:
-        return redirect('index')
+    return redirect('password_change')
+
+@login_required
+def password_change_done(request):
+    messages.info(request, 'New password successfully saved')
+    return redirect('password')
 
 def logout(request):
     auth.logout(request)
