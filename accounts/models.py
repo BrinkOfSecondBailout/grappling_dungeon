@@ -4,4 +4,7 @@ from django.db import models
 # Create your models here.
 
 class User(AbstractUser):
-    pass
+    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+
+    def __str__(self):
+        return self.username
