@@ -61,6 +61,13 @@ def user(request, user_id):
         return render(request, 'user.html', {'user': user})
     else:
         return redirect('index')
+    
+def edit(request):
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'edit.html', {'user': user})
+    else:
+        return redirect('index')
 
 def logout(request):
     auth.logout(request)
