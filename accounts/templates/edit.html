@@ -6,8 +6,28 @@
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save Changes">
+            <div class="form-label-and-field">
+                {{ form.username.label }}
+                {{ form.username }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.first_name.label }}
+                {{ form.first_name }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.last_name.label }}
+                {{ form.last_name }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.email.label }}
+                {{ form.email }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.profile_picture.label }}
+                {{ form.profile_picture }}
+            </div>
+
+            <input type="submit" value="Save Changes" class="submit-button">
         </form>
     </div>
 {% endblock %}

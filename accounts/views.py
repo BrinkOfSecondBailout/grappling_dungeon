@@ -77,6 +77,12 @@ def edit(request):
         return render(request, 'edit.html', {'form': form})
     else:
         return redirect('index')
+    
+def password(request):
+    if request.user.is_authenticated:
+        return render(request, 'password.html')
+    else:
+        return redirect('index')
 
 def logout(request):
     auth.logout(request)
