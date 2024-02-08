@@ -12,7 +12,7 @@
     align-items: center;
     background-color: black;
     color: white;
-    height: 120px;
+    height: 110px;
 }
 
 .nav-bar a {
@@ -39,36 +39,60 @@
 
 .index-wrapper {
     text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
 
 .register-wrapper {
     text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
 .login-wrapper {
     text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
 .dashboard-wrapper {
     text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
 .user-profile-wrapper {
     text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
 .edit-profile-wrapper {
     text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+.edit-profile-columns {
+    display: flex;
+    width: 40%;
+    padding: 10px;
 }
 
 .edit-password-wrapper {
     text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
 .edit-password-done-wrapper {
     text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
+
+
 
 #user-buttons {
     margin-top: 10px;
@@ -134,3 +158,4 @@
     object-fit: cover;
     border: 5px solid black;
 }
+

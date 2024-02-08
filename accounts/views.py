@@ -48,30 +48,36 @@ def login(request):
     context = {'login_form': login_form}
     return render(request, 'login.html', context)
 
-@login_required
+
 def dashboard(request):
-    all_users = User.objects.exclude(username='admin')
-    return render(request, 'dashboard.html', {'all_users': all_users})
+    if request.user.is_authenticated:
+        all_users = User.objects.exclude(username='admin')
+        return render(request, 'dashboard.html', {'all_users': all_users})
+    else:
+        return redirect('index')
 
 @login_required
 def user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     return render(request, 'user.html', {'user': user})
 
-@login_required
+
 def edit(request):
-    user = request.user
+    if request.user.is_authenticated:
+        user = request.user
 
-    if (request.method == 'POST'):
-        form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
-        if form.is_valid():
-            form.save()
-            messages.info(request, 'All changes successfully saved.')
-            return redirect('edit')
+        if (request.method == 'POST'):
+            form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
+            if form.is_valid():
+                form.save()
+                messages.info(request, 'All changes successfully saved.')
+                return redirect('edit')
+        else:
+            form = CustomUserChangeForm(instance=user)
+
+        return render(request, 'edit.html', {'form': form})
     else:
-        form = CustomUserChangeForm(instance=user)
-
-    return render(request, 'edit.html', {'form': form})
+        return redirect('index')
 
 @login_required
 def password(request):
