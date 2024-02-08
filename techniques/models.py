@@ -33,6 +33,7 @@ class Technique(models.Model):
     start_time = models.PositiveIntegerField(blank=True, null=True)
     end_time = models.PositiveIntegerField(blank=True, null=True)
 
+    cropped_video = models.FileField(upload_to='cropped_videos/', null=True, blank=True)
+
     def __str__(self):
         return self.name
-    

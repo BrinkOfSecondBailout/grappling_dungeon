@@ -40,7 +40,7 @@
 .add-technique-wrapper {
     text-align: center;
     padding-top: 4vh;
-    padding-bottom: 4vh;
+    padding-bottom: 10vh;
 }
 
 .private-archive-wrapper {
@@ -81,4 +81,8 @@
     width: fit-content;
     padding: 7px;
     border-radius: 5px;
+}
+
+.instruction-text {
+    font-size: 13px;
 }
