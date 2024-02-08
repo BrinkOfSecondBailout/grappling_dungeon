@@ -77,10 +77,6 @@ def edit(request):
 def password(request):
     return redirect('password_change')
 
-@login_required
-def password_change_done(request):
-    messages.info(request, 'New password successfully saved')
-    return redirect('password')
 
 def logout(request):
     auth.logout(request)
