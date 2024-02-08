@@ -1,4 +1,5 @@
 {% extends 'base_accounts.html' %}
+{% load static %}
 
 {% block content %}
     <div class="edit-profile-wrapper">
@@ -6,6 +7,9 @@
 
         {% if user.profile_picture %}
             <img class="profile-picture" src="{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture">
+        {% else %}
+            <img class="profile-picture" src="{% static 'images/no-profile.png' %}" alt="No profile picture">
+            <h3>No Profile Picture Yet... Upload One Below</h3>
         {% endif %}
 
         <div class="error-message">

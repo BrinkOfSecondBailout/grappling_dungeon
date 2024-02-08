@@ -1,10 +1,23 @@
 {% extends 'base_accounts.html' %}
+{% load static %}
 
 {% block content %}
     <div class="user-profile-wrapper">
         <h1>Grappler Profile</h1>
+
+        {% if user.profile_picture %}
+            <div>
+                <img class="profile-picture" src="{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture">
+            </div>
+        {% else %}
+            <div>
+                <img class="profile-picture" src="{% static 'images/no-profile.png' %}" alt="No profile picture">
+            </div>
+        {% endif %}
+
         {{ user.username }}
-        {{ user.first_name|title }}
-        {{ user.last_name|title }}
+        <div>
+            {{ user.first_name|title }} {{ user.last_name|title }}
+        </div>
     </div>
 {% endblock %}
