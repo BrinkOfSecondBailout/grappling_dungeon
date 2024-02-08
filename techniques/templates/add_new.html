@@ -3,5 +3,43 @@
 {% block content %}
     <div class="add-technique-wrapper">
         <h1>Add A New Move</h1>
+
+        <div class="error-message">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-label-and-field">
+            {{ tech_form.name.label}}
+            {{ tech_form.name}}
+        </div>
+        <div class="form-label-and-field">
+            {{ tech_form.category.label}}
+            {{ tech_form.category}}
+        </div>
+        <div class="form-label-and-field">
+            {{ tech_form.privacy_status.label}}
+            {{ tech_form.privacy_status}}
+        </div>
+        <div class="form-label-and-field">
+            {{ tech_form.video_option.label}}
+            {{ tech_form.video_option}}
+        </div>
+        <div class="form-label-and-field">
+            {{ tech_form.youtube_url.label}}
+            {{ tech_form.youtube_url}}
+        </div>
+        <div class="form-label-and-field">
+            {{ tech_form.start_time.label}}
+            {{ tech_form.start_time}}
+        </div>
+        <div class="form-label-and-field">
+            {{ tech_form.end_time.label}}
+            {{ tech_form.end_time}}
+        </div>
+        <div>
+            <input type="submit" value="Add Technique" class="submit-button">
+        </div>
     </div>
 {% endblock %}
