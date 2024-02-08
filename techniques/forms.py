@@ -4,12 +4,12 @@ from .models import Technique
 class CustomTechniqueCreationForm(forms.ModelForm):
     class Meta:
         model = Technique
-        fields = ['name', 'category', 'privacy_status', 'video_option', 'youtube_url', 'start_time', 'end_time']
+        fields = ['name', 'category', 'privacy_status', 'video_option', 'youtube_url', 'note', 'start_time', 'end_time']
         widgets = {
             'start_time': forms.TextInput(attrs={'placeholder': 'Example: 55 or 1:20'}),
             'end_time': forms.TextInput(attrs={'placeholder': 'Example: 150 or 2:30'}),
+            'note': forms.Textarea(attrs={'rows': 8, 'cols': 30}),
         }
-
 
     MAX_CROPPED_VIDEO_LENGTH = 2
 

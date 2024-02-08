@@ -31,6 +31,10 @@
             {{ tech_form.video_option}}
         </div>
         <div class="form-label-and-field">
+            {{ tech_form.note.label}}
+            {{ tech_form.note}}
+        </div>
+        <div id="start_time_field" class="form-label-and-field">
             {{ tech_form.start_time.label}}
             <div class="instruction-text">
                 <p>*Required if you want to crop the video</p>
@@ -40,7 +44,7 @@
             </div>
             {{ tech_form.start_time}}
         </div>
-        <div class="form-label-and-field">
+        <div id="end_time_field" class="form-label-and-field">
             {{ tech_form.end_time.label}}
             <div class="instruction-text">
                 <p>*Required if you want to crop the video</p>
@@ -54,4 +58,26 @@
             <input type="submit" value="Add Technique" class="submit-button">
         </div>
     </div>
+
+    <script>
+
+        const startTimeField = document.getElementById('start_time_field');
+        const endTimeField = document.getElementById('end_time_field');
+
+        startTimeField.style.display = 'none';
+        endTimeField.style.display = 'none';
+
+        document.getElementById('id_video_option').addEventListener('change', function() {
+            var selectedValue = this.value;
+
+            if(selectedValue === 'cropped') {
+                startTimeField.style.display = 'block';
+                endTimeField.style.display = 'block';
+            } else {
+                startTimeField.style.display = 'none';
+                endTimeField.style.display = 'none';
+            }
+        });
+
+    </script>
 {% endblock %}
