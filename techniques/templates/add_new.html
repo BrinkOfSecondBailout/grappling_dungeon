@@ -23,17 +23,17 @@
             {{ tech_form.privacy_status}}
         </div>
         <div class="form-label-and-field">
-            {{ tech_form.video_option.label}}
-            {{ tech_form.video_option}}
-        </div>
-        <div class="form-label-and-field">
             {{ tech_form.youtube_url.label}}
             {{ tech_form.youtube_url}}
         </div>
         <div class="form-label-and-field">
+            {{ tech_form.video_option.label}}
+            {{ tech_form.video_option}}
+        </div>
+        <div class="form-label-and-field">
             {{ tech_form.start_time.label}}
             <div class="instruction-text">
-                <p>*Only required if you want to crop the video</p>
+                <p>*Required if you want to crop the video</p>
                 <p>*Measured in seconds</p>
                 <p>Example:</p>
                 <p>"55" or "1:20"</p>
@@ -43,10 +43,10 @@
         <div class="form-label-and-field">
             {{ tech_form.end_time.label}}
             <div class="instruction-text">
-                <p>*Only required if you want to crop the video</p>
+                <p>*Required if you want to crop the video</p>
                 <p>*Measured in seconds</p>
                 <p>Example:</p>
-                <p>"55" or "1:20"</p>
+                <p>"150" or "2:30"</p>
             </div>
             {{ tech_form.end_time}}
         </div>
