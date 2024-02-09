@@ -8,6 +8,8 @@ class Technique(models.Model):
         ('guard', 'Guard'),
         ('submission', 'Submission'),
         ('takedown', 'Takedown'),
+        ('counter', 'Defense/Counter'),
+        ('escape', 'Escape'),
     ]
 
     PRIVACY_CHOICES = [
