@@ -3,5 +3,13 @@
 {% block content %}
     <div class="private-archive-wrapper">
         <h1>Your Private Archive</h1>
+        {% for technique in private_techniques %}
+            {{ technique.name|title }}
+            {% if technique.video_option == 'full' %}
+                <div>
+                    <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
 {% endblock %}

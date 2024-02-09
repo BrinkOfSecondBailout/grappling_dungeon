@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CustomTechniqueCreationForm
 from moviepy.video.io.VideoFileClip import VideoFileClip
+from .models import Technique
 
 # Create your views here.
 @login_required
@@ -11,6 +12,15 @@ def add(request):
         if tech_form.is_valid:
             technique = tech_form.save(commit=False)
             technique.uploaded_by = request.user
+
+            if technique.video_option == 'full':
+                if 'youtube.com' in technique.youtube_url:
+                    video_id = technique.youtube_url.split('v=')[1]
+                    if '&' in video_id:
+                        video_id = video_id.split('&')[0]
+                    embed_url = f'https://www.youtube.com/embed/{video_id}'
+                    technique.embed_url = embed_url
+                # else:
 
             if technique.video_option == 'cropped':
                 start_time = technique.start_time
@@ -40,7 +50,9 @@ def crop_video(video_url, start_time, end_time):
 
 @login_required
 def private(request):
-    return render(request, 'private_archive.html')
+    user = request.user
+    private_techniques = Technique.objects.filter(uploaded_by=user, privacy_status='private')
+    return render(request, 'private_archive.html', {'private_techniques': private_techniques})
 
 @login_required
 def public(request):

@@ -10,6 +10,7 @@ class Technique(models.Model):
         ('takedown', 'Takedown'),
         ('counter', 'Defense/Counter'),
         ('escape', 'Escape'),
+        ('other', 'Other'),
     ]
 
     PRIVACY_CHOICES = [
@@ -32,6 +33,8 @@ class Technique(models.Model):
     video_option = models.CharField(max_length = 10, choices=VIDEO_CHOICES)
     youtube_url = models.URLField()
     note = models.CharField(max_length = 500, blank=True, null=True)
+
+    embed_url = models.URLField(blank=True, null=True)
 
     start_time = models.PositiveIntegerField(blank=True, null=True)
     end_time = models.PositiveIntegerField(blank=True, null=True)
