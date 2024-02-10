@@ -22,9 +22,23 @@
                     Under Constructions
                 </div>
             {% endif %}
+
+            <div id="{{ technique.id }}-note" style="display: none;">
+                {% if technique.note == None %}
+                    <p>No note yet.</p>
+                {% endif %}
+                {% if technique.note != None %}
+                    <p>{{ technique.note }}</p>
+                {% endif %}
+                <div>
+                    <button class="standard-button">Edit Note</button>
+                </div>
+            </div>
+            
+
             <div class="note-and-delete-buttons">
                 <div>
-                    <button class="see-note-button">See Note</button>
+                    <button id="{{ technique.id }}-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">See Note</button>
                 </div>
                 <div>
                     <a href="{% url 'remove' technique.id %}"><button class="delete-button">Remove</button></a>
@@ -32,4 +46,19 @@
             </div>
         {% endfor %}
     </div>
+
+    <script>
+        function toggleNote(techniqueId) {
+            const noteDiv = document.getElementById(techniqueId + '-note');
+            const noteButton = document.getElementById(techniqueId + '-button');
+
+            if (noteDiv.style.display === 'none') {
+                noteDiv.style.display ='block';
+                noteButton.innerText = 'Hide Note';
+            } else {
+                noteDiv.style.display = 'none';
+                noteButton.innerText = 'See Note';
+            }
+        }
+    </script>
 {% endblock %}
