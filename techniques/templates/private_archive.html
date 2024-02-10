@@ -3,7 +3,7 @@
 {% block content %}
     <div class="private-archive-wrapper">
         <h1>Your Private Archive</h1>
-        
+
         <div class="error-message">
             {% for message in messages %}
                 <p>{{ message }}</p>
@@ -17,7 +17,7 @@
                     <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div>
-                    <a href="{% url 'remove' technique.id %}"><button>Remove</button></a>
+                    <a href="{% url 'remove' technique.id %}"><button class="delete-button">Remove</button></a>
                 </div>
             {% endif %}
         {% endfor %}
