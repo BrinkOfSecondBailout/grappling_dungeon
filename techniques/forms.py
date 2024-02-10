@@ -37,3 +37,12 @@ class CustomTechniqueCreationForm(forms.ModelForm):
                 raise forms.ValidationError(f"Cropped videos must be no longer than {max_length_minutes} minutes.")
         
         return cleaned_data
+    
+
+class CustomTechniqueChangeForm(forms.ModelForm):
+    class Meta:
+        model = Technique
+        fields = ['name', 'category', 'privacy_status', 'youtube_url', 'note']
+        widgets = {
+            'note': forms.Textarea(attrs={'rows': 8, 'cols': 30}),
+        }

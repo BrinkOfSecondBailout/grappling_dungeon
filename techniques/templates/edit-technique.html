@@ -1,0 +1,55 @@
+{% extends 'base_techniques.html' %}
+
+{% block content %}
+    <div class="edit-technique-wrapper">
+        <h1>Modify Technique</h1>
+
+        <div>
+            <a href="{% url 'private' %}">Go Back</a>
+        </div>
+
+        {% if technique.video_option == 'full' %}
+            <div class="one-video-player">
+                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            {% endif %}
+        {% if technique.video_option == 'cropped' %}
+            <div class="one-video-player">
+                Under Constructions
+            </div>
+        {% endif %}
+
+        <div class="error-message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+
+        <form>
+            <div class="form-label-and-field">
+                {{ form.name.label }}
+                {{ form.name }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.category.label }}
+                {{ form.category }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.privacy_status.label }}
+                {{ form.privacy_status }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.youtube_url.label }}
+                {{ form.youtube_url }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.note.label }}
+                {{ form.note }}
+            </div>
+            <div>
+                <input type="submit" value="Save Changes" class="submit-button">
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

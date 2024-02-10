@@ -6,4 +6,5 @@ urlpatterns = [
     path('private', views.private, name='private'),
     path('public', views.public, name='public'),
     path('remove/<int:technique_id>/', views.remove, name='remove'),
+    path('edit/<int:technique_id>/', views.edit, name='edit'),
 ]

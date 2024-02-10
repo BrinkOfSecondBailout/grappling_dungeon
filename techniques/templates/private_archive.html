@@ -13,7 +13,7 @@
         {% for technique in private_techniques %}
             <div class="one-technique">
                 <div class="technique-title">
-                    <a href="">{{ technique.name|title }}</a>
+                    <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                 </div>
                 {% if technique.video_option == 'full' %}
                     <div class="one-video-player">
@@ -26,13 +26,15 @@
                     </div>
                 {% endif %}
 
-                <div class="one-note" id="{{ technique.id }}-note" style="display: none;">
-                    {% if technique.note == None %}
-                        <p>No note yet.</p>
-                    {% endif %}
-                    {% if technique.note != None %}
-                        <p>{{ technique.note }}</p>
-                    {% endif %}
+                <div class="one-note-div" id="{{ technique.id }}-note" style="display: none;">
+                    <div class="one-note">
+                        {% if technique.note == None %}
+                            <p>No note yet.</p>
+                        {% endif %}
+                        {% if technique.note != None %}
+                            <p>{{ technique.note }}</p>
+                        {% endif %}
+                    </div>
                     <div>
                         <button class="submit-button">Edit Note</button>
                     </div>

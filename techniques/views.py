@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import CustomTechniqueCreationForm
+from .forms import CustomTechniqueCreationForm, CustomTechniqueChangeForm
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from .models import Technique
 from django.contrib import messages
@@ -58,9 +58,7 @@ def private(request):
     private_techniques = Technique.objects.filter(uploaded_by=user, privacy_status='private')
     return render(request, 'private_archive.html', {'private_techniques': private_techniques})
 
-@login_required
-def public(request):
-    return render(request, 'public_archive.html')
+
 
 @login_required
 def remove(request, technique_id):
@@ -73,3 +71,21 @@ def remove(request, technique_id):
         messages.info(request, f'Successfully removed {technique.name} from database')
         technique.delete()
     return redirect('private')
+
+@login_required
+def edit(request, technique_id):
+    technique = get_object_or_404(Technique, id=technique_id)
+    user = request.user
+    if technique.uploaded_by != user:
+        messages.error(request, 'You do not have the credentials to modify that')
+        return redirect('private')
+    else:
+        form = CustomTechniqueChangeForm(instance=technique)
+
+    return render(request, 'edit-technique.html', {'form': form, 'technique': technique})
+
+
+
+@login_required
+def public(request):
+    return render(request, 'public_archive.html')
