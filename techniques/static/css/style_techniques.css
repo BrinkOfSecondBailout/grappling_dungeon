@@ -96,6 +96,10 @@
     border-radius: 5px;
 }
 
+.edit-icon {
+    width: 25px;
+}
+
 .instruction-text {
     font-size: 13px;
 }

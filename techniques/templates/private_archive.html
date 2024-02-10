@@ -1,6 +1,7 @@
 {% extends 'base_techniques.html' %}
 
 {% block content %}
+{% load static %}
     <div class="private-archive-wrapper">
         <h1>Your Private Archive</h1>
 
@@ -40,12 +41,13 @@
                             {% csrf_token %}
                             <textarea class="note-textarea" rows="4" cols="40" name="note">{{ technique.note }}</textarea>
                             <div>
-                                <input class="save-button" type="submit" value="Save">
+                                <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                                <!-- <img type="submit" src="{% static 'images/save-icon.png' %}" class="edit-icon" alt="Save"> -->
                             </div>
                         </form>
                     </div>
                     <div class="edit-note-div">
-                        <button id="{{ technique.id }}-edit-note-button" class="submit-button" onclick="toggleNodeEdit('{{technique.id}}')">Edit Note</button>
+                        <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNodeEdit('{{technique.id}}')">
                     </div>
                 </div>
                 
@@ -84,11 +86,11 @@
             if (note.style.display !== 'none') {
                 note.style.display = 'none';
                 noteForm.style.display = 'block';
-                editNoteButton.innerText = 'Cancel';
+                editNoteButton.src = "{% static 'images/back-icon.png' %}"
             } else {
                 note.style.display = 'block';
                 noteForm.style.display = 'none';
-                editNoteButton.innerText = 'Edit Note';
+                editNoteButton.src = "{% static 'images/edit-icon.png' %}"
             }
         }
     </script>
