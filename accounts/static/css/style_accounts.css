@@ -105,6 +105,7 @@
 
 .error-message {
     color: red;
+    padding: 10px;
 }
 
 .register-form {

@@ -64,6 +64,7 @@
 
 .error-message {
     color: red;
+    padding: 10px;
 }
 
 .form-label-and-field {

@@ -36,8 +36,9 @@
                         {% endif %}
                     </div>
                     <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-                        <form method="POST">
-                            <textarea class="note-textarea" rows="4" cols="40">{{ technique.note }}</textarea>
+                        <form method="POST" action="{% url 'note' technique.id %}">
+                            {% csrf_token %}
+                            <textarea class="note-textarea" rows="4" cols="40" name="note">{{ technique.note }}</textarea>
                             <div>
                                 <input class="save-button" type="submit" value="Save">
                             </div>

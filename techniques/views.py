@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import CustomTechniqueCreationForm, CustomTechniqueChangeForm
+from .forms import CustomTechniqueCreationForm, CustomTechniqueChangeForm, CustomNoteChangeForm
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from .models import Technique
 from django.contrib import messages
@@ -94,6 +94,24 @@ def edit(request, technique_id):
 
     return render(request, 'edit-technique.html', {'form': form, 'technique': technique})
 
+@login_required
+def save_note(request, technique_id):
+    technique = get_object_or_404(Technique, id=technique_id)
+    user = request.user
+    if technique.uploaded_by != user:
+        messages.error(request, 'You do not have the credentials to modify that')
+        return redirect('private')
+    
+    print(request.POST)
+    form = CustomNoteChangeForm(request.POST, instance=technique)
+    print(form)
+    if form.is_valid():
+        form.save()
+        messages.info(request, 'Note successfully saved')
+    else:
+        messages.error(request, 'Error saving note. Try again.')
+        redirect(reverse('edit', args=[technique.id]))
+    return redirect('private')
 
 
 @login_required

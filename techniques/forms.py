@@ -46,3 +46,8 @@ class CustomTechniqueChangeForm(forms.ModelForm):
         widgets = {
             'note': forms.Textarea(attrs={'rows': 8, 'cols': 30}),
         }
+
+class CustomNoteChangeForm(forms.ModelForm):
+    class Meta:
+        model = Technique
+        fields = ['note']
