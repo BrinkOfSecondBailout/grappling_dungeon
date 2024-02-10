@@ -3,6 +3,7 @@
     margin: 0 auto;
 }
 
+
 #main-logo {
     height: 140px;
 }
@@ -92,11 +93,27 @@
     font-size: 13px;
 }
 
+.note-and-delete-buttons {
+    display: flex;
+    width: 220px;
+}
+
 .delete-button {
     padding: 7px;
     border-radius: 5px;
     background-color: red;
     color: white;
+    width: 100px;
+    height: 40px;
+    border: 1px solid black;
+    box-shadow: 0 2px 5px black;
+}
+
+.see-note-button {
+    padding: 7px;
+    border-radius: 5px;
+    background-color: rgb(255, 196, 0);
+    color: rgb(0, 0, 0);
     width: 100px;
     height: 40px;
     border: 1px solid black;

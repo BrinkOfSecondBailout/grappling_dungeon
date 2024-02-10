@@ -16,10 +16,20 @@
                 <div>
                     <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
                 </div>
+            {% endif %}
+            {% if technique.video_option == 'cropped' %}
+                <div>
+                    Under Constructions
+                </div>
+            {% endif %}
+            <div class="note-and-delete-buttons">
+                <div>
+                    <button class="see-note-button">See Note</button>
+                </div>
                 <div>
                     <a href="{% url 'remove' technique.id %}"><button class="delete-button">Remove</button></a>
                 </div>
-            {% endif %}
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
