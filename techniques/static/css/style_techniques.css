@@ -8,6 +8,7 @@
     height: 140px;
 }
 
+
 .nav-bar {
     display: flex;
     align-items: center;
@@ -100,6 +101,10 @@
     width: 25px;
 }
 
+.delete-icon {
+    width: 42px;
+}
+
 .instruction-text {
     font-size: 13px;
 }
@@ -143,7 +148,9 @@
 
 .note-and-delete-buttons {
     display: flex;
-    width: 220px;
+    width: fit-content;
+    padding: 10px;
+    gap: 10px;
 }
 
 
@@ -152,7 +159,18 @@
     border-radius: 5px;
     background-color: red;
     color: white;
-    width: 100px;
+    width: 65px;
+    height: 40px;
+    border: 1px solid black;
+    box-shadow: 0 2px 5px black;
+}
+
+.delete-button2 {
+    padding: 7px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    width: 65px;
     height: 40px;
     border: 1px solid black;
     box-shadow: 0 2px 5px black;
