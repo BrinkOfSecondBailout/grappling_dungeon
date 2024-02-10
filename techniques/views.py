@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import CustomTechniqueCreationForm
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from .models import Technique
+from django.contrib import messages
 
 # Create your views here.
 @login_required
@@ -20,7 +21,9 @@ def add(request):
                         video_id = video_id.split('&')[0]
                     embed_url = f'https://www.youtube.com/embed/{video_id}'
                     technique.embed_url = embed_url
-                # else:
+                else:
+                    messages.error(request, 'Error uploading technique. Check the URL and ensure a valid Youtube link')
+                    return redirect('add')
 
             if technique.video_option == 'cropped':
                 start_time = technique.start_time
@@ -32,6 +35,7 @@ def add(request):
                 technique.cropped_video_path = cropped_video_path
             
             technique.save()
+            messages.info(request, 'Successfully added new technique')
             return redirect('add')
     else:
         tech_form = CustomTechniqueCreationForm()
@@ -57,3 +61,15 @@ def private(request):
 @login_required
 def public(request):
     return render(request, 'public_archive.html')
+
+@login_required
+def remove(request, technique_id):
+    technique = get_object_or_404(Technique, id=technique_id)
+    user = request.user
+    if technique.uploaded_by != user:
+        messages.error(request, 'You do not have the credentials to delete that')
+        return redirect('private')
+    else:
+        messages.info(request, f'Successfully removed {technique.name} from database')
+        technique.delete()
+    return redirect('private')
