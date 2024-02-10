@@ -25,7 +25,8 @@
             {% endfor %}
         </div>
 
-        <form>
+        <form method="POST" action="{% url 'edit' technique.id %}">
+            {% csrf_token %}
             <div class="form-label-and-field">
                 {{ form.name.label }}
                 {{ form.name }}

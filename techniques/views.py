@@ -4,6 +4,7 @@ from .forms import CustomTechniqueCreationForm, CustomTechniqueChangeForm
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from .models import Technique
 from django.contrib import messages
+from django.urls import reverse
 
 # Create your views here.
 @login_required
@@ -79,8 +80,17 @@ def edit(request, technique_id):
     if technique.uploaded_by != user:
         messages.error(request, 'You do not have the credentials to modify that')
         return redirect('private')
-    else:
-        form = CustomTechniqueChangeForm(instance=technique)
+    
+    if request.method == 'POST':
+        form = CustomTechniqueChangeForm(request.POST, instance=technique)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'All changes successfully saved')
+        else:
+            messages.error(request, 'Changes not saved. Check your modifications')
+        return redirect(reverse('edit', args=[technique.id]))
+
+    form = CustomTechniqueChangeForm(instance=technique)
 
     return render(request, 'edit-technique.html', {'form': form, 'technique': technique})
 
