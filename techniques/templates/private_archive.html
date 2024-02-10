@@ -36,7 +36,7 @@
                         {% endif %}
                     </div>
                     <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-                        <form>
+                        <form method="POST">
                             <textarea class="note-textarea" rows="4" cols="40">{{ technique.note }}</textarea>
                             <div>
                                 <input class="save-button" type="submit" value="Save">
