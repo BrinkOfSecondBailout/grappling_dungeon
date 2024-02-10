@@ -26,8 +26,8 @@
                     </div>
                 {% endif %}
 
-                <div class="one-note-div" id="{{ technique.id }}-note" style="display: none;">
-                    <div class="one-note">
+                <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
+                    <div id="{{ technique.id }}-note" class="one-note">
                         {% if technique.note == None %}
                             <p>No note yet.</p>
                         {% endif %}
@@ -35,15 +35,23 @@
                             <p>{{ technique.note }}</p>
                         {% endif %}
                     </div>
-                    <div>
-                        <button class="submit-button">Edit Note</button>
+                    <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                        <form>
+                            <textarea class="note-textarea" rows="4" cols="40">{{ technique.note }}</textarea>
+                            <div>
+                                <input class="save-button" type="submit" value="Save">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="edit-note-div">
+                        <button id="{{ technique.id }}-edit-note-button" class="submit-button" onclick="toggleNodeEdit('{{technique.id}}')">Edit Note</button>
                     </div>
                 </div>
                 
 
                 <div class="note-and-delete-buttons">
                     <div>
-                        <button id="{{ technique.id }}-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">See Note</button>
+                        <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">See Note</button>
                     </div>
                     <div>
                         <a href="{% url 'remove' technique.id %}"><button class="delete-button">Remove</button></a>
@@ -55,8 +63,8 @@
 
     <script>
         function toggleNote(techniqueId) {
-            const noteDiv = document.getElementById(techniqueId + '-note');
-            const noteButton = document.getElementById(techniqueId + '-button');
+            const noteDiv = document.getElementById(techniqueId + '-note-div');
+            const noteButton = document.getElementById(techniqueId + '-note-button');
 
             if (noteDiv.style.display === 'none') {
                 noteDiv.style.display ='block';
@@ -64,6 +72,22 @@
             } else {
                 noteDiv.style.display = 'none';
                 noteButton.innerText = 'See Note';
+            }
+        }
+
+        function toggleNodeEdit(techniqueId) {
+            const note = document.getElementById(techniqueId + '-note')
+            const noteForm = document.getElementById(techniqueId + '-note-edit-form')
+            const editNoteButton = document.getElementById(techniqueId + '-edit-note-button')
+
+            if (note.style.display !== 'none') {
+                note.style.display = 'none';
+                noteForm.style.display = 'block';
+                editNoteButton.innerText = 'Cancel';
+            } else {
+                note.style.display = 'block';
+                noteForm.style.display = 'none';
+                editNoteButton.innerText = 'Edit Note';
             }
         }
     </script>
