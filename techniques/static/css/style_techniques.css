@@ -93,10 +93,31 @@
     font-size: 13px;
 }
 
+.one-technique {
+    padding: 20px;
+}
+
+.technique-title {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.one-video-player {
+    padding: 10px;
+}
+
+.one-note {
+    padding: 10px;
+}
+
+
+
+
 .note-and-delete-buttons {
     display: flex;
     width: 220px;
 }
+
 
 .delete-button {
     padding: 7px;

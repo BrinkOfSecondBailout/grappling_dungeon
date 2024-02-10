@@ -11,37 +11,41 @@
         </div>
 
         {% for technique in private_techniques %}
-            <a href="">{{ technique.name|title }}</a>
-            {% if technique.video_option == 'full' %}
-                <div>
-                    <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+            <div class="one-technique">
+                <div class="technique-title">
+                    <a href="">{{ technique.name|title }}</a>
                 </div>
-            {% endif %}
-            {% if technique.video_option == 'cropped' %}
-                <div>
-                    Under Constructions
-                </div>
-            {% endif %}
-
-            <div id="{{ technique.id }}-note" style="display: none;">
-                {% if technique.note == None %}
-                    <p>No note yet.</p>
+                {% if technique.video_option == 'full' %}
+                    <div class="one-video-player">
+                        <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 {% endif %}
-                {% if technique.note != None %}
-                    <p>{{ technique.note }}</p>
+                {% if technique.video_option == 'cropped' %}
+                    <div class="one-video-player">
+                        Under Constructions
+                    </div>
                 {% endif %}
-                <div>
-                    <button class="standard-button">Edit Note</button>
-                </div>
-            </div>
-            
 
-            <div class="note-and-delete-buttons">
-                <div>
-                    <button id="{{ technique.id }}-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">See Note</button>
+                <div class="one-note" id="{{ technique.id }}-note" style="display: none;">
+                    {% if technique.note == None %}
+                        <p>No note yet.</p>
+                    {% endif %}
+                    {% if technique.note != None %}
+                        <p>{{ technique.note }}</p>
+                    {% endif %}
+                    <div>
+                        <button class="submit-button">Edit Note</button>
+                    </div>
                 </div>
-                <div>
-                    <a href="{% url 'remove' technique.id %}"><button class="delete-button">Remove</button></a>
+                
+
+                <div class="note-and-delete-buttons">
+                    <div>
+                        <button id="{{ technique.id }}-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">See Note</button>
+                    </div>
+                    <div>
+                        <a href="{% url 'remove' technique.id %}"><button class="delete-button">Remove</button></a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
