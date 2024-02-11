@@ -40,6 +40,7 @@
         </div>
 
         <div id="all-techniques" style="display:none;">
+            <h2>All Techniques</h2>
             {% for technique in private_techniques %}
                 <div class="one-technique">
                     <div class="technique-title">
@@ -102,7 +103,9 @@
     <script>
         function submitFilterForm(e) {
             e.preventDefault();
-            var selectedCategory = document.getElementById('category-select').value;
+            const selectedCategory = document.getElementById('category-select').value;
+            const resultsContainer = document.getElementById('results-container');
+
             if (selectedCategory !== "") {
                 var form = document.getElementById('filter-form');
                 var url = form.getAttribute('data-url') + '?category=' + encodeURIComponent(selectedCategory);
@@ -112,7 +115,8 @@
                 xhr.onload = function () {
                     if (xhr.status === 200) {
                         console.log(xhr.responseText);
-                        document.getElementById('results-container').innerHTML = xhr.responseText;
+                        resultsContainer.style.display = 'block';
+                        resultsContainer.innerHTML = xhr.responseText;
                     }
                 }
                 xhr.send();
@@ -122,10 +126,12 @@
         function toggleAllTechniques() {
             const showAllButton = document.getElementById('show-all-button');
             const allTechniques = document.getElementById('all-techniques');
+            const resultsContainer = document.getElementById('results-container');
 
             if (allTechniques.style.display === 'none') {
                 allTechniques.style.display = 'block';
                 showAllButton.innerText = 'Hide All Techniques';
+                resultsContainer.style.display = 'none';
             } else {
                 allTechniques.style.display = 'none';
                 showAllButton.innerText = 'Show All Techniques';

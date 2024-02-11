@@ -1,6 +1,63 @@
+{% load static %}
 <div class="filtered-results-wrapper">
-    <h1>Search Result:</h1>
+    <h2>Search Result:</h2>
     {% for technique in filtered_data %}
-        {{ technique.name|title }}
+        <div class="one-technique">
+            <div class="technique-title">
+                <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
+            </div>
+            {% if technique.video_option == 'full' %}
+            <div class="one-video-player">
+                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            {% endif %}
+            {% if technique.video_option == 'cropped' %}
+            <div class="one-video-player">
+                Under Constructions
+            </div>
+            {% endif %}
+        
+            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
+                <div id="{{ technique.id }}-note" class="one-note">
+                    {% if technique.note == None %}
+                    <p>No note yet.</p>
+                    {% endif %}
+                    {% if technique.note != None %}
+                    <p>{{ technique.note }}</p>
+                    {% endif %}
+                </div>
+                <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                    <form method="POST" action="{% url 'note' technique.id %}">
+                        {% csrf_token %}
+                        <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                        <div>
+                            <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                        </div>
+                    </form>
+                </div>
+                <div class="edit-note-div">
+                    <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon"
+                        id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
+                </div>
+            </div>
+        
+        
+            <div class="note-and-delete-buttons">
+                <div>
+                    <button id="{{ technique.id }}-note-button" class="see-note-button"
+                        onclick="toggleNote('{{technique.id}}')">Note</button>
+                </div>
+                <div>
+                    <div id="{{ technique.id }}-delete-button-div">
+                        <img id="{{ technique.id }}-delete-button" src="{% static 'images/remove-icon2.png' %}" alt="Delete"
+                            class="delete-icon" onclick="toggleDeleteMenu('{{technique.id}}')">
+                    </div>
+                    <div id="{{ technique.id }}-sure-div" style="display:none;">
+                        <a href="{% url 'remove' technique.id %}"><button class="delete-button">Delete?</button></a>
+                        <button class="delete-button2" onclick="toggleDeleteMenu('{{technique.id}}')">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endfor %}
 </div>
