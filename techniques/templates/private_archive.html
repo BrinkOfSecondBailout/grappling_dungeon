@@ -13,14 +13,21 @@
 
         <div id="filter-box">
             <h4>Filter By:</h4>
-            <form method="GET" action="{ url 'filter '}">
+            <form id="filter-form" method="GET" data-url="{ url 'filter '}">
                 <label>Category:</label>
                 <select>
-                    <option value="" selected>All Categories</option>
+                    <option value="" selected>----</option>
                     {% for category in categories %}
                         <option value="{{ category }}">{{ category|title }}</option>
                     {% endfor %}
                 </select>
+                <input type="submit" value="Go">
+            </form>
+
+            <form>
+                <label>Search:</label>
+                <input>
+                <input type="submit" value="Search">
             </form>
         </div>
 

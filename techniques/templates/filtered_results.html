@@ -1,0 +1,22 @@
+{% extends 'base_techniques.html' %}
+
+{% block content %}
+{% load static %}
+
+    <div class="filtered-results-wrapper">
+        <h1>Filtered Result</h1>
+
+        <div class="error-message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+
+        <div>
+            {% for technique in filtered_data %}
+                technique.name
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

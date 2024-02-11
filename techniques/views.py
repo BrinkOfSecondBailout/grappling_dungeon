@@ -63,7 +63,7 @@ def private(request):
         'private_techniques': private_techniques,
         'categories': categories,
     }
-    
+
     return render(request, 'private_archive.html', context)
 
 
@@ -120,7 +120,11 @@ def save_note(request, technique_id):
         redirect(reverse('edit', args=[technique.id]))
     return redirect('private')
 
+@login_required
+def filter(request):
+    return render(request, 'filtered_results.html', {'filter_data': filtered_data})
 
 @login_required
 def public(request):
     return render(request, 'public_archive.html')
+
