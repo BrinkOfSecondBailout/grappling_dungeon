@@ -11,7 +11,7 @@ class CustomTechniqueCreationForm(forms.ModelForm):
             'note': forms.Textarea(attrs={'rows': 8, 'cols': 30}),
         }
 
-    MAX_CROPPED_VIDEO_LENGTH = 2
+    MAX_CROPPED_VIDEO_LENGTH = 1
 
     def clean(self):
         cleaned_data = super().clean()

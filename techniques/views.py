@@ -130,7 +130,7 @@ def filter(request):
         else:
             filtered_data = [];
     
-    return render(request, 'filtered_results.html', {'filtered_data': filtered_data})
+    return render(request, 'filtered_results.html', {'filtered_data': filtered_data, 'category': category})
 
 @login_required
 def public(request):

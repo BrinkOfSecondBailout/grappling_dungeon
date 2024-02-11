@@ -105,6 +105,8 @@
             e.preventDefault();
             const selectedCategory = document.getElementById('category-select').value;
             const resultsContainer = document.getElementById('results-container');
+            const allTechniquesContainer = document.getElementById('all-techniques');
+            const showAllButton = document.getElementById('show-all-button');
 
             if (selectedCategory !== "") {
                 var form = document.getElementById('filter-form');
@@ -116,6 +118,8 @@
                     if (xhr.status === 200) {
                         console.log(xhr.responseText);
                         resultsContainer.style.display = 'block';
+                        allTechniquesContainer.style.display = 'none';
+                        showAllButton.innerText = 'Show All Techniques';
                         resultsContainer.innerHTML = xhr.responseText;
                     }
                 }
@@ -127,11 +131,13 @@
             const showAllButton = document.getElementById('show-all-button');
             const allTechniques = document.getElementById('all-techniques');
             const resultsContainer = document.getElementById('results-container');
+            const categorySelect = document.getElementById('category-select');
 
             if (allTechniques.style.display === 'none') {
                 allTechniques.style.display = 'block';
                 showAllButton.innerText = 'Hide All Techniques';
                 resultsContainer.style.display = 'none';
+                categorySelect.value = '';
             } else {
                 allTechniques.style.display = 'none';
                 showAllButton.innerText = 'Show All Techniques';

@@ -1,6 +1,7 @@
 {% load static %}
 <div class="filtered-results-wrapper">
-    <h2>Search Result:</h2>
+    <h2>Search Result</h2>
+    <h3>For: {{ category|title }}</h3>
     {% for technique in filtered_data %}
         <div class="one-technique">
             <div class="technique-title">
