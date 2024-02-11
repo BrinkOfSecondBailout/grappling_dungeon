@@ -24,7 +24,11 @@
             </form>
         </div>
 
-        <div class="all-techniques">
+        <div id="show-all-div">
+            <button id="show-all-button" onclick="toggleAllTechniques()">Show All My Techniques</button>
+        </div>
+
+        <div id="all-techniques" style="display:none;">
             {% for technique in private_techniques %}
                 <div class="one-technique">
                     <div class="technique-title">
@@ -85,6 +89,19 @@
     </div>
 
     <script>
+        function toggleAllTechniques() {
+            const showAllButton = document.getElementById('show-all-button');
+            const allTechniques = document.getElementById('all-techniques');
+
+            if (allTechniques.style.display === 'none') {
+                allTechniques.style.display = 'block';
+                showAllButton.innerText = 'Hide All Techniques';
+            } else {
+                allTechniques.style.display = 'none';
+                showAllButton.innerText = 'Show All Techniques';
+            }
+        }
+
         function toggleNote(techniqueId) {
             const noteDiv = document.getElementById(techniqueId + '-note-div');
             const noteButton = document.getElementById(techniqueId + '-note-button');
