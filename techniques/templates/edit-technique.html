@@ -1,6 +1,7 @@
 {% extends 'base_techniques.html' %}
 
 {% block content %}
+{% load static %}
     <div class="edit-technique-wrapper">
         <h1>Modify Technique</h1>
 
@@ -47,10 +48,41 @@
                 {{ form.note.label }}
                 {{ form.note }}
             </div>
+            <div class="form-label-and-field">
+                {{ form.keywords.label }}
+                {{ form.keywords }}
+            </div>
             <div>
                 <input type="submit" value="Save Changes" class="submit-button">
             </div>
         </form>
+
+        <div class="delete-button-div">
+            <div id="{{ technique.id }}-delete-button-div">
+                <img id="{{ technique.id }}-delete-button" src="{% static 'images/remove-icon2.png' %}" alt="Delete"
+                    class="delete-icon" onclick="toggleDeleteMenu('{{technique.id}}')">
+            </div>
+            <div id="{{ technique.id }}-sure-div" style="display:none;">
+                <a href="{% url 'remove' technique.id %}"><button class="delete-button">Delete?</button></a>
+                <button class="delete-button2" onclick="toggleDeleteMenu('{{technique.id}}')">No</button>
+            </div>
+        </div>
+
     </div>
+
+    <script>
+        function toggleDeleteMenu(techniqueId) {
+            const deleteButtonDiv = document.getElementById(techniqueId + '-delete-button-div');
+            const sureDiv = document.getElementById(techniqueId + '-sure-div');
+
+            if (sureDiv.style.display === 'none'){
+                sureDiv.style.display = 'block';
+                deleteButtonDiv.style.display = 'none';
+            } else {
+                sureDiv.style.display = 'none';
+                deleteButtonDiv.style.display = 'block';
+            }
+        }
+    </script>
 
 {% endblock %}

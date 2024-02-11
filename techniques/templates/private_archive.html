@@ -11,6 +11,10 @@
             {% endfor %}
         </div>
 
+        <div id="filter-error-message">
+
+        </div>
+
         <div id="filter-box">
             <h4>Filter By:</h4>
             <form id="filter-form" method="GET" data-url="{% url 'filter' %}">
@@ -107,6 +111,7 @@
             const resultsContainer = document.getElementById('results-container');
             const allTechniquesContainer = document.getElementById('all-techniques');
             const showAllButton = document.getElementById('show-all-button');
+            const errorMessage = document.getElementById('filter-error-message');
 
             if (selectedCategory !== "") {
                 var form = document.getElementById('filter-form');
@@ -124,6 +129,8 @@
                     }
                 }
                 xhr.send();
+            } else {
+                errorMessage.innerHTML = 'Please make a selection';
             }
         }
 

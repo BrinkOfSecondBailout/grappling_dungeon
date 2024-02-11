@@ -41,5 +41,7 @@ class Technique(models.Model):
 
     cropped_video = models.FileField(upload_to='cropped_videos/', blank=True, null=True)
 
+    keywords = models.CharField(max_length=255, blank=True, null=True)
+
     def __str__(self):
         return self.name
