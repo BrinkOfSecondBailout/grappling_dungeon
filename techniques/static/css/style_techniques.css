@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -127,7 +128,14 @@
 }
 
 .one-note {
-    padding-bottom: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    max-width: 340px;
+    height: 100px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-wrap: wrap;
+    overflow-y: auto;
 }
 
 .note-textarea {
@@ -159,7 +167,7 @@
     border-radius: 5px;
     background-color: red;
     color: white;
-    width: 65px;
+    width: 70px;
     height: 40px;
     border: 1px solid black;
     box-shadow: 0 2px 5px black;

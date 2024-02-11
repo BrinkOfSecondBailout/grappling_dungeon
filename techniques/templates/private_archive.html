@@ -12,7 +12,16 @@
         </div>
 
         <div class="filter-box">
-
+            <h4>Filter By:</h4>
+            <form method="GET" action="{ url 'filter '}">
+                <label>Category:</label>
+                <select>
+                    <option value="" selected>All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category }}">{{ category|title }}</option>
+                    {% endfor %}
+                </select>
+            </form>
         </div>
 
         <div class="all-techniques">
@@ -44,10 +53,9 @@
                         <div id="{{ technique.id }}-note-edit-form" style="display: none;">
                             <form method="POST" action="{% url 'note' technique.id %}">
                                 {% csrf_token %}
-                                <textarea class="note-textarea" rows="4" cols="40" name="note">{{ technique.note }}</textarea>
+                                <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
                                 <div>
                                     <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
-                                    <!-- <img type="submit" src="{% static 'images/save-icon.png' %}" class="edit-icon" alt="Save"> -->
                                 </div>
                             </form>
                         </div>
@@ -59,15 +67,14 @@
 
                     <div class="note-and-delete-buttons">
                         <div>
-                            <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">See Note</button>
+                            <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">Note</button>
                         </div>
                         <div>
-                            <!-- <a href="{% url 'remove' technique.id %}"><button class="delete-button">Remove</button></a> -->
                             <div id="{{ technique.id }}-delete-button-div">
                                 <img id="{{ technique.id }}-delete-button" src="{% static 'images/remove-icon2.png' %}" alt="Delete" class="delete-icon" onclick="toggleDeleteMenu('{{technique.id}}')">
                             </div>
                             <div id="{{ technique.id }}-sure-div" style="display:none;">
-                                <a href="{% url 'remove' technique.id %}"><button class="delete-button">Sure?</button></a>
+                                <a href="{% url 'remove' technique.id %}"><button class="delete-button">Delete?</button></a>
                                 <button class="delete-button2" onclick="toggleDeleteMenu('{{technique.id}}')">No</button>
                             </div>
                         </div>
@@ -87,7 +94,7 @@
                 noteButton.innerText = 'Hide Note';
             } else {
                 noteDiv.style.display = 'none';
-                noteButton.innerText = 'See Note';
+                noteButton.innerText = 'Note';
             }
         }
 
