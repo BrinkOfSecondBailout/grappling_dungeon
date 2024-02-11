@@ -69,6 +69,20 @@
     padding: 10px;
 }
 
+#filter-box {
+    padding: 10px;
+}
+
+#show-all-button-div {
+    padding: 10px;
+}
+
+#show-all-button {
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px black;
+}
+
 .form-label-and-field {
     display: flex;
     flex-direction: column;
@@ -96,6 +110,7 @@
     width: fit-content;
     padding: 7px;
     border-radius: 5px;
+    box-shadow: 0 2px 2px black;
 }
 
 .edit-icon {

@@ -57,7 +57,14 @@ def crop_video(video_url, start_time, end_time):
 def private(request):
     user = request.user
     private_techniques = Technique.objects.filter(uploaded_by=user, privacy_status='private')
-    return render(request, 'private_archive.html', {'private_techniques': private_techniques})
+    categories = private_techniques.values_list('category', flat=True).distinct()
+
+    context = {
+        'private_techniques': private_techniques,
+        'categories': categories,
+    }
+    
+    return render(request, 'private_archive.html', context)
 
 
 

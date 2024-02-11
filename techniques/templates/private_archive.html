@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
     <div class="private-archive-wrapper">
-        <h1>Your Private Archive</h1>
+        <h1>Private Archive</h1>
 
         <div class="error-message">
             {% for message in messages %}
@@ -11,7 +11,7 @@
             {% endfor %}
         </div>
 
-        <div class="filter-box">
+        <div id="filter-box">
             <h4>Filter By:</h4>
             <form method="GET" action="{ url 'filter '}">
                 <label>Category:</label>
@@ -24,8 +24,8 @@
             </form>
         </div>
 
-        <div id="show-all-div">
-            <button id="show-all-button" onclick="toggleAllTechniques()">Show All My Techniques</button>
+        <div id="show-all-button-div">
+            <button id="show-all-button" onclick="toggleAllTechniques()">Show All Techniques</button>
         </div>
 
         <div id="all-techniques" style="display:none;">

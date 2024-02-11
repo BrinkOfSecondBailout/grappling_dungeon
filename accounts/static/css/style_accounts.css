@@ -137,6 +137,7 @@
     width: fit-content;
     padding: 7px;
     border-radius: 5px;
+    box-shadow: 0 2px 2px black;
 }
 
 .long-button {
@@ -144,6 +145,7 @@
     height: fit-content;
     padding: 7px;
     border-radius: 5px;
+    box-shadow: 0 2px 2px black;
 }
 
 .returning-user-button , .new-user-button {
@@ -151,6 +153,7 @@
     height: 45px;
     padding: 7px;
     border-radius: 5px;
+    box-shadow: 0 2px 2px black;
 }
 
 .profile-picture {
