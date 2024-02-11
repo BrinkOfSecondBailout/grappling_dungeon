@@ -13,15 +13,15 @@
 
         <div id="filter-box">
             <h4>Filter By:</h4>
-            <form id="filter-form" method="GET" data-url="{ url 'filter '}">
+            <form id="filter-form" method="GET" data-url="{% url 'filter' %}">
                 <label>Category:</label>
-                <select>
-                    <option value="" selected>----</option>
+                <select name="category" id="category-select" required>
+                    <option value="" selected disabled>----</option>
                     {% for category in categories %}
                         <option value="{{ category }}">{{ category|title }}</option>
                     {% endfor %}
                 </select>
-                <input type="submit" value="Go">
+                <input type="submit" value="Go" onclick="submitFilterForm(event)">
             </form>
 
             <form>
@@ -33,6 +33,10 @@
 
         <div id="show-all-button-div">
             <button id="show-all-button" onclick="toggleAllTechniques()">Show All Techniques</button>
+        </div>
+
+        <div id="results-container">
+
         </div>
 
         <div id="all-techniques" style="display:none;">
@@ -96,6 +100,25 @@
     </div>
 
     <script>
+        function submitFilterForm(e) {
+            e.preventDefault();
+            var selectedCategory = document.getElementById('category-select').value;
+            if (selectedCategory !== "") {
+                var form = document.getElementById('filter-form');
+                var url = form.getAttribute('data-url') + '?category=' + encodeURIComponent(selectedCategory);
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open(form.getAttribute('method'), url, true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        document.getElementById('results-container').innerHTML = xhr.responseText;
+                    }
+                }
+                xhr.send();
+            }
+        }
+
         function toggleAllTechniques() {
             const showAllButton = document.getElementById('show-all-button');
             const allTechniques = document.getElementById('all-techniques');

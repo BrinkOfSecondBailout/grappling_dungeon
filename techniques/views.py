@@ -122,7 +122,15 @@ def save_note(request, technique_id):
 
 @login_required
 def filter(request):
-    return render(request, 'filtered_results.html', {'filter_data': filtered_data})
+    if request.method == 'GET':
+        user = request.user
+        category = request.GET.get('category')
+        if category:
+            filtered_data = Technique.objects.filter(uploaded_by=user, privacy_status='private', category=category)
+        else:
+            filtered_data = [];
+    
+    return render(request, 'filtered_results.html', {'filtered_data': filtered_data})
 
 @login_required
 def public(request):
