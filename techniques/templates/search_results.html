@@ -2,6 +2,7 @@
 <div class="search-results-wrapper">
     <h2>Search Result</h2>
     <h3>For: "{{ keywords }}"</h3>
+    <button id="clear-button" onclick="clearResults()">Clear</button>
     {% for technique in search_result %}
         <div class="one-technique">
             <div class="technique-title">

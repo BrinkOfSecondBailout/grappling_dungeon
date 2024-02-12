@@ -139,6 +139,12 @@
     margin-top: 10px;
 }
 
+#clear-button {
+    padding: 7px;
+    width: 90px;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px black;
+}
 
 .one-technique {
     padding: 20px;

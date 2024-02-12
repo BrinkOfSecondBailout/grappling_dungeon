@@ -29,7 +29,7 @@
             </form>
 
             <form id="search-form" method="GET" data-url="{% url 'search' %}" onsubmit="submitSearchForm(event)">
-                <label>Search:</label>
+                <label>Keywords:</label>
                 <input name="keywords" id="keywords" required>
                 <input type="submit" value="Search">
             </form>
@@ -161,6 +161,16 @@
                 errorMessage.innerHTML = 'Please type in search bar';
             }
 
+        }
+
+        function clearResults() {
+            const categorySelect = document.getElementById('category-select');
+            const searchKeywords = document.getElementById('keywords');
+            const resultsContainer = document.getElementById('results-container');
+
+            categorySelect.value = '';
+            searchKeywords.value = '';
+            resultsContainer.innerHTML = '';
         }
 
         function toggleAllTechniques() {
