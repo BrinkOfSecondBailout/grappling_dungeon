@@ -121,7 +121,7 @@ def save_note(request, technique_id):
     return redirect('private')
 
 @login_required
-def filter(request):
+def filter_result(request):
     if request.method == 'GET':
         user = request.user
         category = request.GET.get('category')
@@ -131,6 +131,26 @@ def filter(request):
             filtered_data = [];
     
     return render(request, 'filtered_results.html', {'filtered_data': filtered_data, 'category': category})
+
+@login_required
+def search_result(request):
+    if request.method == 'GET':
+        user = request.user
+        keywords = request.GET.get('keywords')
+        if keywords:
+            search_keywords = keywords.split()
+
+            search_result = Technique.objects.filter(
+                uploaded_by=user,
+                privacy_status='private',
+                keywords__icontains=search_keywords[0]
+            )
+
+            for keyword in search_keywords[1:]:
+                search_result = search_result.filter(keywords__icontains=keyword)
+        else:
+            search_result = [];
+    return render(request, 'search_results.html', {'search_result': search_result, 'keywords': keywords})
 
 @login_required
 def public(request):

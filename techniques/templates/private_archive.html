@@ -28,9 +28,9 @@
                 <input type="submit" value="Go" onclick="submitFilterForm(event)">
             </form>
 
-            <form>
+            <form id="search-form" method="GET" data-url="{% url 'search' %}" onsubmit="submitSearchForm(event)">
                 <label>Search:</label>
-                <input>
+                <input name="keywords" id="keywords" required>
                 <input type="submit" value="Search">
             </form>
         </div>
@@ -121,7 +121,6 @@
                 xhr.open(form.getAttribute('method'), url, true);
                 xhr.onload = function () {
                     if (xhr.status === 200) {
-                        console.log(xhr.responseText);
                         resultsContainer.style.display = 'block';
                         allTechniquesContainer.style.display = 'none';
                         showAllButton.innerText = 'Show All Techniques';
@@ -134,17 +133,49 @@
             }
         }
 
+        function submitSearchForm(e) {
+            e.preventDefault();
+            const searchKeywords = document.getElementById('keywords').value;
+            const resultsContainer = document.getElementById('results-container');
+            const allTechniquesContainer = document.getElementById('all-techniques');
+            const showAllButton = document.getElementById('show-all-button');
+            const errorMessage = document.getElementById('filter-error-message');
+
+            if (searchKeywords !== "") {
+                var form = document.getElementById('search-form');
+                var url = form.getAttribute('data-url') + '?keywords=' + encodeURIComponent(searchKeywords);
+                console.log(form);
+                console.log(url);
+                var xhr = new XMLHttpRequest();
+                xhr.open(form.getAttribute('method'), url, true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        resultsContainer.style.display = 'block';
+                        allTechniquesContainer.style.display = 'none';
+                        showAllButton.innerText = 'Show All Techniques';
+                        resultsContainer.innerHTML = xhr.responseText;
+                    }
+                }
+                xhr.send();
+            } else {
+                errorMessage.innerHTML = 'Please type in search bar';
+            }
+
+        }
+
         function toggleAllTechniques() {
             const showAllButton = document.getElementById('show-all-button');
             const allTechniques = document.getElementById('all-techniques');
             const resultsContainer = document.getElementById('results-container');
             const categorySelect = document.getElementById('category-select');
+            const searchKeywords = document.getElementById('keywords');
 
             if (allTechniques.style.display === 'none') {
                 allTechniques.style.display = 'block';
                 showAllButton.innerText = 'Hide All Techniques';
                 resultsContainer.style.display = 'none';
                 categorySelect.value = '';
+                searchKeywords.value = '';
             } else {
                 allTechniques.style.display = 'none';
                 showAllButton.innerText = 'Show All Techniques';

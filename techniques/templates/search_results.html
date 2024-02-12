@@ -1,8 +1,8 @@
 {% load static %}
-<div class="filtered-results-wrapper">
+<div class="search-results-wrapper">
     <h2>Search Result</h2>
-    <h3>For: {{ category|title }}</h3>
-    {% for technique in filtered_data %}
+    <h3>For: "{{ keywords }}"</h3>
+    {% for technique in search_result %}
         <div class="one-technique">
             <div class="technique-title">
                 <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
