@@ -27,6 +27,7 @@ class Technique(models.Model):
     user_model = settings.AUTH_USER_MODEL
 
     name = models.CharField(max_length = 255)
+    athlete = models.CharField(max_length = 100, blank=True, null=True)
     category = models.CharField(max_length = 20, choices=CATEGORY_CHOICES)
     privacy_status = models.CharField(max_length=20, choices=PRIVACY_CHOICES)
     uploaded_by = models.ForeignKey(user_model, on_delete=models.CASCADE)

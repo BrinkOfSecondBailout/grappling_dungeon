@@ -4,7 +4,7 @@ from .models import Technique
 class CustomTechniqueCreationForm(forms.ModelForm):
     class Meta:
         model = Technique
-        fields = ['name', 'category', 'privacy_status', 'video_option', 'youtube_url', 'note', 'keywords', 'start_time', 'end_time']
+        fields = ['name', 'athlete', 'category', 'privacy_status', 'video_option', 'youtube_url', 'note', 'keywords', 'start_time', 'end_time']
         widgets = {
             'start_time': forms.TextInput(attrs={'placeholder': 'Example: 55 or 1:20'}),
             'end_time': forms.TextInput(attrs={'placeholder': 'Example: 150 or 2:30'}),
@@ -23,7 +23,8 @@ class CustomTechniqueCreationForm(forms.ModelForm):
         keywords = cleaned_data.get('keywords')
         name = cleaned_data.get('name')
         category = cleaned_data.get('category')
-        generated_keywords = f'{name} {category}'
+        athlete = cleaned_data.get('athlete')
+        generated_keywords = f'{name} {category} {athlete}'
         all_keywords = f'{keywords}\n{generated_keywords}' if keywords else generated_keywords
 
         cleaned_data['keywords'] = all_keywords
@@ -51,7 +52,7 @@ class CustomTechniqueCreationForm(forms.ModelForm):
 class CustomTechniqueChangeForm(forms.ModelForm):
     class Meta:
         model = Technique
-        fields = ['name', 'category', 'privacy_status', 'youtube_url', 'note', 'keywords']
+        fields = ['name', 'athlete', 'category', 'privacy_status', 'youtube_url', 'note', 'keywords']
         widgets = {
             'note': forms.Textarea(attrs={'rows': 8, 'cols': 30}),
             'keywords': forms.Textarea(attrs={'rows': 3, 'cols': 30}),
