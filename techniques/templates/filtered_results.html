@@ -1,8 +1,10 @@
 {% load static %}
 <div class="filtered-results-wrapper">
-    <h2>Search Result</h2>
-    <h3>For: {{ category|title }}</h3>
-    <button id="clear-button" onclick="clearResults()">Clear</button>
+    <div class="results-div">
+        <h2>Search Result</h2>
+        <h3>for: <u>{{ category|title }}</u></h3>
+        <button id="clear-button" onclick="clearResults()">Clear</button>
+    </div>
     {% for technique in filtered_data %}
         <div class="one-technique">
             <div class="technique-title">

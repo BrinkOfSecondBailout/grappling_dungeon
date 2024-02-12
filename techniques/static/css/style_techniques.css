@@ -112,8 +112,16 @@
 
 #show-all-button {
     padding: 7px;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 2px 3px black;
+    width: 150px;
+}
+
+.results-div {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .form-label-and-field {

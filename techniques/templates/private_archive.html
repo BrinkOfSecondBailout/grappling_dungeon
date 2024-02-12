@@ -39,7 +39,7 @@
         </div>
 
         <div id="show-all-button-div">
-            <button id="show-all-button" onclick="toggleAllTechniques()">Show All Techniques</button>
+            <button id="show-all-button" onclick="toggleAllTechniques()">Show All Techniques ({{total}})</button>
         </div>
 
         <div id="results-container">
@@ -47,7 +47,7 @@
         </div>
 
         <div id="all-techniques" style="display:none;">
-            <h2>All Techniques</h2>
+            <h1>All Techniques</h1>
             {% for technique in private_techniques %}
                 <div class="one-technique">
                     <div class="technique-title">
@@ -126,7 +126,7 @@
                     if (xhr.status === 200) {
                         resultsContainer.style.display = 'block';
                         allTechniquesContainer.style.display = 'none';
-                        showAllButton.innerText = 'Show All Techniques';
+                        showAllButton.innerText = 'Show All Techniques ({{total}})';
                         resultsContainer.innerHTML = xhr.responseText;
                     }
                 }
@@ -155,7 +155,7 @@
                     if (xhr.status === 200) {
                         resultsContainer.style.display = 'block';
                         allTechniquesContainer.style.display = 'none';
-                        showAllButton.innerText = 'Show All Techniques';
+                        showAllButton.innerText = 'Show All Techniques ({{total}})';
                         resultsContainer.innerHTML = xhr.responseText;
                     }
                 }
@@ -185,13 +185,13 @@
 
             if (allTechniques.style.display === 'none') {
                 allTechniques.style.display = 'block';
-                showAllButton.innerText = 'Hide All Techniques';
+                showAllButton.innerText = 'Hide All Techniques ({{total}})';
                 resultsContainer.style.display = 'none';
                 categorySelect.value = '';
                 searchKeywords.value = '';
             } else {
                 allTechniques.style.display = 'none';
-                showAllButton.innerText = 'Show All Techniques';
+                showAllButton.innerText = 'Show All Techniques ({{total}})';
             }
         }
 
