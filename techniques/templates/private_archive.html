@@ -5,34 +5,37 @@
     <div class="private-archive-wrapper">
         <h1>Private Archive</h1>
 
+        {% if messages %}
         <div class="error-message">
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}
         </div>
+        {% endif %}
 
         <div id="filter-error-message">
-
         </div>
 
-        <div id="filter-box">
+        <div id="filter-div">
             <h4>Filter By:</h4>
-            <form id="filter-form" method="GET" data-url="{% url 'filter' %}">
-                <label>Category:</label>
-                <select name="category" id="category-select" required>
-                    <option value="" selected disabled>----</option>
-                    {% for category in categories %}
-                        <option value="{{ category }}">{{ category|title }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="Go" onclick="submitFilterForm(event)">
-            </form>
+            <div id="filter-box">
+                <form id="filter-form" method="GET" data-url="{% url 'filter' %}">
+                    <label>Category:</label>
+                    <select name="category" id="category-select" required>
+                        <option value="" selected disabled>----</option>
+                        {% for category in categories %}
+                            <option value="{{ category }}">{{ category|title }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Go" onclick="submitFilterForm(event)" class="regular-button">
+                </form>
 
-            <form id="search-form" method="GET" data-url="{% url 'search' %}" onsubmit="submitSearchForm(event)">
-                <label>Keywords:</label>
-                <input name="keywords" id="keywords" required>
-                <input type="submit" value="Search">
-            </form>
+                <form id="search-form" method="GET" data-url="{% url 'search' %}" onsubmit="submitSearchForm(event)">
+                    <label>Keywords:</label>
+                    <input name="keywords" id="keywords" required>
+                    <input type="submit" value="Search" class="regular-button">
+                </form>
+            </div>
         </div>
 
         <div id="show-all-button-div">

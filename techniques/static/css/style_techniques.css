@@ -76,14 +76,38 @@
 #filter-error-message {
     color: red;
     padding: 10px;
+    font-size: 14px;
+}
+
+#filter-div {
+    padding: 10px;
+    border: 1px solid black;
+    width: fit-content;
+    border-radius: 5px;
+    margin-top: 12px;
 }
 
 #filter-box {
-    padding: 10px;
+    padding: 15px;
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+}
+
+#filter-box select , input {
+    border-radius: 5px;
+    padding: 7px;
+    border: 2px solid black;
+}
+
+.regular-button {
+    width: 75px;
+    padding: 7px;
 }
 
 #show-all-button-div {
     padding: 10px;
+    margin-top: 15px;
 }
 
 #show-all-button {
@@ -143,7 +167,6 @@
     padding: 7px;
     width: 90px;
     border-radius: 5px;
-    box-shadow: 0 1px 1px black;
 }
 
 .one-technique {
