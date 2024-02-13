@@ -1,22 +1,33 @@
 {% extends 'base_accounts.html' %}
+{% load static %}
 
 {% block content %}
     <div class="dashboard-wrapper">
         <h1>Dashboard</h1>
-        <div>
-            <a href="{% url 'add' %}"><button class="long-button">Add New Technique +</button></a>
-            <a href="{% url 'private' %}"><button class="long-button">Private Archive</button></a>
-        </div>
-        <div>
-            <a href="{% url 'public' %}"><button class="long-button">Public Archive</button></a>
+        <div class="dashboard-buttons-div">
+            <div>
+                <a href="{% url 'add' %}"><button class="dash-button">Add Technique</button></a>
+            </div>
+            <div>
+                <a href="{% url 'private' %}"><button class="dash-button">Private Archive</button></a>
+            </div>
+            <div>
+                <a href="{% url 'public' %}"><button class="dash-button">Public Archive</button></a>
+            </div>
         </div>
 
-        <div>
-            <h2>All Grapplers</h2>
-            <div>
+        <div class="dashboard-body-div">
+            <h2>All Grapplers ({{total_users}})</h2>
+            <div class="all-users">
                 {% for user in all_users %}
-                    <div>
+                    <div class="one-user">
                         <a href="{% url 'user' user.id %}">{{ user.username|title }}</a>
+                        {% if user.profile_picture %}
+                            <a href="{% url 'user' user.id %}"><img class="profile-picture-sm" src="{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture">
+                        {% else %}</a>
+                            <a href="{% url 'user' user.id %}"><img class="profile-picture-sm" src="{% static 'images/no-profile.png' %}" alt="No profile picture"></a>
+                        <p>No Profile Picture Yet...</p>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>

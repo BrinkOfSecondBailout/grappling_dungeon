@@ -52,7 +52,8 @@ def login(request):
 def dashboard(request):
     if request.user.is_authenticated:
         all_users = User.objects.exclude(username='admin')
-        return render(request, 'dashboard.html', {'all_users': all_users})
+        total_users = len(all_users)
+        return render(request, 'dashboard.html', {'all_users': all_users, 'total_users': total_users})
     else:
         return redirect('index')
 

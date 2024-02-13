@@ -14,10 +14,13 @@
                 <img class="profile-picture" src="{% static 'images/no-profile.png' %}" alt="No profile picture">
             </div>
         {% endif %}
-
-        {{ user.username }}
         <div>
-            {{ user.first_name|title }} {{ user.last_name|title }}
+            <div>
+                {{ user.username }}
+            </div>
+            <div>
+                {{ user.first_name|title }} {{ user.last_name|title }}
+            </div>
         </div>
     </div>
 {% endblock %}

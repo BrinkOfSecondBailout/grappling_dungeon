@@ -4,6 +4,11 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+a {
+    text-decoration: underline;
+    color: rgba(0, 132, 247, 0.882);
+}
+
 
 #main-logo {
     height: 140px;
@@ -117,6 +122,10 @@
     width: 150px;
 }
 
+.go-back-div {
+    padding: 15px;
+}
+
 .results-div {
     padding: 10px;
     display: flex;
@@ -156,6 +165,7 @@
 
 .edit-icon {
     width: 25px;
+    border: none;
 }
 
 .delete-icon {
@@ -164,6 +174,7 @@
 
 .instruction-text {
     font-size: 13px;
+    padding: 10px;
 }
 
 #all-techniques {
