@@ -5,9 +5,9 @@
     <div class="edit-profile-wrapper">
         <h1>Edit Profile</h1>
         <div class="edit-profile-columns">
-            <div>
+            <div class="user-profile-div">
                 <div>
-                    <h2>{{ user.username|title }}</h2>
+                    <h2>{{ user.username }}</h2>
                 </div>
                 {% if user.profile_picture %}
                     <img class="profile-picture" src="{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture">

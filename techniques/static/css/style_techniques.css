@@ -79,7 +79,7 @@ a {
     width: fit-content;
     padding: 7px;
     border-radius: 5px;
-    box-shadow: 0 2px 2px black;
+    box-shadow: 0 2px 1px black;
 }
 
 
@@ -166,7 +166,7 @@ input {
 #show-all-button {
     padding: 7px;
     border-radius: 10px;
-    box-shadow: 0 2px 3px black;
+    box-shadow: 0 2px 1px black;
     width: 150px;
 }
 
@@ -273,7 +273,7 @@ input {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 #clear-button {

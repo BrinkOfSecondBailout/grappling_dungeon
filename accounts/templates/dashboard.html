@@ -21,7 +21,7 @@
             <div class="all-users">
                 {% for user in all_users %}
                     <div class="one-user">
-                        <a href="{% url 'user' user.id %}">{{ user.username|title }}</a>
+                        <a href="{% url 'user' user.id %}">{{ user.username }}</a>
                         {% if user.profile_picture %}
                             <a href="{% url 'user' user.id %}"><img class="profile-picture-sm" src="{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture">
                         {% else %}</a>

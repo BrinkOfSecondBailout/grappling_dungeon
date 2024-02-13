@@ -67,7 +67,7 @@ a {
     width: fit-content;
     padding: 7px;
     border-radius: 5px;
-    box-shadow: 0 2px 2px black;
+    box-shadow: 0 2px 1px black;
 }
 
 .long-button {
@@ -75,7 +75,7 @@ a {
     height: fit-content;
     padding: 7px;
     border-radius: 5px;
-    box-shadow: 0 2px 2px black;
+    box-shadow: 0 2px 1px black;
 }
 
 
@@ -98,7 +98,7 @@ a {
     height: 45px;
     padding: 7px;
     border-radius: 5px;
-    box-shadow: 0 2px 2px black;
+    box-shadow: 0 2px 1px black;
 }
 
 /* register.html */
@@ -130,6 +130,11 @@ a {
 
 /* password_change.html */
 
+.go-back-div {
+    padding: 10px;
+    margin-top: 10px;
+}
+
 .pw-requirements {
     font-size: 14px;
     padding: 10px;
@@ -147,6 +152,9 @@ a {
     padding-bottom: 4vh;
 }
 
+.edit-password-div {
+    padding: 10px;
+}
 
 
 /* edit.html */
@@ -163,6 +171,11 @@ a {
     padding: 10px;
 }
 
+.user-profile-div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 
 

@@ -131,8 +131,9 @@ def filter_result(request):
             filtered_data = Technique.objects.filter(uploaded_by=user, privacy_status='private', category=category)
         else:
             filtered_data = [];
-    
-    return render(request, 'filtered_results.html', {'filtered_data': filtered_data, 'category': category})
+    results_total = len(filtered_data)
+
+    return render(request, 'filtered_results.html', {'filtered_data': filtered_data, 'category': category, 'results_total': results_total})
 
 @login_required
 def search_result(request):
@@ -152,7 +153,9 @@ def search_result(request):
                 search_result = search_result.filter(keywords__icontains=keyword)
         else:
             search_result = [];
-    return render(request, 'search_results.html', {'search_result': search_result, 'keywords': keywords})
+    results_total = len(search_result)
+
+    return render(request, 'search_results.html', {'search_result': search_result, 'keywords': keywords, 'results_total': results_total})
 
 @login_required
 def public(request):
