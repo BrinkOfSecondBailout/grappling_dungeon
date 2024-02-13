@@ -45,43 +45,11 @@ a {
     color: white;
 }
 
-.add-technique-wrapper {
-    text-align: center;
-    padding-top: 4vh;
-    padding-bottom: 10vh;
-}
-
-
-
-.public-archive-wrapper {
-    text-align: center;
-    padding-top: 4vh;
-    padding-bottom: 4vh;
-}
-
-.edit-technique-wrapper {
-    text-align: center;
-    padding-top: 4vh;
-    padding-bottom: 10vh;
-}
-
-
 
 .error-message {
     color: red;
     padding: 10px;
 }
-
-
-
-
-
-
-
-.go-back-div {
-    padding: 15px;
-}
-
 
 
 .form-label-and-field {
@@ -114,13 +82,33 @@ a {
     box-shadow: 0 2px 2px black;
 }
 
-.edit-icon {
-    width: 25px;
-    border: none;
+
+/* public_archive.html */
+
+.public-archive-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }
 
-.delete-icon {
-    width: 42px;
+/* edit-technique.html */
+
+.edit-technique-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 10vh;
+}
+
+.go-back-div {
+    padding: 15px;
+}
+
+/* add_new.html */
+
+.add-technique-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 10vh;
 }
 
 .instruction-text {
@@ -129,8 +117,63 @@ a {
 }
 
 
+/* private_archive.html */
 
+.private-archive-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
 
+#filter-error-message {
+    color: red;
+    padding: 10px;
+    font-size: 14px;
+}
+
+#filter-div {
+    padding: 10px;
+    border: 1px solid black;
+    width: fit-content;
+    border-radius: 5px;
+    margin-top: 12px;
+}
+
+#filter-box {
+    padding: 15px;
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+}
+
+#filter-box select,
+input {
+    border-radius: 5px;
+    padding: 7px;
+    border: 2px solid black;
+}
+
+.regular-button {
+    width: 75px;
+    padding: 7px;
+}
+
+#show-all-button-div {
+    padding: 10px;
+    margin-top: 15px;
+}
+
+#show-all-button {
+    padding: 7px;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px black;
+    width: 150px;
+}
+
+#all-techniques {
+    padding: 10px;
+    margin-top: 10px;
+}
 
 .one-video-player {
     padding: 10px;
@@ -211,65 +254,14 @@ a {
     box-shadow: 0 2px 5px black;
 }
 
-/* private_archive.html */
-
-.private-archive-wrapper {
-    text-align: center;
-    padding-top: 4vh;
-    padding-bottom: 4vh;
+.edit-icon {
+    width: 25px;
+    border: none;
 }
 
-#filter-error-message {
-    color: red;
-    padding: 10px;
-    font-size: 14px;
+.delete-icon {
+    width: 42px;
 }
-
-#filter-div {
-    padding: 10px;
-    border: 1px solid black;
-    width: fit-content;
-    border-radius: 5px;
-    margin-top: 12px;
-}
-
-#filter-box {
-    padding: 15px;
-    display: flex;
-    width: fit-content;
-    gap: 20px;
-}
-
-#filter-box select,
-input {
-    border-radius: 5px;
-    padding: 7px;
-    border: 2px solid black;
-}
-
-.regular-button {
-    width: 75px;
-    padding: 7px;
-}
-
-#show-all-button-div {
-    padding: 10px;
-    margin-top: 15px;
-}
-
-#show-all-button {
-    padding: 7px;
-    border-radius: 10px;
-    box-shadow: 0 2px 3px black;
-    width: 150px;
-}
-
-#all-techniques {
-    padding: 10px;
-    margin-top: 10px;
-}
-
-
 
 /* results.html */
 
