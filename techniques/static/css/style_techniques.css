@@ -51,11 +51,7 @@ a {
     padding-bottom: 10vh;
 }
 
-.private-archive-wrapper {
-    text-align: center;
-    padding-top: 4vh;
-    padding-bottom: 4vh;
-}
+
 
 .public-archive-wrapper {
     text-align: center;
@@ -69,69 +65,24 @@ a {
     padding-bottom: 10vh;
 }
 
-.filtered-results-wrapper {
-    padding: 10px;
-}
+
 
 .error-message {
     color: red;
     padding: 10px;
 }
 
-#filter-error-message {
-    color: red;
-    padding: 10px;
-    font-size: 14px;
-}
 
-#filter-div {
-    padding: 10px;
-    border: 1px solid black;
-    width: fit-content;
-    border-radius: 5px;
-    margin-top: 12px;
-}
 
-#filter-box {
-    padding: 15px;
-    display: flex;
-    width: fit-content;
-    gap: 20px;
-}
 
-#filter-box select , input {
-    border-radius: 5px;
-    padding: 7px;
-    border: 2px solid black;
-}
 
-.regular-button {
-    width: 75px;
-    padding: 7px;
-}
 
-#show-all-button-div {
-    padding: 10px;
-    margin-top: 15px;
-}
-
-#show-all-button {
-    padding: 7px;
-    border-radius: 10px;
-    box-shadow: 0 2px 3px black;
-    width: 150px;
-}
 
 .go-back-div {
     padding: 15px;
 }
 
-.results-div {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+
 
 .form-label-and-field {
     display: flex;
@@ -177,25 +128,9 @@ a {
     padding: 10px;
 }
 
-#all-techniques {
-    padding: 10px;
-    margin-top: 10px;
-}
 
-#clear-button {
-    padding: 7px;
-    width: 90px;
-    border-radius: 5px;
-}
 
-.one-technique {
-    padding: 20px;
-}
 
-.technique-title {
-    font-size: 20px;
-    padding: 10px;
-}
 
 .one-video-player {
     padding: 10px;
@@ -274,4 +209,92 @@ a {
     height: 40px;
     border: 1px solid black;
     box-shadow: 0 2px 5px black;
+}
+
+/* private_archive.html */
+
+.private-archive-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+#filter-error-message {
+    color: red;
+    padding: 10px;
+    font-size: 14px;
+}
+
+#filter-div {
+    padding: 10px;
+    border: 1px solid black;
+    width: fit-content;
+    border-radius: 5px;
+    margin-top: 12px;
+}
+
+#filter-box {
+    padding: 15px;
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+}
+
+#filter-box select,
+input {
+    border-radius: 5px;
+    padding: 7px;
+    border: 2px solid black;
+}
+
+.regular-button {
+    width: 75px;
+    padding: 7px;
+}
+
+#show-all-button-div {
+    padding: 10px;
+    margin-top: 15px;
+}
+
+#show-all-button {
+    padding: 7px;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px black;
+    width: 150px;
+}
+
+#all-techniques {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+
+
+/* results.html */
+
+.filtered-results-wrapper {
+    padding: 10px;
+}
+
+.results-div {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#clear-button {
+    padding: 7px;
+    width: 90px;
+    border-radius: 5px;
+}
+
+.one-technique {
+    padding: 20px;
+}
+
+.technique-title {
+    font-size: 20px;
+    padding: 10px;
 }

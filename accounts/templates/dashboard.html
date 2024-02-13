@@ -26,7 +26,7 @@
                             <a href="{% url 'user' user.id %}"><img class="profile-picture-sm" src="{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture">
                         {% else %}</a>
                             <a href="{% url 'user' user.id %}"><img class="profile-picture-sm" src="{% static 'images/no-profile.png' %}" alt="No profile picture"></a>
-                        <p>No Profile Picture Yet...</p>
+                            <p>No Profile Picture Yet...</p>
                         {% endif %}
                     </div>
                 {% endfor %}

@@ -43,6 +43,45 @@ a {
     color: white;
 }
 
+
+.error-message {
+    color: red;
+    padding: 10px;
+}
+
+
+.form-label-and-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.form-label-and-field input {
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.submit-button {
+    height: fit-content;
+    width: fit-content;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px black;
+}
+
+.long-button {
+    width: fit-content;
+    height: fit-content;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px black;
+}
+
+
+
+/* index.html */
+
 .index-wrapper {
     text-align: center;
     padding-top: 4vh;
@@ -50,11 +89,33 @@ a {
 }
 
 
+#user-buttons {
+    margin-top: 10px;
+}
+
+.returning-user-button, .new-user-button {
+    width: 160px;
+    height: 45px;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px black;
+}
+
+/* register.html */
+
 .register-wrapper {
     text-align: center;
     padding-top: 4vh;
     padding-bottom: 4vh;
 }
+
+.register-form {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+/* login.html */
 
 .login-wrapper {
     text-align: center;
@@ -62,17 +123,33 @@ a {
     padding-bottom: 4vh;
 }
 
-.dashboard-wrapper {
+.login-form {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* password_change.html */
+
+.pw-requirements {
+    font-size: 14px;
+    padding: 10px;
+}
+
+.edit-password-wrapper {
     text-align: center;
     padding-top: 4vh;
     padding-bottom: 4vh;
 }
 
-.user-profile-wrapper {
+.edit-password-done-wrapper {
     text-align: center;
     padding-top: 4vh;
     padding-bottom: 4vh;
 }
+
+
+
+/* edit.html */
 
 .edit-profile-wrapper {
     text-align: center;
@@ -86,13 +163,12 @@ a {
     padding: 10px;
 }
 
-.edit-password-wrapper {
-    text-align: center;
-    padding-top: 4vh;
-    padding-bottom: 4vh;
-}
 
-.edit-password-done-wrapper {
+
+
+/* dashboard.html */
+
+.dashboard-wrapper {
     text-align: center;
     padding-top: 4vh;
     padding-bottom: 4vh;
@@ -119,83 +195,6 @@ a {
     box-shadow: 0 2px 2px black;
 }
 
-#user-buttons {
-    margin-top: 10px;
-}
-
-.pw-requirements {
-    font-size: 14px;
-    padding: 10px;
-}
-
-.error-message {
-    color: red;
-    padding: 10px;
-}
-
-.register-form {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-.login-form {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-.form-label-and-field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.form-label-and-field input {
-    border-radius: 10px;
-    padding: 7px;
-}
-
-
-.submit-button {
-    height: fit-content;
-    width: fit-content;
-    padding: 7px;
-    border-radius: 5px;
-    box-shadow: 0 2px 2px black;
-}
-
-.long-button {
-    width: fit-content;
-    height: fit-content;
-    padding: 7px;
-    border-radius: 5px;
-    box-shadow: 0 2px 2px black;
-}
-
-.returning-user-button , .new-user-button {
-    width: 160px;
-    height: 45px;
-    padding: 7px;
-    border-radius: 5px;
-    box-shadow: 0 2px 2px black;
-}
-
-.profile-picture {
-    width: 220px;
-    height: 220px;
-    border-radius: 20%;
-    object-fit: cover;
-    border: 5px solid black;
-}
-
-.profile-picture-sm {
-    width: 120px;
-    height: 120px;
-    border-radius: 20%;
-    object-fit: cover;
-    border: 3px solid black;
-}
-
 .all-users {
     padding: 10px;
     margin-top: 10px;
@@ -207,4 +206,41 @@ a {
     width: fit-content;
     padding: 10px;
     gap: 10px;
+}
+
+.profile-picture-sm {
+    width: 120px;
+    height: 120px;
+    border-radius: 20%;
+    object-fit: cover;
+    border: 3px solid black;
+}
+
+/* user.html */
+
+.user-profile-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+.user-profile-div {
+    padding: 10px;
+}
+
+.profile-pic-div {
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.profile-name-div {
+    padding: 10px;
+}
+
+.profile-picture {
+    width: 220px;
+    height: 220px;
+    border-radius: 20%;
+    object-fit: cover;
+    border: 5px solid black;
 }
