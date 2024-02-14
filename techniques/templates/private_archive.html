@@ -60,7 +60,10 @@
                     {% endif %}
                     {% if technique.video_option == 'cropped' %}
                         <div class="one-video-player">
-                            Under Constructions
+                            <video width="560" height="315" controls>
+                                <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                     {% endif %}
 

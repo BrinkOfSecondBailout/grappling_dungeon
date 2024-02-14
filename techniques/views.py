@@ -42,7 +42,8 @@ def add(request):
 
         if tech_form.is_valid():
             technique = tech_form.save(commit=False)
-            technique.uploaded_by = request.user
+            user = request.user
+            technique.uploaded_by = user
 
             if technique.video_option == 'full':
                 if 'youtube.com' in technique.youtube_url:
@@ -66,7 +67,7 @@ def add(request):
                     messages.error(request, 'Timeout: File not downloaded within allotted time')
                     return redirect('add')
                 
-                technique.cropped_video_path = cropped_video_path
+                technique.cropped_video = cropped_video_path
             
             technique.save()
             messages.info(request, 'Successfully added new technique')
@@ -92,7 +93,7 @@ def crop_video(video_url, start_time, end_time):
 
         temp_download_path = f'media/temp/{custom_name}.mp4'
 
-        max_wait_time = 15
+        max_wait_time = 20
         waited_time = 0
 
         while not os.path.exists(temp_download_path) and waited_time < max_wait_time:
@@ -102,6 +103,7 @@ def crop_video(video_url, start_time, end_time):
         if os.path.exists(temp_download_path):
             video_clip = VideoFileClip(temp_download_path)
             cropped_video_clip = video_clip.subclip(start_time, end_time)
+
             cropped_video_name = f'{uuid.uuid4()}.mp4'
             cropped_video_path = f'media/cropped_videos/{cropped_video_name}'
             cropped_video_clip.write_videofile(codec='libx264', audio_codec='aac', filename=cropped_video_path)
@@ -109,16 +111,12 @@ def crop_video(video_url, start_time, end_time):
             video_clip.reader.close()
             video_clip.audio.reader.close_proc()
             os.remove(temp_download_path)
-
+            print(cropped_video_path)
             return cropped_video_path
         else:
             print('Timeout: File not downloaded within allotted time')
             return None
 
-
-        
-        
-        
 
     except Exception as e:
         print(f'Error: {e}')
