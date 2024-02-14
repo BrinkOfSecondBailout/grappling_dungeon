@@ -31,15 +31,14 @@ class Technique(models.Model):
     category = models.CharField(max_length = 20, choices=CATEGORY_CHOICES)
     privacy_status = models.CharField(max_length=20, choices=PRIVACY_CHOICES)
     uploaded_by = models.ForeignKey(user_model, on_delete=models.CASCADE)
-    video_option = models.CharField(max_length = 10, choices=VIDEO_CHOICES)
     youtube_url = models.URLField()
+    video_option = models.CharField(max_length = 10, choices=VIDEO_CHOICES)
     note = models.CharField(max_length = 500, blank=True, null=True)
-
-    embed_url = models.URLField(blank=True, null=True)
 
     start_time = models.PositiveIntegerField(blank=True, null=True)
     end_time = models.PositiveIntegerField(blank=True, null=True)
 
+    embed_url = models.URLField(blank=True, null=True)
     cropped_video = models.FileField(upload_to='cropped_videos/', blank=True, null=True)
 
     keywords = models.CharField(max_length=255, blank=True, null=True)

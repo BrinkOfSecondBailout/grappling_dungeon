@@ -116,6 +116,10 @@ a {
     padding: 10px;
 }
 
+#start_time_field, #end_time_field {
+    display: none;
+}
+
 
 /* private_archive.html */
 

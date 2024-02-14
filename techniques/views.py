@@ -5,13 +5,42 @@ from moviepy.video.io.VideoFileClip import VideoFileClip
 from .models import Technique
 from django.contrib import messages
 from django.urls import reverse
+from pytube import YouTube
+import os
+import time
 
 # Create your views here.
 @login_required
 def add(request):
     if request.method == 'POST':
-        tech_form = CustomTechniqueCreationForm(request.POST)
-        if tech_form.is_valid:
+        if request.POST['start_time'] and ':' in request.POST['start_time']:
+            start_minutes, start_seconds = map(int, request.POST['start_time'].split(':'))
+            new_start_time = start_minutes * 60 + start_seconds
+
+        if request.POST['end_time'] and ':' in request.POST['end_time']:
+            end_minutes, end_seconds = map(int, request.POST['end_time'].split(':'))
+            new_end_time = end_minutes * 60 + end_seconds
+
+        if request.POST['start_time'] and request.POST['end_time']:
+            modified_form = {
+                'csrfmiddlewaretoken': request.POST['csrfmiddlewaretoken'],
+                'name': request.POST['name'],
+                'athlete': request.POST['athlete'],
+                'category': request.POST['category'],
+                'privacy_status': request.POST['privacy_status'],
+                'youtube_url': request.POST['youtube_url'],
+                'video_option': request.POST['video_option'],
+                'note': request.POST['note'],
+                'keywords': request.POST['keywords'],
+                'start_time': new_start_time,
+                'end_time': new_end_time,
+            }
+
+            tech_form = CustomTechniqueCreationForm(modified_form)
+        else:
+            tech_form = CustomTechniqueCreationForm(request.POST)
+
+        if tech_form.is_valid():
             technique = tech_form.save(commit=False)
             technique.uploaded_by = request.user
 
@@ -33,10 +62,18 @@ def add(request):
                 video_url = technique.youtube_url
                 cropped_video_path = crop_video(video_url, start_time, end_time)
 
+                if not cropped_video_path:
+                    messages.error(request, 'Timeout: File not downloaded within allotted time')
+                    return redirect('add')
+                
                 technique.cropped_video_path = cropped_video_path
             
             technique.save()
             messages.info(request, 'Successfully added new technique')
+            return redirect('add')
+        else: 
+            print(tech_form.errors)
+            messages.error(request, 'Error uploading technique. Check the form for errors.')
             return redirect('add')
     else:
         tech_form = CustomTechniqueCreationForm()
@@ -46,11 +83,38 @@ def add(request):
 
 
 def crop_video(video_url, start_time, end_time):
-    video_clip = VideoFileClip(video_url)
-    cropped_video_clip = video_clip.subclip(start_time, end_time)
-    cropped_video_path = f"media/cropped_videos/{uuid.uuid4()}.mp4"
-    cropped_video_clip.write_videofile(cropped_video_path, codec="libx264", audio_codec="aac")
-    return cropped_video_path
+    try:
+        youtube_video = YouTube(video_url)
+        video_stream = youtube_video.streams.filter(file_extension='mp4').first()
+        video_stream.download('media/temp/')
+        temp_download_path = f'media/temp/{youtube_video.title}.mp4'
+
+        max_wait_time = 20
+        waited_time = 0
+
+        while not os.path.exists(temp_download_path) and waited_time < max_wait_time:
+            time.sleep(1)
+            waited_time += 1
+
+        if os.path.exists(temp_download_path):
+            video_clip = VideoFileClip(temp_download_path)
+            print('success')
+            cropped_video_clip = video_clip.subclip(start_time, end_time)
+            cropped_video_path = f'media/cropped_videos/{uuid.uuid4()}.mp4'
+            cropped_video_clip.write_videofile(cropped_video_path, codec='libx264', audio_codec='aac')
+            return cropped_video_path
+        else:
+            print('Timeout: File not downloaded within allotted time')
+            return None
+
+
+        # video_clip.reader.close()
+        # video_clip.audio.reader.close_proc()
+        # os.remove(temp_download_path)
+
+    except Exception as e:
+        print(f'Error: {e}')
+        return None
 
 
 @login_required

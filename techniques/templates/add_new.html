@@ -76,15 +76,13 @@
         const startTimeField = document.getElementById('start_time_field');
         const endTimeField = document.getElementById('end_time_field');
 
-        startTimeField.style.display = 'none';
-        endTimeField.style.display = 'none';
-
         document.getElementById('id_video_option').addEventListener('change', function() {
             var selectedValue = this.value;
 
             if(selectedValue === 'cropped') {
                 startTimeField.style.display = 'block';
                 endTimeField.style.display = 'block';
+
             } else {
                 startTimeField.style.display = 'none';
                 endTimeField.style.display = 'none';

@@ -19,7 +19,6 @@ class CustomTechniqueCreationForm(forms.ModelForm):
         video_option = cleaned_data.get('video_option')
         start_time = cleaned_data.get('start_time')
         end_time = cleaned_data.get('end_time')
-        
         keywords = cleaned_data.get('keywords')
         name = cleaned_data.get('name')
         category = cleaned_data.get('category')
@@ -32,13 +31,15 @@ class CustomTechniqueCreationForm(forms.ModelForm):
         if video_option == 'cropped' and (start_time is None or end_time is None):
             raise forms.ValidationError("Start time and end time are required for cropped videos.")
         
-        if start_time and ':' in start_time:
-            start_minutes, start_seconds = map(int, start_time.split(':'))
-            start_time = start_minutes * 60 + start_seconds
+        # if start_time and ':' in start_time:
+        #     start_minutes, start_seconds = map(int, start_time.split(':'))
+        #     start_time = start_minutes * 60 + start_seconds
+        #     print(start_time)
 
-        if end_time and ':' in end_time:
-            end_minutes, end_seconds = map(int, end_time.split(':'))
-            end_time = end_minutes * 60 + end_seconds
+        # if end_time and ':' in end_time:
+        #     end_minutes, end_seconds = map(int, end_time.split(':'))
+        #     end_time = end_minutes * 60 + end_seconds
+        #     print(end_time)
 
         if video_option == 'cropped':
             duration = end_time - start_time
