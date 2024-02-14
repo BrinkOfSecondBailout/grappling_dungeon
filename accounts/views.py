@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 from accounts.models import User
+from techniques.models import Technique
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 from django.contrib import messages
 
@@ -51,9 +52,12 @@ def login(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
+        user = request.user
         all_users = User.objects.exclude(username='admin')
         total_users = len(all_users)
-        return render(request, 'dashboard.html', {'all_users': all_users, 'total_users': total_users})
+        private_techniques = Technique.objects.filter(uploaded_by=user, privacy_status='private')
+        total_private = len(private_techniques)
+        return render(request, 'dashboard.html', {'all_users': all_users, 'total_users': total_users, 'total_private': total_private})
     else:
         return redirect('index')
 

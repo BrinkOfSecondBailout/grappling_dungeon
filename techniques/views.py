@@ -103,17 +103,22 @@ def crop_video(video_url, start_time, end_time):
             video_clip = VideoFileClip(temp_download_path)
             cropped_video_clip = video_clip.subclip(start_time, end_time)
             cropped_video_name = f'{uuid.uuid4()}.mp4'
-            cropped_video_path = 'media/cropped_videos/'
-            cropped_video_clip.write_videofile(codec='libx264', audio_codec='aac', filename=cropped_video_name)
+            cropped_video_path = f'media/cropped_videos/{cropped_video_name}'
+            cropped_video_clip.write_videofile(codec='libx264', audio_codec='aac', filename=cropped_video_path)
+
+            video_clip.reader.close()
+            video_clip.audio.reader.close_proc()
+            os.remove(temp_download_path)
+
             return cropped_video_path
         else:
             print('Timeout: File not downloaded within allotted time')
             return None
 
 
-        # video_clip.reader.close()
-        # video_clip.audio.reader.close_proc()
-        # os.remove(temp_download_path)
+        
+        
+        
 
     except Exception as e:
         print(f'Error: {e}')
