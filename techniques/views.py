@@ -8,6 +8,7 @@ from django.urls import reverse
 from pytube import YouTube
 import os
 import time
+import uuid
 
 # Create your views here.
 @login_required
@@ -35,7 +36,6 @@ def add(request):
                 'start_time': new_start_time,
                 'end_time': new_end_time,
             }
-
             tech_form = CustomTechniqueCreationForm(modified_form)
         else:
             tech_form = CustomTechniqueCreationForm(request.POST)
@@ -86,10 +86,13 @@ def crop_video(video_url, start_time, end_time):
     try:
         youtube_video = YouTube(video_url)
         video_stream = youtube_video.streams.filter(file_extension='mp4').first()
-        video_stream.download('media/temp/')
-        temp_download_path = f'media/temp/{youtube_video.title}.mp4'
+        custom_name = 'temp_video'
 
-        max_wait_time = 20
+        video_stream.download(output_path='media/temp/', filename=f'{custom_name}.mp4')
+
+        temp_download_path = f'media/temp/{custom_name}.mp4'
+
+        max_wait_time = 15
         waited_time = 0
 
         while not os.path.exists(temp_download_path) and waited_time < max_wait_time:
@@ -98,10 +101,10 @@ def crop_video(video_url, start_time, end_time):
 
         if os.path.exists(temp_download_path):
             video_clip = VideoFileClip(temp_download_path)
-            print('success')
             cropped_video_clip = video_clip.subclip(start_time, end_time)
-            cropped_video_path = f'media/cropped_videos/{uuid.uuid4()}.mp4'
-            cropped_video_clip.write_videofile(cropped_video_path, codec='libx264', audio_codec='aac')
+            cropped_video_name = f'{uuid.uuid4()}.mp4'
+            cropped_video_path = 'media/cropped_videos/'
+            cropped_video_clip.write_videofile(codec='libx264', audio_codec='aac', filename=cropped_video_name)
             return cropped_video_path
         else:
             print('Timeout: File not downloaded within allotted time')
