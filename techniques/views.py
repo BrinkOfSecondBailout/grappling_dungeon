@@ -18,17 +18,27 @@ def add(request):
             if ':' in request.POST['start_time']:
                 start_minutes, start_seconds = map(int, request.POST['start_time'].split(':'))
                 new_start_time = start_minutes * 60 + start_seconds
+            if request.POST['start_time'].isdigit():
+                new_start_time = int(request.POST['start_time'])
             else:
-                new_start_time = request.POST['start_time']
+                messages.error(request, 'Please input the correct start and end time, ex: 55 or 1:25')
+                return redirect('add')
 
         if request.POST['end_time']:
             if ':' in request.POST['end_time']:
                 end_minutes, end_seconds = map(int, request.POST['end_time'].split(':'))
                 new_end_time = end_minutes * 60 + end_seconds
+            if request.POST['end_time'].isdigit():
+                new_end_time = int(request.POST['end_time'])
             else:
-                new_end_time = request.POST['end_time']
+                messages.error(request, 'Please input the correct start and end time, ex: 55 or 1:25')
+                return redirect('add')
 
         if request.POST['start_time'] and request.POST['end_time']:
+            if new_end_time - new_start_time > 60:
+                messages.error(request, 'Please ensure video is cropped to be maximum 1 minute long')
+                return redirect('add')
+
             modified_form = {
                 'csrfmiddlewaretoken': request.POST['csrfmiddlewaretoken'],
                 'name': request.POST['name'],
