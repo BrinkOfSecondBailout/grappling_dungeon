@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from .forms import CustomTechniqueCreationForm, CustomTechniqueChangeForm, CustomNoteChangeForm
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from .models import Technique
@@ -164,8 +165,13 @@ def remove(request, technique_id):
         messages.error(request, 'You do not have the credentials to delete that')
         return redirect('private')
     else:
-        messages.info(request, f'Successfully removed {technique.name} from database')
+        if technique.video_option == 'cropped':
+            if technique.cropped_video:
+                full_path = os.path.join(settings.MEDIA_ROOT, str(technique.cropped_video))
+                if os.path.exists(full_path):
+                    os.remove(full_path)
         technique.delete()
+        messages.info(request, f'Successfully removed {technique.name} from database')
     return redirect('private')
 
 @login_required
