@@ -14,13 +14,19 @@ import uuid
 @login_required
 def add(request):
     if request.method == 'POST':
-        if request.POST['start_time'] and ':' in request.POST['start_time']:
-            start_minutes, start_seconds = map(int, request.POST['start_time'].split(':'))
-            new_start_time = start_minutes * 60 + start_seconds
+        if request.POST['start_time']:
+            if ':' in request.POST['start_time']:
+                start_minutes, start_seconds = map(int, request.POST['start_time'].split(':'))
+                new_start_time = start_minutes * 60 + start_seconds
+            else:
+                new_start_time = request.POST['start_time']
 
-        if request.POST['end_time'] and ':' in request.POST['end_time']:
-            end_minutes, end_seconds = map(int, request.POST['end_time'].split(':'))
-            new_end_time = end_minutes * 60 + end_seconds
+        if request.POST['end_time']:
+            if ':' in request.POST['end_time']:
+                end_minutes, end_seconds = map(int, request.POST['end_time'].split(':'))
+                new_end_time = end_minutes * 60 + end_seconds
+            else:
+                new_end_time = request.POST['end_time']
 
         if request.POST['start_time'] and request.POST['end_time']:
             modified_form = {
