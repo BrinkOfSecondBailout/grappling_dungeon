@@ -54,6 +54,11 @@ def add(request):
                 'end_time': new_end_time,
             }
             tech_form = CustomTechniqueCreationForm(modified_form)
+
+        if request.POST['video_option'] == 'cropped' and not request.POST['start_time'] and not request.POST['end_time']:
+            messages.error(request, 'To crop the video, please specify start and end time')
+            return redirect('add')
+
         else:
             tech_form = CustomTechniqueCreationForm(request.POST)
 
