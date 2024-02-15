@@ -251,8 +251,8 @@ a {
 }
 
 .profile-picture {
-    width: 220px;
-    height: 220px;
+    width: 270px;
+    height: 300px;
     border-radius: 20%;
     object-fit: cover;
     border: 5px solid black;
