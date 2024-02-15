@@ -15,7 +15,6 @@ class Technique(models.Model):
 
     PRIVACY_CHOICES = [
         ('private', 'Private'),
-        ('group', 'Group'),
         ('public', 'Public'),
     ]
 
