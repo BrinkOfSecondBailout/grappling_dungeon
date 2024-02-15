@@ -105,6 +105,14 @@ a {
 
 /* add_new.html */
 
+#loading-div {
+    padding: 10px;
+}
+
+#form-div {
+    padding: 10px;
+}
+
 .add-technique-wrapper {
     text-align: center;
     padding-top: 4vh;

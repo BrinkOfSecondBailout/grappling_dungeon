@@ -1,4 +1,5 @@
 {% extends 'base_techniques.html' %}
+{% load static %}
 
 {% block content %}
     <div class="add-technique-wrapper">
@@ -10,7 +11,7 @@
             {% endfor %}
         </div>
 
-        <div>
+        <div id="form-div">
             <form method="POST" action="{% url 'add' %}">
                 {% csrf_token %}
                 
@@ -65,9 +66,13 @@
                     {{ tech_form.end_time}}
                 </div>
                 <div>
-                    <input type="submit" value="Add Technique" class="submit-button">
+                    <input type="submit" value="Add Technique" class="submit-button" onclick="loadLoader()">
                 </div>
             </form>
+        </div>
+
+        <div id="loading-div" style="display:none;">
+            <img src="{% static 'images/loading-gif3.gif' %}" >
         </div>
     </div>
 
@@ -88,6 +93,14 @@
                 endTimeField.style.display = 'none';
             }
         });
+
+        function loadLoader() {
+            const formDiv = document.getElementById('form-div');
+            const loadingDiv = document.getElementById('loading-div');
+
+            formDiv.style.display = 'none';
+            loadingDiv.style.display = 'block';
+        }
 
     </script>
 {% endblock %}
