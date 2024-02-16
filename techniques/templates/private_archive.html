@@ -104,11 +104,18 @@
                             <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
                         </div>
                     </div>
+
+                    <div id="playlist-selection-div">
+                        
+                    </div>
                     
 
                     <div class="note-and-delete-buttons">
                         <div>
                             <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">Note</button>
+                        </div>
+                        <div>
+                            <button id="{{ technique.id}}-playlist-button" class="add-to-playlist-button" onclick="togglePlaylist('{{technique.id}}')">Add to Playlist</button>
                         </div>
                         <div>
                             <div id="{{ technique.id }}-delete-button-div">

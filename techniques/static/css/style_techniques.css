@@ -281,10 +281,22 @@ input {
     border-radius: 5px;
     background-color: rgb(255, 196, 0);
     color: rgb(0, 0, 0);
+    width: 90px;
+    height: 40px;
+    border: 1px solid black;
+    box-shadow: 0 2px 5px black;
+}
+
+.add-to-playlist-button {
+    padding: 7px;
+    border-radius: 5px;
+    background-color: rgb(255, 196, 0);
+    color: rgb(0, 0, 0);
     width: 100px;
     height: 40px;
     border: 1px solid black;
     box-shadow: 0 2px 5px black;
+    font-size: 13px;
 }
 
 .edit-icon {
