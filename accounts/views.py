@@ -4,6 +4,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 from accounts.models import User
 from techniques.models import Technique
+from playlists.models import Playlist
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 from django.contrib import messages
 
@@ -57,7 +58,8 @@ def dashboard(request):
         total_users = len(all_users)
         private_techniques = Technique.objects.filter(uploaded_by=user, privacy_status='private')
         total_private = len(private_techniques)
-        return render(request, 'dashboard.html', {'all_users': all_users, 'total_users': total_users, 'total_private': total_private})
+        playlists = Playlist.objects.filter(owner=user)
+        return render(request, 'dashboard.html', {'all_users': all_users, 'total_users': total_users, 'total_private': total_private, 'playlists': playlists })
     else:
         return redirect('index')
 

@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts',
     'techniques',
+    'playlists',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +61,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'accounts', 'templates'),
             os.path.join(BASE_DIR, 'techniques', 'templates'),
+            os.path.join(BASE_DIR, 'playlists', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -137,6 +139,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'accounts', 'static'),
     os.path.join(BASE_DIR, 'techniques', 'static'),
+    os.path.join(BASE_DIR, 'playlists', 'static'),
 ]
 
 # Default primary key field type
