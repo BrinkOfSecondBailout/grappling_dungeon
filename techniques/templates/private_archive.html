@@ -105,8 +105,8 @@
                         </div>
                     </div>
 
-                    <div id="{{technique.id}}-playlist-selection-div" class="playlist-selection-div" style="display:none;">
-                        <form id="playlist-add-form" class="playlist-add-form">
+                    <div id="{{ technique.id }}-playlist-selection-div" class="playlist-selection-div" style="display: none;">
+                        <form id="" class="playlist-add-form">
                             <label>Add "{{ technique.name|title }}" to:</label>
                             <div>
                                 <select name="" id="" required>
@@ -277,8 +277,15 @@
 
         function togglePlaylist(techniqueId) {
             const playlistDiv = document.getElementById(techniqueId + '-playlist-selection-div');
+            const playlistButton = document.getElementById(techniqueId + '-playlist-button');
 
-            playListDiv.style.display = 'block';
+            if (playlistDiv.style.display === 'none') {
+                playlistDiv.style.display = 'block';
+                playlistButton.innerText = 'Go back';
+            } else {
+                playlistDiv.style.display = 'none';
+                playlistButton.innerText = 'Add to Playlist';
+            }
         }
 
     </script>

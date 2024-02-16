@@ -8,6 +8,7 @@ class Technique(models.Model):
         ('guard', 'Guard'),
         ('submission', 'Submission'),
         ('takedown', 'Takedown'),
+        ('guard-pull', 'Guard Pull'),
         ('counter', 'Defense/Counter'),
         ('escape', 'Escape'),
         ('other', 'Other'),
