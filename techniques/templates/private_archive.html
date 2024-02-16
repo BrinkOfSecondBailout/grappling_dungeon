@@ -48,7 +48,7 @@
                             <option value="{{ playlist }}">{{ playlist.name|title }}</option>
                         {% endfor %}
                     </select>
-                    <input type="submit" value="Go" onclick="submitFilterForm(event)" class="regular-button">
+                    <input type="submit" value="Go" onclick="" class="regular-button">
                 </form>
             </div>
         </div>
@@ -105,8 +105,20 @@
                         </div>
                     </div>
 
-                    <div id="playlist-selection-div">
-                        
+                    <div id="{{technique.id}}-playlist-selection-div" class="playlist-selection-div" style="display:none;">
+                        <form id="playlist-add-form" class="playlist-add-form">
+                            <label>Add "{{ technique.name|title }}" to:</label>
+                            <div>
+                                <select name="" id="" required>
+                                    <option value="" selected disabled>----</option>
+                                    {% for playlist in playlists %}
+                                        <option value="{{ playlist }}">{{ playlist.name|title }}</option>
+                                    {% endfor %}
+                                    <option value="new">New Playlist</option>
+                                </select>
+                                <input type="submit" value="Add" onclick="" class="regular-button">
+                            </div>
+                        </form>
                     </div>
                     
 
@@ -262,5 +274,12 @@
                 deleteButtonDiv.style.display = 'block';
             }
         }
+
+        function togglePlaylist(techniqueId) {
+            const playlistDiv = document.getElementById(techniqueId + '-playlist-selection-div');
+
+            playListDiv.style.display = 'block';
+        }
+
     </script>
 {% endblock %}
