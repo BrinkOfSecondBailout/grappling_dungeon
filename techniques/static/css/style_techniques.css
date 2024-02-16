@@ -165,6 +165,27 @@ input {
     border: 2px solid black;
 }
 
+#playlist-div {
+    padding: 10px;
+    margin-top: 12px;
+}
+
+#playlist-box {
+    padding: 15px;
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+}
+
+#playlist-box select,
+input {
+    border-radius: 5px;
+    padding: 7px;
+    width: fit-content;
+    border: 2px solid black;
+}
+
+
 .regular-button {
     width: 75px;
     padding: 7px;

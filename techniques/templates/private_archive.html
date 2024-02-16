@@ -38,16 +38,19 @@
             </div>
         </div>
 
-        <div id="select-playlist">
-            <form id="playlist-form" method="GET" data-url="{% url 'find_playlist' %}">
-                <select name="playlist" id="playlist-select" required>
-                    <option value="" selected disabled>----</option>
-                    {% for playlist in playlists %}
-                        <option value="{{ playlist }}">{{ playlist.name|title }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="Go" onclick="submitFilterForm(event)" class="regular-button">
-            </form>
+        <div id="playlist-div">
+            <h4>Select Playlist:</h4>
+            <div id="playlist-box">
+                <form id="playlist-form" method="GET" data-url="{% url 'find_playlist' %}">
+                    <select name="playlist" id="playlist-select" required>
+                        <option value="" selected disabled>----</option>
+                        {% for playlist in playlists %}
+                            <option value="{{ playlist }}">{{ playlist.name|title }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Go" onclick="submitFilterForm(event)" class="regular-button">
+                </form>
+            </div>
         </div>
 
         <div id="show-all-button-div">
