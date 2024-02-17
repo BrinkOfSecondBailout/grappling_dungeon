@@ -332,8 +332,14 @@
             const selectedValue = playlistNameForm.elements['name'].value;
             const csrfToken = playlistNameForm.elements['csrfmiddlewaretoken'].value;
             const url = playlistNameForm.getAttribute('data-url');
+            var messageDiv = document.getElementById(techniqueId + '-playlist-messages');
+
+            if (selectedValue === '') {
+                messageDiv.innerHTML = '<p>Please select a playlist</p>';
+            } else {
+                addToPlaylist(techniqueId, selectedValue, url, csrfToken, e);
+            }
             
-            addToPlaylist(techniqueId, selectedValue, url, csrfToken, e);
         }
 
         function addToPlaylist(techniqueId, name, endpoint, token, e) {
