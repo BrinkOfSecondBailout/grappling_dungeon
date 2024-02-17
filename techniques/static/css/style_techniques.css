@@ -143,6 +143,12 @@ a {
     font-size: 14px;
 }
 
+.playlist-error-message p {
+    color: red;
+    padding: 5px;
+    font-size: 15px;
+}
+
 #filter-div {
     padding: 10px;
     border: 1px solid black;

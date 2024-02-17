@@ -50,6 +50,7 @@ def add_to_playlist(request):
 
             return redirect('private')
         else:
+            print(f'Name for playlist is required')
             return redirect('private')
 
     else:

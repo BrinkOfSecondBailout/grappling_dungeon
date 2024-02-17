@@ -106,7 +106,7 @@
                         </div>
                     </div>
 
-                    <div id="{{ technique.id }}-playlist-messages">
+                    <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
 
                     </div>
 
@@ -312,8 +312,12 @@
             const selectedValue = playlistSelectionForm.elements['name'].value;
             const newNameDiv = document.getElementById(techniqueId + '-new-playlist-div');
             const url = playlistSelectionForm.getAttribute('data-url');
+            var messageDiv = document.getElementById(techniqueId + '-playlist-messages');
 
-            if (selectedValue === 'new') {
+            if (selectedValue === '') {
+                messageDiv.innerHTML = '<p>Please select a playlist</p>';
+            }
+            else if (selectedValue === 'new') {
                 newNameDiv.style.display = 'block';
             } else {
                 const csrfToken = playlistSelectionForm.elements['csrfmiddlewaretoken'].value;
@@ -334,6 +338,8 @@
 
         function addToPlaylist(techniqueId, name, endpoint, token, e) {
             e.preventDefault();
+
+            var messageDiv = document.getElementById(techniqueId + '-playlist-messages');
             const url = endpoint
 
             console.log(url);
@@ -348,6 +354,7 @@
             formData.append('technique', techniqueId);
             xhr.onload = function () {
                 if (xhr.status === 200) {
+                    messageDiv.innerHTML = '<p>Technique added to playlist "' + name + '"</p>';
                     console.log(xhr.status);
                 }
             }
