@@ -111,7 +111,7 @@
                     </div>
 
                     <div id="{{ technique.id }}-playlist-selection-div" class="playlist-selection-div" style="display: none;">
-                        <form id="{{ technique.id }}-playlist-selection-form" class="playlist-add-form">
+                        <form id="{{ technique.id }}-playlist-selection-form" class="playlist-add-form" data-url="{% url 'add_to_playlist' %}">
                             {% csrf_token %}
                             <p>Add <b>"{{ technique.name|title }}"</b> to:</p>
                             <div>
@@ -311,22 +311,14 @@
             const playlistSelectionForm = document.getElementById(techniqueId + '-playlist-selection-form');
             const selectedValue = playlistSelectionForm.elements['name'].value;
             const newNameDiv = document.getElementById(techniqueId + '-new-playlist-div');
+            const url = playlistSelectionForm.getAttribute('data-url');
 
             if (selectedValue === 'new') {
                 newNameDiv.style.display = 'block';
             } else {
-                // var url = playlistSelectionForm.getAttribute('data-url') + '?playlist=' + encodeURIComponent(selectedValue) + '?technique=' + encodeURIComponent(techniqueId);
-                // console.log(url);
+                const csrfToken = playlistSelectionForm.elements['csrfmiddlewaretoken'].value;
 
-                // var xhr = new XMLHttpRequest();
-                // xhr.open(playlistSelectionForm('method'), url, true);
-                // xhr.onload = function () {
-                //     if (xhr.status === 200) {
-                //         console.log(xhr.status);
-                //     }
-                // }
-                // xhr.send();
-                addToPlaylist(techniqueId, e);
+                addToPlaylist(techniqueId, selectedValue, url, csrfToken, e);
             }
         }
 
