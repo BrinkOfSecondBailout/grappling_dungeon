@@ -20,7 +20,7 @@
             <h4>Filter By:</h4>
             <div id="filter-box">
                 <form id="filter-form" method="GET" data-url="{% url 'filter' %}">
-                    <label>Category:</label>
+                    <label>Position:</label>
                     <select name="category" id="category-select" required>
                         <option value="" selected disabled>----</option>
                         {% for category in categories %}
@@ -42,6 +42,7 @@
             <h4>Select Playlist:</h4>
             <div id="playlist-box">
                 <form id="playlist-form" method="GET" data-url="{% url 'find_playlist' %}">
+                    {% csrf_token %}
                     <select name="playlist" id="playlist-select" required>
                         <option value="" selected disabled>----</option>
                         {% for playlist in playlists %}
@@ -106,20 +107,32 @@
                     </div>
 
                     <div id="{{ technique.id }}-playlist-selection-div" class="playlist-selection-div" style="display: none;">
-                        <form id="" class="playlist-add-form">
-                            <label>Add "{{ technique.name|title }}" to:</label>
+                        <form id="{{ technique.id }}-playlist-selection-form" class="playlist-add-form">
+                            {% csrf_token %}
+                            <p>Add <b>"{{ technique.name|title }}"</b> to:</p>
                             <div>
-                                <select name="" id="" required>
+                                <select name="playlist" id="" required>
                                     <option value="" selected disabled>----</option>
                                     {% for playlist in playlists %}
                                         <option value="{{ playlist }}">{{ playlist.name|title }}</option>
                                     {% endfor %}
                                     <option value="new">New Playlist</option>
                                 </select>
-                                <input type="submit" value="Add" onclick="" class="regular-button">
+                                <input type="submit" value="+" onclick="submitPlaylist('{{ technique.id }}', event)" class="regular-button">
                             </div>
                         </form>
+
+                        <div id="{{ technique.id }}-new-playlist-div" class="playlist-name-div" style="display: none;">
+                            <form class="playlist-name-form">
+                                {% csrf_token %}
+                                <p>New playlist name:</p>
+                                <input>
+                                <input type="submit">
+                            </form>
+                        </div>
                     </div>
+
+                    
                     
 
                     <div class="note-and-delete-buttons">
@@ -145,6 +158,18 @@
     </div>
 
     <script>
+
+        // const playlistSelectionDiv = document.getElementById(techniqueId + '-playlist-selection-div');
+        // const newPlaylistDiv = document.getElementById(techniqueId + '-new-playlist-div');
+
+        // playlistSelectionDiv.addEventListener('change', function() {
+        //     var selectedValue = this.value;
+
+        //     if (selectedValue === 'new') {
+        //         newPlaylistDiv.style.display = 'block';
+        //     }
+        // })
+
         function submitFilterForm(e) {
             e.preventDefault();
             const selectedCategory = document.getElementById('category-select').value;
@@ -287,6 +312,18 @@
                 playlistButton.innerText = 'Add to Playlist';
             }
         }
+
+        function submitPlaylist(techniqueId, e) {
+            e.preventDefault();
+            const playlistSelectionForm = document.getElementById(techniqueId + '-playlist-selection-form');
+            const selectedValue = playlistSelectionForm.elements['playlist'].value;
+            const newNameDiv = document.getElementById(techniqueId + '-new-playlist-div');
+
+            if (selectedValue === 'new') {
+                newNameDiv.style.display = 'block';
+            }
+        }
+
 
     </script>
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -15,3 +15,9 @@ def find_playlist(request):
     playlist_total = len(playlist_techniques)
 
     return render(request, 'playlist_results.html', {'playlist_techniques': playlist_techniques, 'playlist': playlist, 'playlist_total': playlist_total})
+
+@login_required
+def add_to_playlist(request):
+    if request.method == 'POST':
+        print(request.POST)
+    return redirect('private')

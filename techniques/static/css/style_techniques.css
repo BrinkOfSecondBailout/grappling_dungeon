@@ -186,8 +186,8 @@ input {
 }
 
 .playlist-selection-div {
-    font-size: 12px;
     padding: 10px;
+    font-size: 16px;
 }
 
 .playlist-add-form {
@@ -195,6 +195,7 @@ input {
     flex-direction: column;
     gap: 10px;
     padding: 7;
+    font-size: 16px;
 }
 
 .playlist-add-form select,
@@ -203,6 +204,17 @@ input {
     padding: 7px;
     width: fit-content;
     border: 2px solid black;
+}
+
+.playlist-name-div {
+    padding: 5px;
+}
+
+.playlist-name-form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .regular-button {
