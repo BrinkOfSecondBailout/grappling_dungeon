@@ -220,6 +220,8 @@ input {
 .regular-button {
     width: 75px;
     padding: 7px;
+    border: 2px solid black;
+    border-radius: 5px;
 }
 
 #show-all-button-div {

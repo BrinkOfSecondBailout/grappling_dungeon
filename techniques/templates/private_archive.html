@@ -127,8 +127,9 @@
                                 {% csrf_token %}
                                 <p>New playlist name:</p>
                                 <input>
-                                <input type="submit">
+                                <input type="submit" class="regular-button">
                             </form>
+                            <button class="regular-button" onclick="toggleNewPlaylistNameForm('{{ technique.id }}')">Cancel</button>
                         </div>
                     </div>
 
@@ -321,9 +322,17 @@
 
             if (selectedValue === 'new') {
                 newNameDiv.style.display = 'block';
+            } else {
+                var url = playlistSelectionForm.getAttribute('data-url') + '?playlist=' + encodeURIComponent(selectedValue);
+
             }
         }
+        
+        function toggleNewPlaylistNameForm(techniqueId) {
+            const newPlaylistForm = document.getElementById(techniqueId + '-new-playlist-div');
 
+            newPlaylistForm.style.display = 'none';
+        }
 
     </script>
 {% endblock %}
