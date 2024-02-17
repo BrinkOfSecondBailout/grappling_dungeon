@@ -24,32 +24,33 @@ def add_to_playlist(request):
         user = request.user
         playlist_name = request.POST.get('name')
         technique_id = request.POST.get('technique')
-        print(playlist_name)
-        print(technique_id)
 
-        playlist = Playlist.objects.filter(owner=user, name=playlist_name).first()
-        technique = get_object_or_404(Technique, id=technique_id)
+        if playlist_name:
+            playlist = Playlist.objects.filter(owner=user, name=playlist_name).first()
+            technique = get_object_or_404(Technique, id=technique_id)
 
-        if playlist:
-            order = PlaylistItem.objects.filter(playlist=playlist).count() + 1
+            if playlist:
+                order = PlaylistItem.objects.filter(playlist=playlist).count() + 1
 
-            playlist_item = PlaylistItem(playlist=playlist, technique=technique, order=order)
-            playlist_item.save()
+                playlist_item = PlaylistItem(playlist=playlist, technique=technique, order=order)
+                playlist_item.save()
 
-            print(f'Technique added to existing playlist: {playlist_name}')
+                print(f'Technique added to existing playlist: {playlist_name}')
 
+            else:
+                new_playlist = Playlist(owner=user, name=playlist_name)
+                new_playlist.save()
+
+                order = 1
+
+                playlist_item = PlaylistItem(playlist=new_playlist, technique=technique, order=order)
+                playlist_item.save()
+
+                print(f'Technique added to new playlist: {playlist_name}')
+
+            return redirect('private')
         else:
-            new_playlist = Playlist(owner=user, name=playlist_name)
-            new_playlist.save()
-
-            order = 1
-
-            playlist_item = PlaylistItem(playlist=new_playlist, technique=technique, order=order)
-            playlist_item.save()
-
-            print(f'Technique added to new playlist: {playlist_name}')
-
-        return redirect('private')
+            return redirect('private')
 
     else:
         pass
