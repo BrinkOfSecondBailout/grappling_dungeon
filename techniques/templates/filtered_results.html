@@ -5,6 +5,7 @@
         <h3>for: <u>{{ category|title }}</u> ({{ results_total }})</h3>
         <button id="clear-button" onclick="clearResults()">Clear</button>
     </div>
+    <div class="all-techniques-div">
     {% for technique in filtered_data %}
         <div class="one-technique">
             <div class="technique-title">
@@ -67,4 +68,5 @@
             </div>
         </div>
     {% endfor %}
+    </div>
 </div>

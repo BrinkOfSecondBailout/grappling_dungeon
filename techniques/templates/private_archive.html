@@ -71,102 +71,104 @@
 
         <div id="all-techniques" style="display:none;">
             <h1>All Techniques</h1>
-            {% for technique in private_techniques %}
-                <div class="one-technique">
-                    <div class="technique-title">
-                        <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
-                    </div>
-                    {% if technique.video_option == 'full' %}
-                        <div class="one-video-player">
-                            <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+            <div class="all-techniques-div">
+                {% for technique in private_techniques %}
+                    <div class="one-technique">
+                        <div class="technique-title">
+                            <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                         </div>
-                    {% endif %}
-                    {% if technique.video_option == 'cropped' %}
-                        <div class="one-video-player">
-                            <video width="560" height="315" controls>
-                                <source src="../../{{ technique.cropped_video }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    {% endif %}
+                        {% if technique.video_option == 'full' %}
+                            <div class="one-video-player">
+                                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        {% endif %}
+                        {% if technique.video_option == 'cropped' %}
+                            <div class="one-video-player">
+                                <video width="560" height="315" controls>
+                                    <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        {% endif %}
 
-                    <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
-                        <div id="{{ technique.id }}-note" class="one-note">
-                            {% if technique.note == None %}
-                                <p>No note yet.</p>
-                            {% endif %}
-                            {% if technique.note != None %}
-                                <p>{{ technique.note }}</p>
-                            {% endif %}
+                        <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
+                            <div id="{{ technique.id }}-note" class="one-note">
+                                {% if technique.note == None %}
+                                    <p>No note yet.</p>
+                                {% endif %}
+                                {% if technique.note != None %}
+                                    <p>{{ technique.note }}</p>
+                                {% endif %}
+                            </div>
+                            <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                                <form method="POST" action="{% url 'note' technique.id %}">
+                                    {% csrf_token %}
+                                    <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                                    <div>
+                                        <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="edit-note-div">
+                                <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
+                            </div>
                         </div>
-                        <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-                            <form method="POST" action="{% url 'note' technique.id %}">
+
+                        <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
+
+                        </div>
+
+
+                        <div id="{{ technique.id }}-playlist-selection-div" class="playlist-selection-div" style="display: none;">
+                            <form id="{{ technique.id }}-playlist-selection-form" class="playlist-add-form" data-url="{% url 'add_to_playlist' %}">
                                 {% csrf_token %}
-                                <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                                <p>Add <b>"{{ technique.name|title }}"</b> to:</p>
                                 <div>
-                                    <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                                    <select name="name" id="" required>
+                                        <option value="" selected disabled>----</option>
+                                        {% for playlist in playlists %}
+                                            <option value="{{ playlist }}">{{ playlist.name|title }}</option>
+                                        {% endfor %}
+                                        <option value="new">New Playlist</option>
+                                    </select>
+                                    <input type="submit" value="+" onclick="submitPlaylist('{{ technique.id }}', event)" class="regular-button">
                                 </div>
                             </form>
+
+                            <div id="{{ technique.id }}-new-playlist-div" class="playlist-name-div" style="display: none;">
+                                <form id="{{ technique.id }}-add-playlist-form" class="playlist-name-form" method="POST" data-url="{% url 'add_to_playlist' %}">
+                                    {% csrf_token %}
+                                    <p>New playlist name:</p>
+                                    <input name="name" id="name">
+                                    <button class="regular-button" onclick="addToNewPlaylist('{{ technique.id }}', event)">Submit</button>
+                                </form>
+                                <button class="regular-button" onclick="toggleNewPlaylistNameForm('{{ technique.id }}')">Cancel</button>
+                            </div>
                         </div>
-                        <div class="edit-note-div">
-                            <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
-                        </div>
-                    </div>
 
-                    <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
+                        
+                        
 
-                    </div>
-
-
-                    <div id="{{ technique.id }}-playlist-selection-div" class="playlist-selection-div" style="display: none;">
-                        <form id="{{ technique.id }}-playlist-selection-form" class="playlist-add-form" data-url="{% url 'add_to_playlist' %}">
-                            {% csrf_token %}
-                            <p>Add <b>"{{ technique.name|title }}"</b> to:</p>
+                        <div class="note-and-delete-buttons">
                             <div>
-                                <select name="name" id="" required>
-                                    <option value="" selected disabled>----</option>
-                                    {% for playlist in playlists %}
-                                        <option value="{{ playlist }}">{{ playlist.name|title }}</option>
-                                    {% endfor %}
-                                    <option value="new">New Playlist</option>
-                                </select>
-                                <input type="submit" value="+" onclick="submitPlaylist('{{ technique.id }}', event)" class="regular-button">
+                                <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">Note</button>
                             </div>
-                        </form>
-
-                        <div id="{{ technique.id }}-new-playlist-div" class="playlist-name-div" style="display: none;">
-                            <form id="{{ technique.id }}-add-playlist-form" class="playlist-name-form" method="POST" data-url="{% url 'add_to_playlist' %}">
-                                {% csrf_token %}
-                                <p>New playlist name:</p>
-                                <input name="name" id="name">
-                                <button class="regular-button" onclick="addToNewPlaylist('{{ technique.id }}', event)">Submit</button>
-                            </form>
-                            <button class="regular-button" onclick="toggleNewPlaylistNameForm('{{ technique.id }}')">Cancel</button>
-                        </div>
-                    </div>
-
-                    
-                    
-
-                    <div class="note-and-delete-buttons">
-                        <div>
-                            <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">Note</button>
-                        </div>
-                        <div>
-                            <button id="{{ technique.id}}-playlist-button" class="add-to-playlist-button" onclick="togglePlaylist('{{technique.id}}')">Add to Playlist</button>
-                        </div>
-                        <div>
-                            <div id="{{ technique.id }}-delete-button-div">
-                                <img id="{{ technique.id }}-delete-button" src="{% static 'images/remove-icon2.png' %}" alt="Delete" class="delete-icon" onclick="toggleDeleteMenu('{{technique.id}}')">
+                            <div>
+                                <button id="{{ technique.id}}-playlist-button" class="add-to-playlist-button" onclick="togglePlaylist('{{technique.id}}')">Add to Playlist</button>
                             </div>
-                            <div id="{{ technique.id }}-sure-div" style="display:none;">
-                                <a href="{% url 'remove' technique.id %}"><button class="delete-button">Delete?</button></a>
-                                <button class="delete-button2" onclick="toggleDeleteMenu('{{technique.id}}')">No</button>
+                            <div>
+                                <div id="{{ technique.id }}-delete-button-div">
+                                    <img id="{{ technique.id }}-delete-button" src="{% static 'images/remove-icon2.png' %}" alt="Delete" class="delete-icon" onclick="toggleDeleteMenu('{{technique.id}}')">
+                                </div>
+                                <div id="{{ technique.id }}-sure-div" style="display:none;">
+                                    <a href="{% url 'remove' technique.id %}"><button class="delete-button">Delete?</button></a>
+                                    <button class="delete-button2" onclick="toggleDeleteMenu('{{technique.id}}')">No</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 
@@ -206,6 +208,7 @@
             e.preventDefault();
             const selectedCategory = document.getElementById('category-select').value;
             const resultsContainer = document.getElementById('results-container');
+            const playlistContainer = document.getElementById('playlist-container');
             const allTechniquesContainer = document.getElementById('all-techniques');
             const showAllButton = document.getElementById('show-all-button');
             const errorMessage = document.getElementById('filter-error-message');
@@ -220,6 +223,7 @@
                     if (xhr.status === 200) {
                         resultsContainer.style.display = 'block';
                         allTechniquesContainer.style.display = 'none';
+                        playlistContainer.style.display = 'none';
                         showAllButton.innerText = 'Show All Techniques ({{total}})';
                         resultsContainer.innerHTML = xhr.responseText;
                     }
@@ -234,6 +238,7 @@
             e.preventDefault();
             const searchKeywords = document.getElementById('keywords').value;
             const resultsContainer = document.getElementById('results-container');
+            const playlistContainer = document.getElementById('playlist-container');
             const allTechniquesContainer = document.getElementById('all-techniques');
             const showAllButton = document.getElementById('show-all-button');
             const errorMessage = document.getElementById('filter-error-message');
@@ -248,6 +253,7 @@
                     if (xhr.status === 200) {
                         resultsContainer.style.display = 'block';
                         allTechniquesContainer.style.display = 'none';
+                        playlistContainer.style.display = 'none';
                         showAllButton.innerText = 'Show All Techniques ({{total}})';
                         resultsContainer.innerHTML = xhr.responseText;
                     }
@@ -263,22 +269,26 @@
             const categorySelect = document.getElementById('category-select');
             const searchKeywords = document.getElementById('keywords');
             const resultsContainer = document.getElementById('results-container');
+            const playlistContainer = document.getElementById('playlist-container');
 
             categorySelect.value = '';
             searchKeywords.value = '';
             resultsContainer.innerHTML = '';
+            playlistContainer.innerHTML = '';
         }
 
         function toggleAllTechniques() {
             const showAllButton = document.getElementById('show-all-button');
             const allTechniques = document.getElementById('all-techniques');
             const resultsContainer = document.getElementById('results-container');
+            const playlistContainer = document.getElementById('playlist-container');
             const categorySelect = document.getElementById('category-select');
             const searchKeywords = document.getElementById('keywords');
 
             if (allTechniques.style.display === 'none') {
                 allTechniques.style.display = 'block';
                 showAllButton.innerText = 'Hide All Techniques ({{total}})';
+                playlistContainer.style.display = 'none';
                 resultsContainer.style.display = 'none';
                 categorySelect.value = '';
                 searchKeywords.value = '';

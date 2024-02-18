@@ -71,3 +71,17 @@ def add_to_playlist(request):
 
     else:
         pass
+
+
+@login_required
+def extract_from_playlist(request, technique_id, playlist):
+    user = request.user
+    technique = get_object_or_404(Technique, id=technique_id)
+    current_playlist = get_object_or_404(Playlist, name=playlist)
+    if (current_playlist.owner == user):
+        playlist_item = get_object_or_404(PlaylistItem, playlist=current_playlist, technique=technique)
+        playlist_item.delete()
+        print(f'Technique {technique.name} removed from playlist {playlist}')
+    else:
+        print(f'Unauthorized actions')
+    return redirect('private')

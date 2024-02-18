@@ -254,6 +254,11 @@ input {
     margin-top: 10px;
 }
 
+.all-techniques-div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .one-video-player {
     padding: 10px;
 }
@@ -358,6 +363,11 @@ input {
 
 .filtered-results-wrapper {
     padding: 10px;
+}
+
+.remove-from-playlist {
+    padding: 5px;
+    font-size: 15px;
 }
 
 .results-div {
