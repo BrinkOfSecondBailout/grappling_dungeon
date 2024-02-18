@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import PlaylistForm, PlaylistChangeForm
 from .models import Playlist, PlaylistItem, Technique
@@ -19,8 +20,9 @@ def find_playlist(request):
                 playlist_items = PlaylistItem.objects.filter(playlist=playlist).order_by('order')
                 playlist_techniques = [item.technique for item in playlist_items]
                 playlist_total = len(playlist_techniques)
+                playlist_id = playlist.id
 
-                return render(request, 'playlist_results.html', {'playlist_techniques': playlist_techniques, 'playlist': playlist_name, 'playlist_total': playlist_total})
+                return render(request, 'playlist_results.html', {'playlist_techniques': playlist_techniques, 'playlist': playlist_name, 'playlist_total': playlist_total, 'playlist_id': playlist_id})
             else:
                 messages.error(request, f'Playlist "{playlist_name}" does not exist.')
         else:
@@ -93,14 +95,24 @@ def extract_from_playlist(request, technique_id, playlist):
 
 
 @login_required
-def edit_playlist(request, playlist):
+def edit_playlist(request, playlist_id):
     user = request.user
-    current_playlist = get_object_or_404(Playlist, name=playlist)
-    if current_playlist and current_playlist.owner == user:
-        playlist_items = PlaylistItem.objects.filter(playlist=current_playlist).order_by('order')
-        playlist_techniques = [item.technique for item in playlist_items]
-        form = PlaylistChangeForm(instance=current_playlist)
-        return render(request, 'edit_playlist.html', {'playlist': playlist_techniques, 'playlist_name': playlist, 'form': form})
+    current_playlist = get_object_or_404(Playlist, id=playlist_id)
+
+    if request.method == 'POST':
+        form = PlaylistChangeForm(request.POST, instance=current_playlist)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'All changes successfully saved')
+        else:
+            messages.error(request, 'Changes not saved. Check your modifications')
+        return redirect(reverse('edit_playlist', args=[playlist_id]))
     else:
-        print(f'Unauthorized actions')
-        return redirect('private')
+        if current_playlist and current_playlist.owner == user:
+            playlist_items = PlaylistItem.objects.filter(playlist=current_playlist).order_by('order')
+            playlist_techniques = [item.technique for item in playlist_items]
+            form = PlaylistChangeForm(instance=current_playlist)
+            return render(request, 'edit_playlist.html', {'playlist': playlist_techniques, 'form': form})
+        else:
+            print(f'Unauthorized actions')
+            return redirect('private')
