@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_playlists.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mediaqueries_playlists.css' %}">
+    <title>{% block title %}Welcome to Grappling Dungeon{% endblock %}</title>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div>
+            <a href="{% url 'dashboard' %}"><img id="main-logo" src="{% static 'images/main-logo.png' %}"
+                    alt="Grappling Dungeon Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="{% url 'dashboard' %}">Home</a>
+            <a href="{% url 'edit' %}">Edit Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </div>
+
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer class="footer-bar">
+        &copy; 2024 Danny Nguyen Duong
+    </footer>
+</body>
+
+</html>

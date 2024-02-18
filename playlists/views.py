@@ -81,7 +81,23 @@ def extract_from_playlist(request, technique_id, playlist):
     if (current_playlist.owner == user):
         playlist_item = get_object_or_404(PlaylistItem, playlist=current_playlist, technique=technique)
         playlist_item.delete()
+
         print(f'Technique {technique.name} removed from playlist {playlist}')
+
+        if PlaylistItem.objects.filter(playlist=current_playlist).count() == 0:
+            current_playlist.delete()
+            print(f'Playlist {playlist} deleted since it has no items')
     else:
         print(f'Unauthorized actions')
     return redirect('private')
+
+
+@login_required
+def edit_playlist(request, playlist):
+    user = request.user
+    current_playlist = get_object_or_404(Playlist, name=playlist)
+    if (current_playlist.owner == user):
+        return render(request, 'edit_playlist.html', {'playlist': current_playlist})
+    else:
+        print(f'Unauthorized actions')
+        return redirect('private')

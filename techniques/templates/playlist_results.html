@@ -2,8 +2,8 @@
 <div class="playlist-results-wrapper">
     <div class="results-div">
         <h2>All from Playlist:</h2>
-        <h3><u>{{ playlist|title }}</u> ({{ playlist_total }})</h3>
-        <button id="clear-button" onclick="clearResults()">Clear</button>
+        <a href="{% url 'edit_playlist' playlist %}"><h1>{{ playlist|title }} ({{ playlist_total }})</h1></a>
+        <button id="clear-button" onclick="clearResults()">Clear Search</button>
     </div>
     <div class="all-techniques-div">
     {% for technique in playlist_techniques %}

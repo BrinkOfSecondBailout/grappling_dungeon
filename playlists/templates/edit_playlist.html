@@ -1,0 +1,38 @@
+{% extends 'base_playlists.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="edit-playlist-wrapper">
+        <h1>Edit Playlist</h1>
+        <h2>{{ playlist.name|title }}</h2>
+    </div>
+
+    <div class="all-techniques-div">
+        {% for technique in playlist_techniques %}
+        <div class="one-technique">
+            <div class="technique-title">
+                <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
+            </div>
+            {% if technique.video_option == 'full' %}
+            <div class="one-video-player">
+                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            {% endif %}
+            {% if technique.video_option == 'cropped' %}
+            <div class="one-video-player">
+                <video width="560" height="315" controls>
+                    <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            {% endif %}
+    
+            <div class="remove-from-playlist">
+                <a href="{% url 'extract' technique.id playlist %}">Remove from playlist</a>
+            </div>
+    
+
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -193,6 +193,7 @@
                     if (xhr.status === 200) {
                         playlistContainer.style.display = 'block';
                         allTechniquesContainer.style.display = 'none';
+                        resultsContainer.style.display = 'none';
                         showAllButton.innerText = 'Show All Techniques ({{total}})';
                         playlistContainer.innerHTML = xhr.responseText;
                     }
