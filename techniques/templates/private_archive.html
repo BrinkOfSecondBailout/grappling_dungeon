@@ -204,11 +204,15 @@
             }
         }
 
+        function flashErrorMessage(message, div) {
+            const errorMessage = document.getElementById(div + '-error-message');
+            errorMessage.innerHTML = message;
+        }
+
         function selectPlaylist(e) {
             e.preventDefault();
             const selectedPlaylist = document.getElementById('playlist-select').value;
             const playlistContainer = document.getElementById('playlist-container');
-            const errorMessage = document.getElementById('playlist-error-message');
 
             if (selectedPlaylist !== "") {
                 const form = document.getElementById('playlist-form');
@@ -225,7 +229,7 @@
                 }
                 xhr.send();
             } else {
-                errorMessage.innerHTML = 'Please make a selection';
+                flashErrorMessage('Please make a selection', 'playlist')
             }
 
         }
@@ -234,7 +238,6 @@
             e.preventDefault();
             const selectedCategory = document.getElementById('category-select').value;
             const resultsContainer = document.getElementById('results-container');
-            const errorMessage = document.getElementById('filter-error-message');
 
             if (selectedCategory !== "") {
                 const form = document.getElementById('filter-form');
@@ -251,7 +254,7 @@
                 }
                 xhr.send();
             } else {
-                errorMessage.innerHTML = 'Please make a selection';
+                flashErrorMessage('Please make a selection', 'filter')
             }
         }
 
@@ -259,7 +262,6 @@
             e.preventDefault();
             const searchKeywords = document.getElementById('keywords').value;
             const resultsContainer = document.getElementById('results-container');
-            const errorMessage = document.getElementById('filter-error-message');
 
             if (searchKeywords !== "") {
                 const form = document.getElementById('search-form');
@@ -276,7 +278,7 @@
                 }
                 xhr.send();
             } else {
-                errorMessage.innerHTML = 'Please type in search bar';
+                flashErrorMessage('Please type in search bar', 'filter')
             }
 
         }
