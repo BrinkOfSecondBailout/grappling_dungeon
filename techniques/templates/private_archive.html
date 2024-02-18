@@ -174,13 +174,40 @@
 
     <script>
 
+        function closeAllOtherPanels(activePanel) {
+            if (activePanel === 'playlist') {
+                const resultsContainer = document.getElementById('results-container');
+                const allTechniquesContainer = document.getElementById('all-techniques');
+                const showAllButton = document.getElementById('show-all-button');
+    
+                allTechniquesContainer.style.display = 'none';
+                resultsContainer.style.display = 'none';
+                showAllButton.innerText = 'Show All Techniques ({{total}})';
+            }
+            if (activePanel === 'search') {
+                const playlistContainer = document.getElementById('playlist-container');
+                const allTechniquesContainer = document.getElementById('all-techniques');
+                const showAllButton = document.getElementById('show-all-button');
+
+                playlistContainer.style.display = 'none';
+                allTechniquesContainer.style.display = 'none';
+                showAllButton.innerText = 'Show All Techniques ({{total}})';
+            }
+            if (activePanel === 'showAll') {
+                const playlistContainer = document.getElementById('playlist-container');
+                const resultsContainer = document.getElementById('results-container');
+                const showAllButton = document.getElementById('show-all-button');
+
+                playlistContainer.style.display = 'none';
+                resultsContainer.style.display = 'none';
+                showAllButton.innerText = 'Hide All Techniques ({{total}})';
+            }
+        }
+
         function selectPlaylist(e) {
             e.preventDefault();
             const selectedPlaylist = document.getElementById('playlist-select').value;
             const playlistContainer = document.getElementById('playlist-container');
-            const resultsContainer = document.getElementById('results-container');
-            const allTechniquesContainer = document.getElementById('all-techniques');
-            const showAllButton = document.getElementById('show-all-button');
             const errorMessage = document.getElementById('playlist-error-message');
 
             if (selectedPlaylist !== "") {
@@ -192,9 +219,7 @@
                 xhr.onload = function () {
                     if (xhr.status === 200) {
                         playlistContainer.style.display = 'block';
-                        allTechniquesContainer.style.display = 'none';
-                        resultsContainer.style.display = 'none';
-                        showAllButton.innerText = 'Show All Techniques ({{total}})';
+                        closeAllOtherPanels('playlist');
                         playlistContainer.innerHTML = xhr.responseText;
                     }
                 }
@@ -209,9 +234,6 @@
             e.preventDefault();
             const selectedCategory = document.getElementById('category-select').value;
             const resultsContainer = document.getElementById('results-container');
-            const playlistContainer = document.getElementById('playlist-container');
-            const allTechniquesContainer = document.getElementById('all-techniques');
-            const showAllButton = document.getElementById('show-all-button');
             const errorMessage = document.getElementById('filter-error-message');
 
             if (selectedCategory !== "") {
@@ -223,9 +245,7 @@
                 xhr.onload = function () {
                     if (xhr.status === 200) {
                         resultsContainer.style.display = 'block';
-                        allTechniquesContainer.style.display = 'none';
-                        playlistContainer.style.display = 'none';
-                        showAllButton.innerText = 'Show All Techniques ({{total}})';
+                        closeAllOtherPanels('search');
                         resultsContainer.innerHTML = xhr.responseText;
                     }
                 }
@@ -239,9 +259,6 @@
             e.preventDefault();
             const searchKeywords = document.getElementById('keywords').value;
             const resultsContainer = document.getElementById('results-container');
-            const playlistContainer = document.getElementById('playlist-container');
-            const allTechniquesContainer = document.getElementById('all-techniques');
-            const showAllButton = document.getElementById('show-all-button');
             const errorMessage = document.getElementById('filter-error-message');
 
             if (searchKeywords !== "") {
@@ -253,9 +270,7 @@
                 xhr.onload = function () {
                     if (xhr.status === 200) {
                         resultsContainer.style.display = 'block';
-                        allTechniquesContainer.style.display = 'none';
-                        playlistContainer.style.display = 'none';
-                        showAllButton.innerText = 'Show All Techniques ({{total}})';
+                        closeAllOtherPanels('search');
                         resultsContainer.innerHTML = xhr.responseText;
                     }
                 }
@@ -279,18 +294,13 @@
         }
 
         function toggleAllTechniques() {
-            const showAllButton = document.getElementById('show-all-button');
             const allTechniques = document.getElementById('all-techniques');
-            const resultsContainer = document.getElementById('results-container');
-            const playlistContainer = document.getElementById('playlist-container');
             const categorySelect = document.getElementById('category-select');
             const searchKeywords = document.getElementById('keywords');
 
             if (allTechniques.style.display === 'none') {
                 allTechniques.style.display = 'block';
-                showAllButton.innerText = 'Hide All Techniques ({{total}})';
-                playlistContainer.style.display = 'none';
-                resultsContainer.style.display = 'none';
+                closeAllOtherPanels('showAll');
                 categorySelect.value = '';
                 searchKeywords.value = '';
             } else {

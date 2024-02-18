@@ -96,8 +96,10 @@ def extract_from_playlist(request, technique_id, playlist):
 def edit_playlist(request, playlist):
     user = request.user
     current_playlist = get_object_or_404(Playlist, name=playlist)
-    if (current_playlist.owner == user):
-        return render(request, 'edit_playlist.html', {'playlist': current_playlist})
+    if current_playlist and current_playlist.owner == user:
+        playlist_items = PlaylistItem.objects.filter(playlist=current_playlist).order_by('order')
+        playlist_techniques = [item.technique for item in playlist_items]
+        return render(request, 'edit_playlist.html', {'playlist': playlist_techniques, 'playlist_name': playlist})
     else:
         print(f'Unauthorized actions')
         return redirect('private')

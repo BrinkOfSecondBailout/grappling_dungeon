@@ -50,3 +50,27 @@ a {
     padding-top: 4vh;
     padding-bottom: 4vh;
 }
+
+#all-techniques {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.all-techniques-div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.one-technique {
+    text-align: center;
+    padding: 20px;
+}
+
+.one-video-player {
+    padding: 10px;
+}
+
+.technique-title {
+    font-size: 20px;
+    padding: 10px;
+}
