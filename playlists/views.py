@@ -8,17 +8,25 @@ from django.contrib import messages
 
 @login_required
 def find_playlist(request):
-    print('hi')
     if request.method == 'GET':
         user = request.user
-        playlist = request.GET.get('playlist')
-        if playlist:
-            playlist_techniques = []
-        else:
-            playlist_techniques = []
-    playlist_total = len(playlist_techniques)
+        playlist_name = request.GET.get('playlist')
 
-    return render(request, 'playlist_results.html', {'playlist_techniques': playlist_techniques, 'playlist': playlist, 'playlist_total': playlist_total})
+        if playlist_name:
+            playlist = Playlist.objects.filter(owner=user, name=playlist_name).first()
+
+            if playlist:
+                playlist_items = PlaylistItem.objects.filter(playlist=playlist).order_by('order')
+                playlist_techniques = [item.technique for item in playlist_items]
+                playlist_total = len(playlist_techniques)
+
+                return render(request, 'playlist_results.html', {'playlist_techniques': playlist_techniques, 'playlist': playlist_name, 'playlist_total': playlist_total})
+            else:
+                messages.error(request, f'Playlist "{playlist_name}" does not exist.')
+        else:
+            messages.error(request, 'Please select a playlist.')
+
+    return render(request, 'playlist_results.html', {'playlist_techniques': [], 'playlist': playlist, 'playlist_total': 0})
 
 @login_required
 def add_to_playlist(request):
