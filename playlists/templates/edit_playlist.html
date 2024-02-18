@@ -4,35 +4,60 @@
 {% block content %}
     <div class="edit-playlist-wrapper">
         <h1>Edit Playlist</h1>
-        <h2>{{ playlist_name|title }}</h2>
-    </div>
 
-    <div class="all-techniques-div">
-        {% for technique in playlist %}
-        <div class="one-technique">
-            <div class="technique-title">
-                <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
-            </div>
-            {% if technique.video_option == 'full' %}
-            <div class="one-video-player">
-                <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
-            </div>
-            {% endif %}
-            {% if technique.video_option == 'cropped' %}
-            <div class="one-video-player">
-                <video width="400" height="280" controls>
-                    <source src="../../{{ technique.cropped_video }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            {% endif %}
-    
-            <div class="remove-from-playlist">
-                <a href="{% url 'extract' technique.id playlist %}">Remove from playlist</a>
-            </div>
-    
-
+        <div class="go-back-div">
+            <a href="{% url 'private' %}">Go Back</a>
         </div>
-        {% endfor %}
+
+        
+    
+
+        <div class="error-message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-label-and-field">
+                {{ form.name.label }}
+                {{ form.name }}
+            </div>
+            <div class="form-label-and-field">
+                {{ form.description.label }}
+                {{ form.description }}
+            </div>
+            <div>
+                <input type="submit" value="Save Changes" class="submit-button">
+            </div>
+        </form>
+
+        <div class="all-techniques-div">
+            {% for technique in playlist %}
+            <div class="one-technique">
+                <div class="technique-title">
+                    <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
+                </div>
+                {% if technique.video_option == 'full' %}
+                <div class="one-video-player">
+                    <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                {% endif %}
+                {% if technique.video_option == 'cropped' %}
+                <div class="one-video-player">
+                    <video width="400" height="280" controls>
+                        <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                {% endif %}
+        
+                <div class="remove-from-playlist">
+                    <a href="{% url 'extract' technique.id playlist %}">Remove from playlist</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

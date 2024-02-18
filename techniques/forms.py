@@ -31,15 +31,6 @@ class CustomTechniqueCreationForm(forms.ModelForm):
         if video_option == 'cropped' and (start_time is None or end_time is None):
             raise forms.ValidationError("Start time and end time are required for cropped videos.")
         
-        # if start_time and ':' in start_time:
-        #     start_minutes, start_seconds = map(int, start_time.split(':'))
-        #     start_time = start_minutes * 60 + start_seconds
-        #     print(start_time)
-
-        # if end_time and ':' in end_time:
-        #     end_minutes, end_seconds = map(int, end_time.split(':'))
-        #     end_time = end_minutes * 60 + end_seconds
-        #     print(end_time)
 
         if video_option == 'cropped':
             duration = end_time - start_time

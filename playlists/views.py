@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import PlaylistForm
+from .forms import PlaylistForm, PlaylistChangeForm
 from .models import Playlist, PlaylistItem, Technique
 from django.contrib import messages
 
@@ -99,7 +99,8 @@ def edit_playlist(request, playlist):
     if current_playlist and current_playlist.owner == user:
         playlist_items = PlaylistItem.objects.filter(playlist=current_playlist).order_by('order')
         playlist_techniques = [item.technique for item in playlist_items]
-        return render(request, 'edit_playlist.html', {'playlist': playlist_techniques, 'playlist_name': playlist})
+        form = PlaylistChangeForm(instance=current_playlist)
+        return render(request, 'edit_playlist.html', {'playlist': playlist_techniques, 'playlist_name': playlist, 'form': form})
     else:
         print(f'Unauthorized actions')
         return redirect('private')

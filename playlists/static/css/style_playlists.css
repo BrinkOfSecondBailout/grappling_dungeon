@@ -51,6 +51,46 @@ a {
     padding-bottom: 4vh;
 }
 
+.go-back-div {
+    padding: 15px;
+}
+
+.error-message {
+    color: red;
+    padding: 10px;
+}
+
+
+.form-label-and-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.form-label-and-field input {
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.form-label-and-field select {
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.form-label-and-field textarea {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.submit-button {
+    height: fit-content;
+    width: fit-content;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 2px 1px black;
+}
+
 #all-techniques {
     padding: 10px;
     margin-top: 10px;
