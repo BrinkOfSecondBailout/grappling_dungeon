@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import PlaylistForm
 from .models import Playlist, PlaylistItem, Technique
+from django.contrib import messages
 
 # Create your views here.
 
 @login_required
 def find_playlist(request):
+    print('hi')
     if request.method == 'GET':
         user = request.user
         playlist = request.GET.get('playlist')
@@ -30,11 +32,16 @@ def add_to_playlist(request):
             technique = get_object_or_404(Technique, id=technique_id)
 
             if playlist:
+                if PlaylistItem.objects.filter(playlist=playlist, technique=technique).exists():
+                    print(f'This technique already exists in playlist: {playlist_name}')
+                    messages.error(request, f'This technique already exists in playlist: {playlist_name}')
+                    return redirect('private')
+
                 order = PlaylistItem.objects.filter(playlist=playlist).count() + 1
 
                 playlist_item = PlaylistItem(playlist=playlist, technique=technique, order=order)
                 playlist_item.save()
-
+                messages.info(request, f'Technique added to existing playlist: {playlist_name}')
                 print(f'Technique added to existing playlist: {playlist_name}')
 
             else:
@@ -45,11 +52,12 @@ def add_to_playlist(request):
 
                 playlist_item = PlaylistItem(playlist=new_playlist, technique=technique, order=order)
                 playlist_item.save()
-
+                messages.info(request, f'Technique added to new playlist: {playlist_name}')
                 print(f'Technique added to new playlist: {playlist_name}')
 
             return redirect('private')
         else:
+            messages.error(request, f'Name for playlist is required')
             print(f'Name for playlist is required')
             return redirect('private')
 

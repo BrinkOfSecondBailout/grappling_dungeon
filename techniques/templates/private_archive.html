@@ -38,6 +38,9 @@
             </div>
         </div>
 
+        <div id="playlist-error-message">
+        </div>
+
         <div id="playlist-div">
             <h4>Select Playlist:</h4>
             <div id="playlist-box">
@@ -49,7 +52,7 @@
                             <option value="{{ playlist }}">{{ playlist.name|title }}</option>
                         {% endfor %}
                     </select>
-                    <input type="submit" value="Go" onclick="" class="regular-button">
+                    <input type="submit" value="Go" onclick="selectPlaylist(event)" class="regular-button">
                 </form>
             </div>
         </div>
@@ -59,6 +62,10 @@
         </div>
 
         <div id="results-container">
+
+        </div>
+
+        <div id="playlist-container">
 
         </div>
 
@@ -109,6 +116,7 @@
                     <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
 
                     </div>
+
 
                     <div id="{{ technique.id }}-playlist-selection-div" class="playlist-selection-div" style="display: none;">
                         <form id="{{ technique.id }}-playlist-selection-form" class="playlist-add-form" data-url="{% url 'add_to_playlist' %}">
@@ -164,6 +172,36 @@
 
     <script>
 
+        function selectPlaylist(e) {
+            e.preventDefault();
+            const selectedPlaylist = document.getElementById('playlist-select').value;
+            const playlistContainer = document.getElementById('playlist-container');
+            const resultsContainer = document.getElementById('results-container');
+            const allTechniquesContainer = document.getElementById('all-techniques');
+            const showAllButton = document.getElementById('show-all-button');
+            const errorMessage = document.getElementById('playlist-error-message');
+
+            if (selectedPlaylist !== "") {
+                const form = document.getElementById('playlist-form');
+                const url = form.getAttribute('data-url') + '?playlist=' + encodeURIComponent(selectedPlaylist);
+
+                const xhr = new XMLHttpRequest();
+                xhr.open(form.getAttribute('method'), url, true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        playlistContainer.style.display = 'block';
+                        allTechniquesContainer.style.display = 'none';
+                        showAllButton.innerText = 'Show All Techniques ({{total}})';
+                        playlistContainer.innerHTML = xhr.responseText;
+                    }
+                }
+                xhr.send();
+            } else {
+                errorMessage.innerHTML = 'Please make a selection';
+            }
+
+        }
+
         function submitFilterForm(e) {
             e.preventDefault();
             const selectedCategory = document.getElementById('category-select').value;
@@ -173,10 +211,10 @@
             const errorMessage = document.getElementById('filter-error-message');
 
             if (selectedCategory !== "") {
-                var form = document.getElementById('filter-form');
-                var url = form.getAttribute('data-url') + '?category=' + encodeURIComponent(selectedCategory);
+                const form = document.getElementById('filter-form');
+                const url = form.getAttribute('data-url') + '?category=' + encodeURIComponent(selectedCategory);
                 
-                var xhr = new XMLHttpRequest();
+                const xhr = new XMLHttpRequest();
                 xhr.open(form.getAttribute('method'), url, true);
                 xhr.onload = function () {
                     if (xhr.status === 200) {
@@ -201,10 +239,10 @@
             const errorMessage = document.getElementById('filter-error-message');
 
             if (searchKeywords !== "") {
-                var form = document.getElementById('search-form');
-                var url = form.getAttribute('data-url') + '?keywords=' + encodeURIComponent(searchKeywords);
+                const form = document.getElementById('search-form');
+                const url = form.getAttribute('data-url') + '?keywords=' + encodeURIComponent(searchKeywords);
                 
-                var xhr = new XMLHttpRequest();
+                const xhr = new XMLHttpRequest();
                 xhr.open(form.getAttribute('method'), url, true);
                 xhr.onload = function () {
                     if (xhr.status === 200) {
@@ -299,7 +337,7 @@
 
             if (playlistDiv.style.display === 'none') {
                 playlistDiv.style.display = 'block';
-                playlistButton.innerText = 'Go back';
+                playlistButton.innerText = 'Hide Playlists';
             } else {
                 playlistDiv.style.display = 'none';
                 playlistButton.innerText = 'Add to Playlist';
@@ -315,7 +353,7 @@
             var messageDiv = document.getElementById(techniqueId + '-playlist-messages');
 
             if (selectedValue === '') {
-                messageDiv.innerHTML = '<p>Please select a playlist</p>';
+                messageDiv.innerHTML = 'Please select a playlist';
             }
             else if (selectedValue === 'new') {
                 newNameDiv.style.display = 'block';
@@ -335,11 +373,10 @@
             var messageDiv = document.getElementById(techniqueId + '-playlist-messages');
 
             if (selectedValue === '') {
-                messageDiv.innerHTML = '<p>Please select a playlist</p>';
+                messageDiv.innerHTML = 'Please select a playlist';
             } else {
                 addToPlaylist(techniqueId, selectedValue, url, csrfToken, e);
             }
-            
         }
 
         function addToPlaylist(techniqueId, name, endpoint, token, e) {
@@ -360,7 +397,7 @@
             formData.append('technique', techniqueId);
             xhr.onload = function () {
                 if (xhr.status === 200) {
-                    messageDiv.innerHTML = '<p>Technique added to playlist "' + name + '"</p>';
+                    messageDiv.innerHTML = 'Technique added to playlist "' + name + '"';
                     console.log(xhr.status);
                 }
             }
