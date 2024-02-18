@@ -173,7 +173,6 @@
     </div>
 
     <script>
-
         function closeAllOtherPanels(activePanel) {
             if (activePanel === 'playlist') {
                 const resultsContainer = document.getElementById('results-container');
@@ -285,11 +284,13 @@
 
         function clearResults() {
             const categorySelect = document.getElementById('category-select');
+            const playlistSelect = document.getElementById('playlist-select');
             const searchKeywords = document.getElementById('keywords');
             const resultsContainer = document.getElementById('results-container');
             const playlistContainer = document.getElementById('playlist-container');
 
             categorySelect.value = '';
+            playlistSelect.value = '';
             searchKeywords.value = '';
             resultsContainer.innerHTML = '';
             playlistContainer.innerHTML = '';
@@ -408,8 +409,6 @@
             var messageDiv = document.getElementById(techniqueId + '-playlist-messages');
             const url = endpoint
 
-            console.log(url);
-
             const xhr = new XMLHttpRequest();
             xhr.open('POST', url, true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -424,7 +423,6 @@
                     console.log(xhr.status);
                 }
             }
-            
             xhr.send(formData.toString());
         }
 
