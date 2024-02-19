@@ -60,9 +60,8 @@ a {
     padding: 10px;
 }
 
-.edit-icon {
-    width: 25px;
-    border: none;
+.remove-icon {
+    width: 35px;
 }
 
 .remove-from-playlist a {
