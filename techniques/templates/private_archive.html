@@ -91,27 +91,31 @@
                             </div>
                         {% endif %}
 
-                        <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
-                            <div id="{{ technique.id }}-note" class="one-note">
-                                {% if technique.note == None %}
+                        {% if technique.note == None %}
+                            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
+                                <div id="{{ technique.id }}-note" class="one-note">
                                     <p>No note yet.</p>
-                                {% endif %}
-                                {% if technique.note != None %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if technique.note != None %}
+                            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: block;">
+                                <div id="{{ technique.id }}-note" class="one-note">
                                     <p>{{ technique.note }}</p>
-                                {% endif %}
+                                </div>
                             </div>
-                            <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-                                <form method="POST" action="{% url 'note' technique.id %}">
-                                    {% csrf_token %}
-                                    <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
-                                    <div>
-                                        <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="edit-note-div">
-                                <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
-                            </div>
+                        {% endif %}
+                        <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                            <form method="POST" action="{% url 'note' technique.id %}">
+                                {% csrf_token %}
+                                <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                                <div>
+                                    <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="edit-note-div">
+                            <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
                         </div>
 
                         <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
@@ -146,13 +150,18 @@
                             </div>
                         </div>
 
-                        
-                        
-
                         <div class="note-and-delete-buttons">
-                            <div>
-                                <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">Note</button>
-                            </div>
+                            {% if technique.note == None %}
+                                <div>
+                                    <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">Note</button>
+                                </div>
+                            {% endif %}
+                            {% if technique.note != None %}
+                                <div>
+                                    <button id="{{ technique.id }}-note-button" class="see-note-button"
+                                        onclick="toggleNote('{{technique.id}}')">Hide Note</button>
+                                </div>
+                            {% endif %}
                             <div>
                                 <button id="{{ technique.id}}-playlist-button" class="add-to-playlist-button" onclick="togglePlaylist('{{technique.id}}')">Add to Playlist</button>
                             </div>
@@ -300,6 +309,7 @@
             const allTechniques = document.getElementById('all-techniques');
             const categorySelect = document.getElementById('category-select');
             const searchKeywords = document.getElementById('keywords');
+            const showAllButton = document.getElementById('show-all-button');
 
             if (allTechniques.style.display === 'none') {
                 allTechniques.style.display = 'block';
