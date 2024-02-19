@@ -325,6 +325,8 @@
         function toggleNote(techniqueId) {
             const noteDiv = document.getElementById(techniqueId + '-note-div');
             const noteButton = document.getElementById(techniqueId + '-note-button');
+            const noteForm = document.getElementById(techniqueId + '-note-edit-form')
+            const editNoteButton = document.getElementById(techniqueId + '-edit-note-button')
 
             if (noteDiv.style.display === 'none') {
                 noteDiv.style.display ='block';
@@ -332,6 +334,8 @@
             } else {
                 noteDiv.style.display = 'none';
                 noteButton.innerText = 'Note';
+                noteForm.style.display = 'none';
+                editNoteButton.src = "{% static 'images/edit-icon.png' %}"
             }
         }
 
