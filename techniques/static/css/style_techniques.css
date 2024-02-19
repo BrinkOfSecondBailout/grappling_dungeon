@@ -350,6 +350,18 @@ input {
     font-size: 13px;
 }
 
+.remove-from-playlist a {
+    text-decoration: none;
+}
+
+.remove-from-playlist-button {
+    border-radius: 5px;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .edit-icon {
     width: 25px;
     border: none;

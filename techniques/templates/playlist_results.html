@@ -26,7 +26,7 @@
             {% endif %}
 
             <div class="remove-from-playlist">
-                <a href="{% url 'extract' technique.id playlist %}">Remove from playlist</a>
+                <a href="{% url 'extract' technique.id playlist %}"><button class="remove-from-playlist-button">Remove From Playlist<img class="edit-icon" src="{% static 'images/minus-icon.png' %}"></button></a>
             </div>
         
             <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
