@@ -105,6 +105,7 @@
                                 </div>
                             </div>
                         {% endif %}
+
                         <div id="{{ technique.id }}-note-edit-form" style="display: none;">
                             <form method="POST" action="{% url 'note' technique.id %}">
                                 {% csrf_token %}
@@ -114,12 +115,20 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="edit-note-div">
-                            <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
-                        </div>
+                        
+                        {% if technique.note != None %}
+                            <div id="{{ technique.id }}-edit-note-div">
+                                <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
+                            </div>
+                        {% endif %}
+                        {% if technique.note == None %}
+                            <div id="{{ technique.id }}-edit-note-div" style="display: none;">
+                                <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button"
+                                onclick="toggleNoteEdit('{{technique.id}}')">
+                            </div>
+                        {% endif %}
 
                         <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
-
                         </div>
 
 
@@ -325,28 +334,34 @@
         function toggleNote(techniqueId) {
             const noteDiv = document.getElementById(techniqueId + '-note-div');
             const noteButton = document.getElementById(techniqueId + '-note-button');
-            const noteForm = document.getElementById(techniqueId + '-note-edit-form')
-            const editNoteButton = document.getElementById(techniqueId + '-edit-note-button')
+            const noteForm = document.getElementById(techniqueId + '-note-edit-form');
+            const editNoteButton = document.getElementById(techniqueId + '-edit-note-button');
+            const editNoteDiv = document.getElementById(techniqueId + '-edit-note-div');
 
-            if (noteDiv.style.display === 'none') {
-                noteDiv.style.display ='block';
+            if (noteButton.innerText === 'Note') {
+                noteDiv.style.display = 'block';
+                editNoteDiv.style.display = 'block';
                 noteButton.innerText = 'Hide Note';
             } else {
                 noteDiv.style.display = 'none';
                 noteButton.innerText = 'Note';
                 noteForm.style.display = 'none';
                 editNoteButton.src = "{% static 'images/edit-icon.png' %}"
+                noteButton.innerText = 'Note';
+                editNoteDiv.style.display = 'none';
             }
         }
 
         function toggleNoteEdit(techniqueId) {
-            const note = document.getElementById(techniqueId + '-note')
+            const note = document.getElementById(techniqueId + '-note-div')
             const noteForm = document.getElementById(techniqueId + '-note-edit-form')
             const editNoteButton = document.getElementById(techniqueId + '-edit-note-button')
+            const noteButton = document.getElementById(techniqueId + '-note-button');
 
             if (note.style.display !== 'none') {
                 note.style.display = 'none';
                 noteForm.style.display = 'block';
+                noteButton.innerText = 'Hide Note';
                 editNoteButton.src = "{% static 'images/back-icon.png' %}"
             } else {
                 note.style.display = 'block';
