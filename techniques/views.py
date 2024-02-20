@@ -4,7 +4,7 @@ from django.conf import settings
 from .forms import CustomTechniqueCreationForm, CustomTechniqueChangeForm, CustomNoteChangeForm
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from .models import Technique
-from playlists.models import Playlist
+from playlists.models import Playlist, PlaylistItem
 from django.contrib import messages
 from django.urls import reverse
 from pytube import YouTube
@@ -153,12 +153,14 @@ def private(request):
     total = len(private_techniques)
     categories = private_techniques.values_list('category', flat=True).distinct()
     playlists = Playlist.objects.filter(owner=user)
+    playlist_items = PlaylistItem.objects.filter()
 
     context = {
         'private_techniques': private_techniques,
         'categories': categories,
         'total': total,
         'playlists': playlists,
+        'playlist_items': playlist_items,
     }
 
     return render(request, 'private_archive.html', context)
