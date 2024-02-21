@@ -5,6 +5,8 @@
     <div class="private-archive-wrapper">
         <h1>Private Archive</h1>
 
+        
+
         {% if messages %}
         <div class="error-message">
             {% for message in messages %}
@@ -139,20 +141,22 @@
                                 <div>
                                     <select name="name" id="" required>
                                         <option value="" selected disabled>----</option>
+
                                         
+
 
                                         {% for playlist in playlists %}
                                             <option value="{{ playlist }}">
                                             {% for item in playlist_items %}
                                                 {% if item.playlist_id == playlist.id and technique.id == item.technique_id %}
-                                                    BOLD-{{ playlist.name }}
+                                                    CURRENTLY -
                                                 {% endif %}
-                                            {% endfor %}
-                                            {{ playlist.name }}
+                                                {% endfor %}
+                                                {{ playlist.name }}
                                             </option>
                                         {% endfor %}
 
-                                        <option value="new">New Playlist</option>
+                                        <option value="new"><strong>New Playlist</strong></option>
                                     </select>
                                     <input type="submit" value="+" onclick="submitPlaylist('{{ technique.id }}', event)" class="regular-button">
                                 </div>
@@ -201,6 +205,9 @@
     </div>
 
     <script>
+        
+
+
         function closeAllOtherPanels(activePanel) {
             if (activePanel === 'playlist') {
                 const resultsContainer = document.getElementById('results-container');

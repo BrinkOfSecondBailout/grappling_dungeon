@@ -155,12 +155,23 @@ def private(request):
     playlists = Playlist.objects.filter(owner=user)
     playlist_items = PlaylistItem.objects.filter()
 
+    techniques_by_playlist = {}
+
+    for item in playlist_items:
+        playlist_name = item.playlist.name
+
+        if playlist_name not in techniques_by_playlist:
+            techniques_by_playlist[playlist_name] = []
+
+        techniques_by_playlist[playlist_name].append(item.technique.id)
+
     context = {
         'private_techniques': private_techniques,
         'categories': categories,
         'total': total,
         'playlists': playlists,
         'playlist_items': playlist_items,
+        'techniques_by_playlist': techniques_by_playlist,
     }
 
     return render(request, 'private_archive.html', context)
