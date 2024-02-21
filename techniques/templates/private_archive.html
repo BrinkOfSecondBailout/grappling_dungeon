@@ -473,11 +473,15 @@
 
             xhr.onload = function () {
                 if (xhr.status === 200) {
-                    messageDiv.innerHTML = 'Technique added to playlist "' + name + '"';
+                    messageDiv.innerHTML = 'Technique added to playlist "' + name + '" <br><a style="cursor: pointer;" onclick="refreshPage()">Refresh page to see changes</a>';
                     console.log(xhr.status);
                 }
             }
             xhr.send(formData.toString());
+        }
+
+        function refreshPage() {
+            location.reload();
         }
 
 
