@@ -139,24 +139,17 @@
                                 <div>
                                     <select name="name" id="" required>
                                         <option value="" selected disabled>----</option>
-                                        {% for playlist in playlists %}
-                                            {% with technique_in_playlist=False %}
-                                                {% for item in playlist_items %}
-                                                    {% if technique.id == item.technique_id and playlist.id == item.playlist_id %}
-                                                        {% with technique_in_playlist=True %}
-                                                        {% endwith %}
-                                                    {% endif %}
-                                                {% endfor %}
+                                        
 
-                                                <option value="{{ playlist}}">
-                                                    {% if technique_in_playlist %}
-                                                        <strong>{{ playlist.name|title }}</strong>
-                                                    {% else %}
-                                                        {{ playlist.name|title }}
-                                                    {% endif %}
-                                                </option>
-                                                
-                                            {% endwith %}
+                                        {% for playlist in playlists %}
+                                            <option value="{{ playlist }}">
+                                            {% for item in playlist_items %}
+                                                {% if item.playlist_id == playlist.id and technique.id == item.technique_id %}
+                                                    BOLD-{{ playlist.name }}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {{ playlist.name }}
+                                            </option>
                                         {% endfor %}
 
                                         <option value="new">New Playlist</option>
