@@ -146,15 +146,17 @@
 
 
                                         {% for playlist in playlists %}
-                                            <option value="{{ playlist }}"
+                                            <option 
+
                                             {% for item in playlist_items %}
 
                                                 {% if item.playlist_id == playlist.id and technique.id == item.technique_id %}
-                                                    style = 'font-weight: bold;'
+                                                    value='present' style = 'font-weight: bold; font-style: italic;'
                                                 {% endif %}
 
-                                                {% endfor %}
-                                                >{{ playlist.name|title }}
+                                            {% endfor %}
+
+                                            value="{{ playlist }}">{{ playlist.name|title }}
                                             </option>
                                         {% endfor %}
 
@@ -427,6 +429,9 @@
             if (selectedValue === '') {
                 messageDiv.innerHTML = 'Please select a playlist';
             }
+            else if(selectedValue === 'present') {
+                messageDiv.innerHTML = 'This technique already exists in that playlist';
+            }
             else if (selectedValue === 'new') {
                 newNameDiv.style.display = 'block';
             } else {
@@ -445,7 +450,7 @@
             var messageDiv = document.getElementById(techniqueId + '-playlist-messages');
 
             if (selectedValue === '') {
-                messageDiv.innerHTML = 'Please select a playlist';
+                messageDiv.innerHTML = 'Please select a playlist or type a new playlist';
             } else {
                 addToPlaylist(techniqueId, selectedValue, url, csrfToken, e);
             }
@@ -465,6 +470,7 @@
             const formData = new URLSearchParams();
             formData.append('name', name);
             formData.append('technique', techniqueId);
+
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     messageDiv.innerHTML = 'Technique added to playlist "' + name + '"';
