@@ -146,17 +146,19 @@
 
 
                                         {% for playlist in playlists %}
-                                            <option value="{{ playlist }}">
+                                            <option value="{{ playlist }}"
                                             {% for item in playlist_items %}
+
                                                 {% if item.playlist_id == playlist.id and technique.id == item.technique_id %}
-                                                    CURRENTLY -
+                                                    style = 'font-weight: bold;'
                                                 {% endif %}
+
                                                 {% endfor %}
-                                                {{ playlist.name }}
+                                                >{{ playlist.name|title }}
                                             </option>
                                         {% endfor %}
 
-                                        <option value="new"><strong>New Playlist</strong></option>
+                                        <option value="new">New Playlist</option>
                                     </select>
                                     <input type="submit" value="+" onclick="submitPlaylist('{{ technique.id }}', event)" class="regular-button">
                                 </div>
