@@ -122,6 +122,7 @@ def all_playlists(request):
     user = request.user
     playlists = Playlist.objects.filter(owner=user)
     
+    
     context = {
         'playlists': playlists
     }

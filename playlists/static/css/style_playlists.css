@@ -132,12 +132,22 @@ a {
 }
 
 /* all_playlists.html */
+.all-playlists {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
 .one-playlist {
     padding: 10px;
 }
 
 .playlist-name-div {
     padding: 10px;
+    font-size: 22px;
 }
 
 .delete-icon-div {
@@ -145,11 +155,11 @@ a {
 }
 
 .delete-confirmation-div {
-    margin-top: -5px;
     padding: 5px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    font-size: 15px;
 }
 
 .delete-playlist-button {
@@ -158,6 +168,7 @@ a {
     width: 80px;
     background-color: rgb(255, 37, 37);
     color: white;
+    box-shadow: 0 1px 1px black;
 }
 
 
@@ -165,8 +176,13 @@ a {
     padding: 7px;
     width: 80px;
     border-radius: 7px;
+    box-shadow: 0 1px 1px black;
 }
 
 .delete-icon {
-    width: 42px;
+    width: 50px;
+}
+
+.delete-icon:hover {
+    transform: scale(1.1);
 }

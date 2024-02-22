@@ -9,22 +9,38 @@
         <a href="{% url 'private' %}">Go Back</a>
     </div>
 
-    {% for playlist in playlists %}
-        <div class="one-playlist">
-            <div class="playlist-name-div">
-                <a href="{% url 'edit_playlist' playlist.id %}">{{ playlist.name }}</a>
-            </div>
-            <div class="delete-icon-div">
-                <img id="" src="{% static 'images/remove-icon2.png' %}" alt="Delete" class="delete-icon" onclick="">
-            </div>
-            <div class="delete-confirmation-div">
-                <p>Delete entire playlist?</p>
-                <div>
-                    <button class="delete-playlist-button">Delete</button>
-                    <button class="cancel-button">Cancel</button>
+    <div class="all-playlists">
+        {% for playlist in playlists %}
+            <div class="one-playlist">
+                <div class="playlist-name-div">
+                    <a href="{% url 'edit_playlist' playlist.id %}">{{ playlist.name|title }}</a>
+                </div>
+                <div class="delete-icon-div">
+                    <img id="" src="{% static 'images/remove-icon3.png' %}" alt="Delete" class="delete-icon" onclick="toggleDeleteConfirmationDiv('{{playlist.id}}')">
+                </div>
+                <div id="{{playlist.id}}-confirmation-div" class="delete-confirmation-div" style="display: none;">
+                    <p>Delete entire playlist?</p>
+                    <div>
+                        <button class="delete-playlist-button">Delete</button>
+                        <button class="cancel-button">Cancel</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
+
+<script>
+    function toggleDeleteConfirmationDiv(playlistId) {
+        const confirmationDiv = document.getElementById(playlistId + '-confirmation-div');
+
+        if(confirmationDiv.style.display === 'none') {
+            confirmationDiv.style.display = 'flex';
+        } else {
+            confirmationDiv.style.display = 'none';
+        }
+    }
+
+</script>
+
 {% endblock %}

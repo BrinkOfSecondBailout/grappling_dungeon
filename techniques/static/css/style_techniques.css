@@ -385,9 +385,12 @@ input {
 }
 
 .delete-icon {
-    width: 42px;
+    width: 45px;
 }
 
+.delete-icon:hover {
+    transform: scale(1.1);
+}
 /* results.html */
 
 .filtered-results-wrapper {
