@@ -5,8 +5,6 @@ from techniques.models import Technique
 # Create your models here.
 
 class Playlist(models.Model):
-
-
     user_model = settings.AUTH_USER_MODEL
 
     name = models.CharField(max_length=255)

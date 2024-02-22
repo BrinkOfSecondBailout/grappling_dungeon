@@ -9,6 +9,14 @@
         <a href="{% url 'private' %}">Go Back</a>
     </div>
 
+    {% if messages %}
+        <div class="error-message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="all-playlists">
         {% for playlist in playlists %}
             <div class="one-playlist">
@@ -21,8 +29,8 @@
                 <div id="{{playlist.id}}-confirmation-div" class="delete-confirmation-div" style="display: none;">
                     <p>Delete entire playlist?</p>
                     <div>
-                        <button class="delete-playlist-button">Delete</button>
-                        <button class="cancel-button">Cancel</button>
+                        <a href="{% url 'delete_playlist' playlist.id %}"><button class="delete-playlist-button">Delete</button></a>
+                        <button class="cancel-button" onclick="toggleDeleteConfirmationDiv('{{playlist.id}}')">Cancel</button>
                     </div>
                 </div>
             </div>

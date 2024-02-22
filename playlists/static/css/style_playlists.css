@@ -169,6 +169,7 @@ a {
     background-color: rgb(255, 37, 37);
     color: white;
     box-shadow: 0 1px 1px black;
+    cursor: pointer;
 }
 
 
@@ -177,6 +178,7 @@ a {
     width: 80px;
     border-radius: 7px;
     box-shadow: 0 1px 1px black;
+    cursor: pointer;
 }
 
 .delete-icon {

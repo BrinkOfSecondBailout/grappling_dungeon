@@ -122,8 +122,20 @@ def all_playlists(request):
     user = request.user
     playlists = Playlist.objects.filter(owner=user)
     
-    
     context = {
         'playlists': playlists
     }
     return render(request, 'all_playlists.html', context)
+
+@login_required
+def delete_whole_playlist(request, playlist_id):
+    user = request.user
+    current_playlist = get_object_or_404(Playlist, id=playlist_id)
+    if current_playlist.owner == user:
+        current_playlist.delete()
+        messages.info(request, f'Playlist {current_playlist.name} successfully deleted')
+        print(f'Playlist "{current_playlist.name}" successfully deleted')
+    else:
+        print(f'Unauthorized actions')
+        messages.error(request, 'Unauthorized actions')
+    return redirect('all_playlists')

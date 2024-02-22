@@ -391,6 +391,7 @@ input {
 .delete-icon:hover {
     transform: scale(1.1);
 }
+
 /* results.html */
 
 .filtered-results-wrapper {
