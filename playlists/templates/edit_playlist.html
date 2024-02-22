@@ -51,6 +51,13 @@
                     <div class="technique-title">
                         <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                     </div>
+                    <div class="one-note">
+                        {% if technique.note == None %}
+                            <p>No note yet...</p>
+                        {% else %}
+                            <p>{{ technique.note }}</p>
+                        {% endif %}
+                    </div>
                     <div class="remove-from-playlist">
                         <a href="{% url 'extract' technique.id playlist %}"><img src="{% static 'images/remove-icon3.png' %}" class="delete-icon"></a>
                     </div>
