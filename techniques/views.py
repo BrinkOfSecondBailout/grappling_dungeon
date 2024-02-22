@@ -155,8 +155,6 @@ def private(request):
     playlists = Playlist.objects.filter(owner=user)
     playlist_items = PlaylistItem.objects.filter()
 
-    
-
     context = {
         'private_techniques': private_techniques,
         'categories': categories,

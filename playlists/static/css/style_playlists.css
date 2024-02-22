@@ -130,3 +130,43 @@ a {
     font-size: 20px;
     padding: 10px;
 }
+
+/* all_playlists.html */
+.one-playlist {
+    padding: 10px;
+}
+
+.playlist-name-div {
+    padding: 10px;
+}
+
+.delete-icon-div {
+    padding: 10px;
+}
+
+.delete-confirmation-div {
+    margin-top: -5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.delete-playlist-button {
+    padding: 7px;
+    border-radius: 7px;
+    width: 80px;
+    background-color: rgb(255, 37, 37);
+    color: white;
+}
+
+
+.cancel-button {
+    padding: 7px;
+    width: 80px;
+    border-radius: 7px;
+}
+
+.delete-icon {
+    width: 42px;
+}

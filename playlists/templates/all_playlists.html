@@ -10,8 +10,20 @@
     </div>
 
     {% for playlist in playlists %}
-        <div>
-            {{ playlist.name }}
+        <div class="one-playlist">
+            <div class="playlist-name-div">
+                <a href="{% url 'edit_playlist' playlist.id %}">{{ playlist.name }}</a>
+            </div>
+            <div class="delete-icon-div">
+                <img id="" src="{% static 'images/remove-icon2.png' %}" alt="Delete" class="delete-icon" onclick="">
+            </div>
+            <div class="delete-confirmation-div">
+                <p>Delete entire playlist?</p>
+                <div>
+                    <button class="delete-playlist-button">Delete</button>
+                    <button class="cancel-button">Cancel</button>
+                </div>
+            </div>
         </div>
     {% endfor %}
 </div>
