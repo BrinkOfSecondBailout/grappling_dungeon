@@ -33,26 +33,29 @@
         <div class="all-techniques-div">
             {% for technique in playlist %}
             <div class="one-technique">
-                <div class="technique-title">
-                    <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
+                <div class="technique-left">
+                    <div class="one-video-player">
+                        {% if technique.video_option == 'full' %}
+                        <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                        {% endif %}
+                        {% if technique.video_option == 'cropped' %}
+                        <video width="400" height="280" controls>
+                            <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        {% endif %}
+                    </div>
                 </div>
-                {% if technique.video_option == 'full' %}
-                <div class="one-video-player">
-                    <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+
+                <div class="technique-right">
+                    <div class="technique-title">
+                        <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
+                    </div>
+                    <div class="remove-from-playlist">
+                        <a href="{% url 'extract' technique.id playlist %}"><img src="{% static 'images/remove-icon3.png' %}" class="delete-icon"></a>
+                    </div>
                 </div>
-                {% endif %}
-                {% if technique.video_option == 'cropped' %}
-                <div class="one-video-player">
-                    <video width="400" height="280" controls>
-                        <source src="../../{{ technique.cropped_video }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                {% endif %}
-        
-                <div class="remove-from-playlist">
-                    <a href="{% url 'extract' technique.id playlist %}"><img src="{% static 'images/remove-icon3.png' %}" class="delete-icon"></a>
-                </div>
+                
             </div>
             {% endfor %}
         </div>

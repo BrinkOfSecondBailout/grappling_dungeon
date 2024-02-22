@@ -20,36 +20,36 @@
     <div class="all-playlists">
         {% for playlist, technique in playlist_and_technique.items %}
             <div class="one-playlist">
-                <div class="playlist-name-div">
-                    <p>{{ playlist.name|title }}</p>
-                </div>
-                <div class="one-video-player">
-                    {% if technique.video_option == 'full' %}
+                <div class="playlist-left">
+                    <div class="one-video-player">
+                        {% if technique.video_option == 'full' %}
                         <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                    {% endif %}
-                    {% if technique.video_option == 'cropped' %}
+                        {% endif %}
+                        {% if technique.video_option == 'cropped' %}
                         <video width="400" height="280" controls>
                             <source src="../../{{ technique.cropped_video }}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
-                <div>
-                    <p></p>
-                </div>
-                <div class="the-rest-div">
-                    <a href="{% url 'edit_playlist' playlist.id %}">See more...</a>
-                </div>
-
-
-                <div class="delete-icon-div">
-                    <img id="" src="{% static 'images/remove-icon3.png' %}" alt="Delete" class="delete-icon" onclick="toggleDeleteConfirmationDiv('{{playlist.id}}')">
-                </div>
-                <div id="{{playlist.id}}-confirmation-div" class="delete-confirmation-div" style="display: none;">
-                    <p>Delete entire playlist?</p>
-                    <div>
-                        <a href="{% url 'delete_playlist' playlist.id %}"><button class="delete-playlist-button">Delete</button></a>
-                        <button class="cancel-button" onclick="toggleDeleteConfirmationDiv('{{playlist.id}}')">Cancel</button>
+                <div class="playlist-right">
+                    <div class="playlist-name-div">
+                        <p>{{ playlist.name|title }}</p>
+                    </div>
+                    <div class="the-rest-div">
+                        <a href="{% url 'edit_playlist' playlist.id %}">See more...</a>
+                    </div>
+                    <div class="delete-icon-div">
+                        <img id="" src="{% static 'images/remove-icon3.png' %}" alt="Delete" class="delete-icon"
+                            onclick="toggleDeleteConfirmationDiv('{{playlist.id}}')">
+                    </div>
+                    <div id="{{playlist.id}}-confirmation-div" class="delete-confirmation-div" style="display: none;">
+                        <p>Delete entire playlist?</p>
+                        <div>
+                            <a href="{% url 'delete_playlist' playlist.id %}"><button class="delete-playlist-button">Delete</button></a>
+                            <button class="cancel-button" onclick="toggleDeleteConfirmationDiv('{{playlist.id}}')">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
