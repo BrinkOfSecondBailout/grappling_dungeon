@@ -132,15 +132,15 @@ a {
 .technique-right {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 360px;
 }
 
 .one-note {
     padding: 10px;
     font-size: 15px;
     border-radius: 5px;
-    width: 380px;
-    height: 170px;
+    width: 360px;
+    max-height: 160px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -186,6 +186,16 @@ a {
     font-size: 25px;
     text-decoration: underline;
 }
+
+.description-div {
+    padding: 10px;
+    font-size: 15px;
+    width: 300px;
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 
 .delete-icon-div {
     padding: 10px;

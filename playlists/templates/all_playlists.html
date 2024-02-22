@@ -38,7 +38,14 @@
                         <p>{{ playlist.name|title }}</p>
                     </div>
                     <div class="the-rest-div">
-                        <a href="{% url 'edit_playlist' playlist.id %}">See more...</a>
+                        <a href="{% url 'edit_playlist' playlist.id %}">See more from this playlist...</a>
+                    </div>
+                    <div class="description-div">
+                        {% if playlist.description %}
+                            {{ playlist.description }}
+                        {% else %}
+                            <p>No description yet...</p>
+                        {% endif %}
                     </div>
                     <div class="delete-icon-div">
                         <img id="" src="{% static 'images/remove-icon3.png' %}" alt="Delete" class="delete-icon"
