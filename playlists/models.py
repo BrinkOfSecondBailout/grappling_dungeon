@@ -10,7 +10,7 @@ class Playlist(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=500, blank=True)
     techniques = models.ManyToManyField(Technique, through='PlaylistItem')
-    owner = models.ForeignKey(user_model, on_delete=models.CASCADE)
+    owner = models.ForeignKey(user_model, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
