@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div id="show-all-button-div">
+        <div id="show-all-button-div" style="display: none";>
             <button id="show-all-button" onclick="toggleAllTechniques()">Hide All Techniques ({{total}})</button>
         </div>
 
@@ -85,7 +85,7 @@
         </div>
 
 
-        <div id="all-techniques">
+        <div id="all-techniques" style="display: none;">
             <h1>All Techniques</h1>
             <div class="all-techniques-div">
                 {% for technique in private_techniques %}
@@ -226,12 +226,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             const loadingDiv = document.getElementById('loading-div');
             const allTechniques = document.getElementById('all-techniques');
-
-            allTechniques.style.display = 'none';
+            const showAllButton = document.getElementById('show-all-button-div');
 
             setTimeout(function() {
                 loadingDiv.style.display = 'none';
                 allTechniques.style.display = 'block';
+                showAllButton.style.display = 'block';
             }, 5000);
         })
 
