@@ -57,10 +57,23 @@
                     <input type="submit" value="Go" onclick="selectPlaylist(event)" class="regular-button">
                 </form>
             </div>
+
+            <div>
+                <a>Edit All Playlists</a>
+            </div>
+        </div>
+
+        <div id="loading-div">
+            <div>
+                <img src="{% static 'images/loading-bar.gif' %}" id="loading-bar">
+            </div>
+            <div>
+                <img src="{% static 'images/loading.gif' %}" id="loading-img">
+            </div>
         </div>
 
         <div id="show-all-button-div">
-            <button id="show-all-button" onclick="toggleAllTechniques()">Show All Techniques ({{total}})</button>
+            <button id="show-all-button" onclick="toggleAllTechniques()">Hide All Techniques ({{total}})</button>
         </div>
 
         <div id="results-container">
@@ -71,7 +84,8 @@
 
         </div>
 
-        <div id="all-techniques" style="display:none;">
+
+        <div id="all-techniques">
             <h1>All Techniques</h1>
             <div class="all-techniques-div">
                 {% for technique in private_techniques %}
@@ -151,7 +165,7 @@
                                             {% for item in playlist_items %}
 
                                                 {% if item.playlist_id == playlist.id and technique.id == item.technique_id %}
-                                                    value='present' style = 'font-weight: bold; font-style: italic;'
+                                                    value='present' style = 'font-weight: bold;'
                                                 {% endif %}
 
                                             {% endfor %}
@@ -209,7 +223,17 @@
     </div>
 
     <script>
-        
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingDiv = document.getElementById('loading-div');
+            const allTechniques = document.getElementById('all-techniques');
+
+            allTechniques.style.display = 'none';
+
+            setTimeout(function() {
+                loadingDiv.style.display = 'none';
+                allTechniques.style.display = 'block';
+            }, 5000);
+        })
 
 
         function closeAllOtherPanels(activePanel) {
@@ -484,8 +508,6 @@
             location.reload();
         }
 
-
-        
         function toggleNewPlaylistNameForm(techniqueId) {
             const newPlaylistForm = document.getElementById(techniqueId + '-new-playlist-div');
 

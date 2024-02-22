@@ -137,6 +137,23 @@ a {
     padding-bottom: 4vh;
 }
 
+#loading-div {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#loading-bar {
+    width: 220px;
+    height: 110px;
+    object-fit: cover;
+}
+
+#loading-img {
+    margin-top: -5vh;
+    border-radius: 10px;
+}
+
 #filter-error-message {
     color: red;
     padding: 10px;
