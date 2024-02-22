@@ -116,3 +116,13 @@ def edit_playlist(request, playlist_id):
         else:
             print(f'Unauthorized actions')
             return redirect('private')
+        
+@login_required
+def all_playlists(request):
+    user = request.user
+    playlists = Playlist.objects.filter(owner=user)
+    
+    context = {
+        'playlists': playlists
+    }
+    return render(request, 'all_playlists.html', context)

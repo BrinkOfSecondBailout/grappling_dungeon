@@ -59,7 +59,7 @@
             </div>
 
             <div>
-                <a>Edit All Playlists</a>
+                <a href="{% url 'all_playlists' %}">All Playlists</a>
             </div>
         </div>
 
@@ -237,31 +237,28 @@
 
 
         function closeAllOtherPanels(activePanel) {
+            const resultsContainer = document.getElementById('results-container');
+            const allTechniquesContainer = document.getElementById('all-techniques');
+            const showAllButton = document.getElementById('show-all-button');
+            const loadingDiv = document.getElementById('loading-div');
+            const playlistContainer = document.getElementById('playlist-container');
+
             if (activePanel === 'playlist') {
-                const resultsContainer = document.getElementById('results-container');
-                const allTechniquesContainer = document.getElementById('all-techniques');
-                const showAllButton = document.getElementById('show-all-button');
-    
                 allTechniquesContainer.style.display = 'none';
                 resultsContainer.style.display = 'none';
+                loadingDiv.style.display = 'none';
                 showAllButton.innerText = 'Show All Techniques ({{total}})';
             }
             if (activePanel === 'search') {
-                const playlistContainer = document.getElementById('playlist-container');
-                const allTechniquesContainer = document.getElementById('all-techniques');
-                const showAllButton = document.getElementById('show-all-button');
-
                 playlistContainer.style.display = 'none';
                 allTechniquesContainer.style.display = 'none';
+                loadingDiv.style.display = 'none';
                 showAllButton.innerText = 'Show All Techniques ({{total}})';
             }
             if (activePanel === 'showAll') {
-                const playlistContainer = document.getElementById('playlist-container');
-                const resultsContainer = document.getElementById('results-container');
-                const showAllButton = document.getElementById('show-all-button');
-
                 playlistContainer.style.display = 'none';
                 resultsContainer.style.display = 'none';
+                loadingDiv.style.display = 'none';
                 showAllButton.innerText = 'Hide All Techniques ({{total}})';
             }
         }
