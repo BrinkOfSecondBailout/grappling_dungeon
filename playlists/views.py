@@ -130,7 +130,6 @@ def all_playlists(request):
         playlist_and_technique[playlist] = technique
 
     context = {
-        # 'playlists': playlists,
         'playlist_and_technique': playlist_and_technique,
     }
 

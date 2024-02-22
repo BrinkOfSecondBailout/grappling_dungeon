@@ -147,7 +147,7 @@ a {
 
 .playlist-name-div {
     padding: 10px;
-    font-size: 22px;
+    font-size: 25px;
 }
 
 .delete-icon-div {
@@ -187,4 +187,8 @@ a {
 
 .delete-icon:hover {
     transform: scale(1.1);
+}
+
+.the-rest-div {
+    font-size: 16px;
 }

@@ -21,7 +21,7 @@
         {% for playlist, technique in playlist_and_technique.items %}
             <div class="one-playlist">
                 <div class="playlist-name-div">
-                    <a href="{% url 'edit_playlist' playlist.id %}">{{ playlist.name|title }}</a>
+                    <p>{{ playlist.name|title }}</p>
                 </div>
                 <div class="one-video-player">
                     {% if technique.video_option == 'full' %}
@@ -37,8 +37,8 @@
                 <div>
                     <p></p>
                 </div>
-                <div>
-                    <a href="">See the rest...</a>
+                <div class="the-rest-div">
+                    <a href="{% url 'edit_playlist' playlist.id %}">See more...</a>
                 </div>
 
 

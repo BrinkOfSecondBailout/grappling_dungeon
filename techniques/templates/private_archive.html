@@ -18,7 +18,7 @@
         <div id="filter-error-message">
         </div>
 
-        <div id="filter-div">
+        <div id="filter-div" style="display:none;">
             <h4>Filter By:</h4>
             <div id="filter-box">
                 <form id="filter-form" method="GET" data-url="{% url 'filter' %}">
@@ -43,7 +43,7 @@
         <div id="playlist-error-message">
         </div>
 
-        <div id="playlist-div">
+        <div id="playlist-div" style="display:none;">
             <h4>Select Playlist:</h4>
             <div id="playlist-box">
                 <form id="playlist-form" method="GET" data-url="{% url 'find_playlist' %}">
@@ -227,9 +227,13 @@
             const loadingDiv = document.getElementById('loading-div');
             const allTechniques = document.getElementById('all-techniques');
             const showAllButton = document.getElementById('show-all-button-div');
+            const filterDiv = document.getElementById('filter-div');
+            const playlistDiv = document.getElementById('playlist-div');
 
             setTimeout(function() {
                 loadingDiv.style.display = 'none';
+                filterDiv.style.display = 'block';
+                playlistDiv.style.display = 'block';
                 allTechniques.style.display = 'block';
                 showAllButton.style.display = 'block';
             }, 5000);
