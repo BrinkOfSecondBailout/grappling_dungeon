@@ -18,11 +18,30 @@
     {% endif %}
 
     <div class="all-playlists">
-        {% for playlist in playlists %}
+        {% for playlist, technique in playlist_and_technique.items %}
             <div class="one-playlist">
                 <div class="playlist-name-div">
                     <a href="{% url 'edit_playlist' playlist.id %}">{{ playlist.name|title }}</a>
                 </div>
+                <div class="one-video-player">
+                    {% if technique.video_option == 'full' %}
+                        <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                    {% endif %}
+                    {% if technique.video_option == 'cropped' %}
+                        <video width="400" height="280" controls>
+                            <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    {% endif %}
+                </div>
+                <div>
+                    <p></p>
+                </div>
+                <div>
+                    <a href="">See the rest...</a>
+                </div>
+
+
                 <div class="delete-icon-div">
                     <img id="" src="{% static 'images/remove-icon3.png' %}" alt="Delete" class="delete-icon" onclick="toggleDeleteConfirmationDiv('{{playlist.id}}')">
                 </div>

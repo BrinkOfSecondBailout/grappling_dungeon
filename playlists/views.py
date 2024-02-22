@@ -121,10 +121,20 @@ def edit_playlist(request, playlist_id):
 def all_playlists(request):
     user = request.user
     playlists = Playlist.objects.filter(owner=user)
-    
+    playlist_and_technique = {}
+
+    for playlist in playlists:
+        item = PlaylistItem.objects.filter(playlist_id=playlist.id).first()
+        technique = get_object_or_404(Technique, id=item.technique_id)
+
+        playlist_and_technique[playlist] = technique
+
     context = {
-        'playlists': playlists
+        # 'playlists': playlists,
+        'playlist_and_technique': playlist_and_technique,
     }
+
+    
     return render(request, 'all_playlists.html', context)
 
 @login_required
