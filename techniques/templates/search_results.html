@@ -6,24 +6,23 @@
         <button id="clear-button" onclick="clearResults()">Clear Search</button>
     </div>
     <div class="all-techniques-div">
+        
     {% for technique in search_result %}
         <div class="one-technique">
             <div class="technique-title">
                 <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
             </div>
-            {% if technique.video_option == 'full' %}
-                <div class="one-video-player">
+            <div class="one-video-player">
+                {% if technique.video_option == 'full' %}
                     <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                </div>
-            {% endif %}
-            {% if technique.video_option == 'cropped' %}
-                <div class="one-video-player">
+                {% endif %}
+                {% if technique.video_option == 'cropped' %}
                     <video width="560" height="315" controls>
                         <source src="../../{{ technique.cropped_video }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         
             <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
                 <div id="{{ technique.id }}-note" class="one-note">
@@ -34,6 +33,7 @@
                         <p>{{ technique.note }}</p>
                     {% endif %}
                 </div>
+                
                 <div id="{{ technique.id }}-note-edit-form" style="display: none;">
                     <form method="POST" action="{% url 'note' technique.id %}">
                         {% csrf_token %}

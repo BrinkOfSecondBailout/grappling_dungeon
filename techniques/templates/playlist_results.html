@@ -11,19 +11,18 @@
             <div class="technique-title">
                 <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
             </div>
-            {% if technique.video_option == 'full' %}
+
             <div class="one-video-player">
-                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                {% if technique.video_option == 'full' %}
+                    <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                {% endif %}
+                {% if technique.video_option == 'cropped' %}
+                    <video width="560" height="315" controls>
+                        <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
             </div>
-            {% endif %}
-            {% if technique.video_option == 'cropped' %}
-            <div class="one-video-player">
-                <video width="560" height="315" controls>
-                    <source src="../../{{ technique.cropped_video }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            {% endif %}
 
             <div class="remove-from-playlist">
                 <a href="{% url 'extract' technique.id playlist %}"><button class="remove-from-playlist-button">Remove From Playlist<img class="edit-icon" src="{% static 'images/minus-icon.png' %}"></button></a>
