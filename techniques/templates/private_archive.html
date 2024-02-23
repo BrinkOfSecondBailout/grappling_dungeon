@@ -143,20 +143,13 @@
                                     <select name="name" id="" required>
                                         <option value="" selected disabled>----</option>
 
-                                        
-
-
                                         {% for playlist in playlists %}
                                             <option 
-
                                             {% for item in playlist_items %}
-
                                                 {% if item.playlist_id == playlist.id and technique.id == item.technique_id %}
                                                     value='present' style = 'font-weight: bold;'
                                                 {% endif %}
-
                                             {% endfor %}
-
                                             value="{{ playlist }}">{{ playlist.name|title }}
                                             </option>
                                         {% endfor %}
@@ -179,20 +172,15 @@
                         </div>
 
                         <div class="note-and-delete-buttons">
-                            {% if technique.note == None %}
-                                <div>
-                                    <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">Note</button>
-                                </div>
-                            {% endif %}
-                            {% if technique.note != None %}
-                                <div>
-                                    <button id="{{ technique.id }}-note-button" class="see-note-button"
-                                        onclick="toggleNote('{{technique.id}}')">Hide Note</button>
-                                </div>
-                            {% endif %}
+
+                            <div>
+                                <button id="{{ technique.id }}-note-button" class="see-note-button" onclick="toggleNote('{{technique.id}}')">{% if technique.note == None %}Note{% else %}Hide Note{% endif %}</button>
+                            </div>
+
                             <div>
                                 <button id="{{ technique.id}}-playlist-button" class="add-to-playlist-button" onclick="togglePlaylist('{{technique.id}}')">Add to Playlist</button>
                             </div>
+
                             <div>
                                 <div id="{{ technique.id }}-delete-button-div">
                                     <img id="{{ technique.id }}-delete-button" src="{% static 'images/remove-icon3.png' %}" alt="Delete" class="delete-icon" onclick="toggleDeleteMenu('{{technique.id}}')">
