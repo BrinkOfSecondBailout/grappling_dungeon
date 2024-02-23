@@ -5,8 +5,6 @@
     <div class="private-archive-wrapper">
         <h1>Private Archive</h1>
 
-        
-
         {% if messages %}
         <div class="error-message">
             {% for message in messages %}
@@ -93,19 +91,17 @@
                         <div class="technique-title">
                             <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                         </div>
+                        <div class="one-video-player">
                         {% if technique.video_option == 'full' %}
-                            <div class="one-video-player">
-                                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                            </div>
+                            <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
                         {% endif %}
                         {% if technique.video_option == 'cropped' %}
-                            <div class="one-video-player">
-                                <video width="560" height="315" controls>
-                                    <source src="../../{{ technique.cropped_video }}" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
+                            <video width="560" height="315" controls>
+                                <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         {% endif %}
+                        </div>
 
                         {% if technique.note == None %}
                             <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">

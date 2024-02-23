@@ -51,6 +51,9 @@ a {
     padding: 10px;
 }
 
+.small-icon {
+    width: 40px;
+}
 
 .form-label-and-field {
     display: flex;
@@ -150,7 +153,6 @@ a {
 }
 
 #loading-img {
-    margin-top: -5vh;
     border-radius: 10px;
 }
 

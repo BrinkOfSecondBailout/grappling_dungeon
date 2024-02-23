@@ -133,6 +133,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 360px;
+    gap: 10px;
 }
 
 .one-note {
@@ -163,6 +164,9 @@ a {
     overflow-x: hidden;
 }
 
+.small-icon {
+    width: 40px;
+}
 
 .one-playlist {
     padding: 10px;
@@ -179,6 +183,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 400px;
+    gap: 10px;
 }
 
 .playlist-name-div {
@@ -236,7 +241,20 @@ a {
     transform: scale(1.1);
 }
 
+.the-rest-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.the-rest-div {
+}
+
 .the-rest-div a{
     text-decoration: none;
     font-size: 16px;
+}
+
+.arrow-icon {
+    width: 13px;
 }

@@ -6,7 +6,7 @@
         <h1>Edit Playlist</h1>
 
         <div class="go-back-div">
-            <a href="{% url 'private' %}">Go Back</a>
+            <a href="{% url 'private' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
         </div>
 
         <div class="error-message">
@@ -36,13 +36,13 @@
                 <div class="technique-left">
                     <div class="one-video-player">
                         {% if technique.video_option == 'full' %}
-                        <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                            <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
                         {% endif %}
                         {% if technique.video_option == 'cropped' %}
-                        <video width="400" height="280" controls>
-                            <source src="../../{{ technique.cropped_video }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                            <video width="400" height="280" controls>
+                                <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         {% endif %}
                     </div>
                 </div>
