@@ -9,12 +9,11 @@
                 <div>
                     <h2>{{ user.username }}</h2>
                 </div>
-                {% if user.profile_picture %}
-                    <img class="profile-picture" src="{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture">
-                {% else %}
-                    <img class="profile-picture" src="{% static 'images/no-profile.png' %}" alt="No profile picture">
-                    <p>No Profile Picture Yet...</p>
-                {% endif %}
+                
+                <div>
+                    <img class="profile-picture" src={% if user.profile_picture %} "{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture"> {% else %} "{% static 'images/no-profile.png' %}" alt="No profile picture"> <p>No Profile Picture Yet...</p> {% endif %}
+                </div>
+
                 <div>
                     <a href="{% url 'password' %}">Change Password</a>
                 </div>

@@ -328,7 +328,6 @@
         }
 
         function toggleAllTechniques() {
-            const allTechniques = document.getElementById('all-techniques');
             const categorySelect = document.getElementById('category-select');
             const searchKeywords = document.getElementById('keywords');
             const showAllButton = document.getElementById('show-all-button');
@@ -450,7 +449,6 @@
 
         function addToPlaylist(techniqueId, name, endpoint, token, e) {
             e.preventDefault();
-
             var messageDiv = document.getElementById(techniqueId + '-playlist-messages');
             const url = endpoint
 
