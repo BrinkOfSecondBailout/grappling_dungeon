@@ -11,7 +11,13 @@
                 </div>
                 
                 <div>
-                    <img class="profile-picture" src={% if user.profile_picture %} "{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture"> {% else %} "{% static 'images/no-profile.png' %}" alt="No profile picture"> <p>No Profile Picture Yet...</p> {% endif %}
+                    <img class="profile-picture" src=
+                    {% if user.profile_picture %} 
+                        "{{ user.profile_picture.url }}" alt="{{user.username}}'s Profile Picture"> 
+                    {% else %} 
+                        "{% static 'images/no-profile.png' %}" alt="No profile picture"> 
+                        <p>No Profile Picture Yet...</p> 
+                    {% endif %}
                 </div>
 
                 <div>

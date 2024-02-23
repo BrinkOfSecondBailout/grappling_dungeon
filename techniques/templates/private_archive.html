@@ -106,9 +106,20 @@
 
 
                         <div class="one-note-div" id="{{ technique.id }}-note-div"
-                            style="display: {% if technique.note %}block{% else %}none{% endif %};">
+                            style="display:
+                            {% if technique.note %}
+                                block
+                            {% else %}
+                                none
+                            {% endif %}
+                            ;">
                             <div id="{{ technique.id }}-note" class="one-note">
-                                <p>{% if technique.note %}{{ technique.note }}{% else %}No note yet.{% endif %}</p>
+                                <p>{% if technique.note %}
+                                        {{ technique.note }}
+                                    {% else %}
+                                        No note yet.
+                                    {% endif %}
+                                </p>
                             </div>
                         </div>
 
@@ -127,8 +138,6 @@
                         <div id="{{ technique.id }}-edit-note-div" {% if technique.note == None %} style="display:none;" {% endif %}>
                             <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
                         </div>
-
-
 
 
                         <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
