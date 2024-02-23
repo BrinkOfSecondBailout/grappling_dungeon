@@ -103,20 +103,14 @@
                         {% endif %}
                         </div>
 
-                        {% if technique.note == None %}
-                            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
-                                <div id="{{ technique.id }}-note" class="one-note">
-                                    <p>No note yet.</p>
-                                </div>
+
+
+                        <div class="one-note-div" id="{{ technique.id }}-note-div"
+                            style="display: {% if technique.note %}block{% else %}none{% endif %};">
+                            <div id="{{ technique.id }}-note" class="one-note">
+                                <p>{% if technique.note %}{{ technique.note }}{% else %}No note yet.{% endif %}</p>
                             </div>
-                        {% endif %}
-                        {% if technique.note != None %}
-                            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: block;">
-                                <div id="{{ technique.id }}-note" class="one-note">
-                                    <p>{{ technique.note }}</p>
-                                </div>
-                            </div>
-                        {% endif %}
+                        </div>
 
                         <div id="{{ technique.id }}-note-edit-form" style="display: none;">
                             <form method="POST" action="{% url 'note' technique.id %}">
@@ -127,18 +121,15 @@
                                 </div>
                             </form>
                         </div>
-                        
-                        {% if technique.note != None %}
-                            <div id="{{ technique.id }}-edit-note-div">
-                                <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
-                            </div>
-                        {% endif %}
-                        {% if technique.note == None %}
-                            <div id="{{ technique.id }}-edit-note-div" style="display: none;">
-                                <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button"
-                                onclick="toggleNoteEdit('{{technique.id}}')">
-                            </div>
-                        {% endif %}
+
+
+
+                        <div id="{{ technique.id }}-edit-note-div" {% if technique.note == None %} style="display:none;" {% endif %}>
+                            <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
+                        </div>
+
+
+
 
                         <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
                         </div>
