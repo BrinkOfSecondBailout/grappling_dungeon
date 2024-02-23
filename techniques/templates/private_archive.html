@@ -198,13 +198,15 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingDiv = document.getElementById('loading-div');
-            const allTechniques = document.getElementById('all-techniques');
-            const showAllButton = document.getElementById('show-all-button-div');
-            const filterDiv = document.getElementById('filter-div');
-            const playlistDiv = document.getElementById('playlist-div');
+        const loadingDiv = document.getElementById('loading-div');
+        const allTechniques = document.getElementById('all-techniques');
+        const showAllButton = document.getElementById('show-all-button-div');
+        const filterDiv = document.getElementById('filter-div');
+        const playlistDiv = document.getElementById('playlist-div');
+        const resultsContainer = document.getElementById('results-container');
+        const playlistContainer = document.getElementById('playlist-container');
 
+        document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 loadingDiv.style.display = 'none';
                 filterDiv.style.display = 'block';
@@ -216,21 +218,17 @@
 
 
         function closeAllOtherPanels(activePanel) {
-            const resultsContainer = document.getElementById('results-container');
-            const allTechniquesContainer = document.getElementById('all-techniques');
             const showAllButton = document.getElementById('show-all-button');
-            const loadingDiv = document.getElementById('loading-div');
-            const playlistContainer = document.getElementById('playlist-container');
 
             if (activePanel === 'playlist') {
-                allTechniquesContainer.style.display = 'none';
+                allTechniques.style.display = 'none';
                 resultsContainer.style.display = 'none';
                 loadingDiv.style.display = 'none';
                 showAllButton.innerText = 'Show All Techniques ({{total}})';
             }
             if (activePanel === 'search') {
                 playlistContainer.style.display = 'none';
-                allTechniquesContainer.style.display = 'none';
+                allTechniques.style.display = 'none';
                 loadingDiv.style.display = 'none';
                 showAllButton.innerText = 'Show All Techniques ({{total}})';
             }
@@ -250,12 +248,10 @@
         function selectPlaylist(e) {
             e.preventDefault();
             const selectedPlaylist = document.getElementById('playlist-select').value;
-            const playlistContainer = document.getElementById('playlist-container');
 
             if (selectedPlaylist !== "") {
                 const form = document.getElementById('playlist-form');
                 const url = form.getAttribute('data-url') + '?playlist=' + encodeURIComponent(selectedPlaylist);
-
                 const xhr = new XMLHttpRequest();
                 xhr.open(form.getAttribute('method'), url, true);
                 xhr.onload = function () {
@@ -269,13 +265,11 @@
             } else {
                 flashErrorMessage('Please make a selection', 'playlist')
             }
-
         }
 
         function submitFilterForm(e) {
             e.preventDefault();
             const selectedCategory = document.getElementById('category-select').value;
-            const resultsContainer = document.getElementById('results-container');
 
             if (selectedCategory !== "") {
                 const form = document.getElementById('filter-form');
@@ -299,8 +293,7 @@
         function submitSearchForm(e) {
             e.preventDefault();
             const searchKeywords = document.getElementById('keywords').value;
-            const resultsContainer = document.getElementById('results-container');
-
+            
             if (searchKeywords !== "") {
                 const form = document.getElementById('search-form');
                 const url = form.getAttribute('data-url') + '?keywords=' + encodeURIComponent(searchKeywords);
@@ -318,7 +311,6 @@
             } else {
                 flashErrorMessage('Please type in search bar', 'filter')
             }
-
         }
 
         function clearResults() {
