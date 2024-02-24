@@ -22,11 +22,12 @@ def find_playlist(request):
                 playlist_total = len(playlist_techniques)
                 playlist_id = playlist.id
 
-                return render(request, 'playlist_results.html', {'playlist_techniques': playlist_techniques, 'playlist': playlist_name, 'playlist_total': playlist_total, 'playlist_id': playlist_id})
+                return render(request, 'playlist_results.html', {'playlist_techniques': playlist_techniques, 'playlist': playlist, 'playlist_total': playlist_total, 'playlist_id': playlist_id})
             else:
                 messages.error(request, f'Playlist "{playlist_name}" does not exist.')
         else:
             messages.error(request, 'Please select a playlist.')
+
 
     return render(request, 'playlist_results.html', {'playlist_techniques': [], 'playlist': playlist, 'playlist_total': 0})
 

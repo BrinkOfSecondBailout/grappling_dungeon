@@ -3,6 +3,9 @@
     <div class="results-div">
         <h2>All from Playlist:</h2>
         <a href="{% url 'edit_playlist' playlist_id %}"><h1>{{ playlist|title }} ({{ playlist_total }})</h1></a>
+        <div>
+            <h4>"{{ playlist.description }}"</h4>
+        </div>
         <button id="clear-button" onclick="clearResults()">Clear Search</button>
     </div>
     <div class="playlist-all-techniques-div">
@@ -32,9 +35,11 @@
                     </div>
 
                     <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;">
-                        <p>Remove from playlist "{{ playlist|title }}"?</p>
-                        <div style="margin-top: 5px;">
-                            <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Delete</button></a>
+                        <div>
+                            <p>Remove from playlist "{{ playlist|title }}"?</p>
+                        </div>
+                        <div>
+                            <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Remove</button></a>
                             <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
                         </div>
                     </div>

@@ -383,6 +383,7 @@ input {
 
 .remove-from-playlist-icon {
     width: 30px;
+    cursor: pointer;
 }
 
 .delete-confirmation-div {
