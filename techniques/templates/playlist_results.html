@@ -24,8 +24,16 @@
                 {% endif %}
             </div>
 
-            <div class="remove-from-playlist">
-                <a href="{% url 'extract' technique.id playlist %}"><button class="remove-from-playlist-button">Remove From Playlist<img class="edit-icon" src="{% static 'images/minus-icon.png' %}"></button></a>
+            <div id="{{technique.id}}-remove-div" class="remove-from-playlist">
+                <img class="remove-from-playlist-icon" src="{% static 'images/minus-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')"">
+            </div>
+
+            <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;">
+                <p>Remove from playlist "{{ playlist|title }}"?</p>
+                <div>
+                    <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Delete</button></a>
+                    <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
+                </div>
             </div>
         
             <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
@@ -57,16 +65,6 @@
                 <div>
                     <button id="{{ technique.id }}-note-button" class="see-note-button"
                         onclick="toggleNote('{{technique.id}}')">Note</button>
-                </div>
-                <div>
-                    <div id="{{ technique.id }}-delete-button-div">
-                        <img id="{{ technique.id }}-delete-button" src="{% static 'images/remove-icon2.png' %}" alt="Delete"
-                            class="delete-icon" onclick="toggleDeleteMenu('{{technique.id}}')">
-                    </div>
-                    <div id="{{ technique.id }}-sure-div" style="display:none;">
-                        <a href="{% url 'remove' technique.id %}"><button class="delete-button">Delete?</button></a>
-                        <button class="delete-button2" onclick="toggleDeleteMenu('{{technique.id}}')">No</button>
-                    </div>
                 </div>
             </div>
         </div>

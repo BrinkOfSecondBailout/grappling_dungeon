@@ -222,7 +222,7 @@
                 playlistDiv.style.display = 'block';
                 allTechniques.style.display = 'block';
                 showAllButton.style.display = 'block';
-            }, 4000);
+            }, 2000);
         })
 
 
@@ -487,6 +487,19 @@
             const newPlaylistForm = document.getElementById(techniqueId + '-new-playlist-div');
 
             newPlaylistForm.style.display = 'none';
+        }
+
+        function toggleDeleteFromPlaylistConfirmationDiv(techniqueId) {
+            const removeDiv = document.getElementById(techniqueId + '-remove-div');
+            const removeConfDiv = document.getElementById(techniqueId + '-remove-conf-div');
+
+            if (removeDiv.style.display === 'block') {
+                removeDiv.style.display = 'none';
+                removeConfDiv.style.display = 'block';
+            } else {
+                removeDiv.style.display = 'block';
+                removeConfDiv.style.display = 'none';
+            }
         }
 
     </script>

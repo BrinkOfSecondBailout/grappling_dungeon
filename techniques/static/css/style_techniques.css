@@ -381,6 +381,36 @@ input {
     gap: 5px;
 }
 
+.remove-from-playlist-icon {
+    width: 30px;
+}
+
+.delete-confirmation-div {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.delete-playlist-button {
+    padding: 7px;
+    border-radius: 7px;
+    width: 80px;
+    background-color: rgb(255, 37, 37);
+    color: white;
+    box-shadow: 0 1px 1px black;
+    cursor: pointer;
+}
+
+
+.cancel-button {
+    padding: 7px;
+    width: 80px;
+    border-radius: 7px;
+    box-shadow: 0 1px 1px black;
+    cursor: pointer;
+}
 .edit-icon {
     width: 25px;
     border: none;

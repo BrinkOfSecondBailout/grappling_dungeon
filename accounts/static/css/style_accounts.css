@@ -165,9 +165,17 @@ a {
     padding-bottom: 4vh;
 }
 
+.go-back-div {
+    padding: 15px;
+}
+
+.small-icon {
+    width: 40px;
+}
+
 .edit-profile-columns {
     display: flex;
-    width: 40%;
+    width: 50%;
     padding: 10px;
 }
 
@@ -177,6 +185,8 @@ a {
     gap: 20px;
 }
 
+.edit-profile-right {
+}
 
 
 /* dashboard.html */

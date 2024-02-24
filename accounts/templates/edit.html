@@ -4,6 +4,12 @@
 {% block content %}
     <div class="edit-profile-wrapper">
         <h1>Edit Profile</h1>
+
+        <div class="go-back-div">
+            <a href="{% url 'dashboard' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
+        </div>
+
+        
         <div class="edit-profile-columns">
             <div class="user-profile-div">
                 <div>
@@ -25,7 +31,7 @@
                 </div>
             </div>
     
-            <div>
+            <div class=edit-profile-right>
                 <div class="error-message">
                     {% for message in messages %}
                         <p>{{ message }}</p>
