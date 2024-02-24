@@ -456,3 +456,30 @@ input {
     font-size: 20px;
     padding: 10px;
 }
+
+
+/* playlist_results.html */
+
+.playlist-results-wrapper {
+
+}
+
+.playlist-all-techniques-div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.playlist-one-technique {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.playlist-technique-left {
+
+}
+
+.playlist-technique-right {
+    width: 400px;
+}

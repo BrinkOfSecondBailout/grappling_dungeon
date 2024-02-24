@@ -5,99 +5,64 @@
         <a href="{% url 'edit_playlist' playlist_id %}"><h1>{{ playlist|title }} ({{ playlist_total }})</h1></a>
         <button id="clear-button" onclick="clearResults()">Clear Search</button>
     </div>
-    <div class="all-techniques-div">
-    {% for technique in playlist_techniques %}
-        <div class="one-technique">
-            <div class="technique-title">
-                <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
-            </div>
-
-            <div class="one-video-player">
-                {% if technique.video_option == 'full' %}
-                    <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                {% endif %}
-                {% if technique.video_option == 'cropped' %}
-                    <video width="560" height="315" controls>
-                        <source src="../../{{ technique.cropped_video }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                {% endif %}
-            </div>
-
-            <div id="{{technique.id}}-remove-div" class="remove-from-playlist" style="display:block;">
-                <img class="remove-from-playlist-icon" src="{% static 'images/minus-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
-            </div>
-
-            <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;">
-                <p>Remove from playlist "{{ playlist|title }}"?</p>
-                <div style="margin-top: 5px;">
-                    <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Delete</button></a>
-                    <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
+    <div class="playlist-all-techniques-div">
+        {% for technique in playlist_techniques %}
+            <div class="playlist-one-technique">
+                <div class="playlist-technique-left">
+                    <div class="one-video-player">
+                        {% if technique.video_option == 'full' %}
+                            <iframe width="540" height="300" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                        {% endif %}
+                        {% if technique.video_option == 'cropped' %}
+                            <video width="540" height="300" controls>
+                                <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-        
-            <!-- <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
-                <div id="{{ technique.id }}-note" class="one-note">
-                    {% if technique.note == None %}
-                        <p>No note yet.</p>
-                    {% endif %}
-                    {% if technique.note != None %}
-                        <p>{{ technique.note }}</p>
-                    {% endif %}
-                </div>
-                <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-                    <form method="POST" action="{% url 'note' technique.id %}">
-                        {% csrf_token %}
-                        <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
-                        <div>
-                            <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+
+                <div class="playlist-technique-right">
+                    <div class="technique-title">
+                        <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
+                    </div>
+
+                    <div id="{{technique.id}}-remove-div" class="remove-from-playlist" style="display:block;">
+                        <img class="remove-from-playlist-icon" src="{% static 'images/minus-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
+                    </div>
+
+                    <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;">
+                        <p>Remove from playlist "{{ playlist|title }}"?</p>
+                        <div style="margin-top: 5px;">
+                            <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Delete</button></a>
+                            <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
                         </div>
-                    </form>
-                </div>
-                <div class="edit-note-div">
-                    <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon"
-                        id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
-                </div>
-            </div>
-        
-        
-            <div class="note-and-delete-buttons">
-                <div>
-                    <button id="{{ technique.id }}-note-button" class="see-note-button"
-                        onclick="toggleNote('{{technique.id}}')">Note</button>
-                </div>
-            </div> -->
+                    </div>
 
-            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display:
-                {% if technique.note %}
-                    block
-                {% else %}
-                    none
-                {% endif %}
-            ;">
-            
-                <div id="{{ technique.id }}-note" class="one-note">
-                    <p>
-                    {% if technique.note %}
-                        {{ technique.note }}
-                    {% else %}
-                        No note yet.
-                    {% endif %}
-                    </p>
-                </div>
-                
-                <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-                    <form method="POST" action="{% url 'note' technique.id %}">
-                        {% csrf_token %}
-                        <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
-                        <div>
-                            <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                    <div class="one-note-div" id="{{ technique.id }}-note-div" style="display:
+                        {% if technique.note %}
+                            block
+                        {% else %}
+                            none
+                        {% endif %}
+                    ;">
+
+                        <div id="{{ technique.id }}-note" class="one-note">
+                            {{ technique.note }}
                         </div>
-                    </form>
-                </div>
-
-            </div> 
-        </div>
-    {% endfor %}
+                        
+                        <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                            <form method="POST" action="{% url 'note' technique.id %}">
+                                {% csrf_token %}
+                                <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                                <div>
+                                    <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        {% endfor %}
     </div>
 </div>
