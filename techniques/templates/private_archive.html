@@ -104,9 +104,7 @@
                         </div>
 
 
-
-                        <div class="one-note-div" id="{{ technique.id }}-note-div"
-                            style="display:
+                        <div class="one-note-div" id="{{ technique.id }}-note-div" style="display:
                             {% if technique.note %}
                                 block
                             {% else %}
@@ -132,8 +130,6 @@
                                 </div>
                             </form>
                         </div>
-
-
 
                         <div id="{{ technique.id }}-edit-note-div" {% if technique.note == None %} style="display:none;" {% endif %}>
                             <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
@@ -222,7 +218,7 @@
                 playlistDiv.style.display = 'block';
                 allTechniques.style.display = 'block';
                 showAllButton.style.display = 'block';
-            }, 2000);
+            }, 1000);
         })
 
 

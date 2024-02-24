@@ -24,19 +24,19 @@
                 {% endif %}
             </div>
 
-            <div id="{{technique.id}}-remove-div" class="remove-from-playlist">
-                <img class="remove-from-playlist-icon" src="{% static 'images/minus-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')"">
+            <div id="{{technique.id}}-remove-div" class="remove-from-playlist" style="display:block;">
+                <img class="remove-from-playlist-icon" src="{% static 'images/minus-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
             </div>
 
             <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;">
                 <p>Remove from playlist "{{ playlist|title }}"?</p>
-                <div>
+                <div style="margin-top: 5px;">
                     <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Delete</button></a>
                     <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
                 </div>
             </div>
         
-            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
+            <!-- <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
                 <div id="{{ technique.id }}-note" class="one-note">
                     {% if technique.note == None %}
                         <p>No note yet.</p>
@@ -66,7 +66,37 @@
                     <button id="{{ technique.id }}-note-button" class="see-note-button"
                         onclick="toggleNote('{{technique.id}}')">Note</button>
                 </div>
-            </div>
+            </div> -->
+
+            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display:
+                {% if technique.note %}
+                    block
+                {% else %}
+                    none
+                {% endif %}
+            ;">
+            
+                <div id="{{ technique.id }}-note" class="one-note">
+                    <p>
+                    {% if technique.note %}
+                        {{ technique.note }}
+                    {% else %}
+                        No note yet.
+                    {% endif %}
+                    </p>
+                </div>
+                
+                <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                    <form method="POST" action="{% url 'note' technique.id %}">
+                        {% csrf_token %}
+                        <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                        <div>
+                            <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                        </div>
+                    </form>
+                </div>
+
+            </div> 
         </div>
     {% endfor %}
     </div>
