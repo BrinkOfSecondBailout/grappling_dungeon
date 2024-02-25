@@ -9,11 +9,13 @@
             <a href="{% url 'private' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
         </div>
 
+        {% if messages %}
         <div class="error-message">
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}
         </div>
+        {% endif %}
 
         <form method="POST" action="">
             {% csrf_token %}
@@ -30,10 +32,10 @@
             </div>
         </form>
 
-        <div>
+        <div class="other-playlist-selection-div">
             <h4>Choose another playlist:</h4>
             <div id="playlist-box">
-                <form id="playlist-form" method="GET" action="{% url 'edit_playlist' playlist.id %}">
+                <form id="playlist-form" method="GET" data-url="{% url 'edit_playlist' playlist.id %}">
                     {% csrf_token %}
                     <select name="playlist" id="playlist-select" required>
                         <option value="" selected disabled>----</option>
@@ -45,6 +47,8 @@
                 </form>
             </div>
         </div>
+
+        <h1 style="text-decoration: underline;">{{ playlist.name }}</h1>
 
         <div class="all-techniques-div">
             {% for technique in playlist_techniques %}
@@ -79,7 +83,7 @@
                     </div>
 
                     <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;" >
-                        <p>Remove from playlist?</p>
+                        <p>Remove from playlist {{ playlist.name|title }}?</p>
                         <div style="margin-top: 8px;">
                             <a href="{% url 'extract' technique.id playlist.name %}"><button class="delete-playlist-button">Remove</button></a>
                             <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>

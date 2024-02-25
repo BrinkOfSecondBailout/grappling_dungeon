@@ -36,18 +36,6 @@
                         <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                     </div>
 
-                    <div id="{{technique.id}}-remove-div" class="remove-from-playlist" style="display:block;">
-                        <img class="remove-from-playlist-icon" src="{% static 'images/x-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
-                    </div>
-
-                    <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;">
-                        <p>Remove from playlist "{{ playlist|title }}"?</p>
-                        <div style="margin-top: 8px;">
-                            <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Remove</button></a>
-                            <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
-                        </div>
-                    </div>
-
                     <div class="one-note-div" id="{{ technique.id }}-note-div" style="display:
                         {% if technique.note %}
                             block
@@ -70,6 +58,19 @@
                             </form>
                         </div>
                     </div>
+
+                    <div id="{{technique.id}}-remove-div" class="remove-from-playlist" style="display:block;">
+                        <img class="remove-from-playlist-icon" src="{% static 'images/x-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
+                    </div>
+
+                    <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;">
+                        <p>Remove from playlist "{{ playlist|title }}"?</p>
+                        <div style="margin-top: 8px;">
+                            <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Remove</button></a>
+                            <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
+                        </div>
+                    </div>
+                    
                 </div> 
             </div>
         {% endfor %}
