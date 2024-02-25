@@ -39,9 +39,17 @@
                     {% csrf_token %}
                     <select name="playlist" id="playlist-select" required>
                         <option value="" selected disabled>----</option>
-                        {% for playlist in playlists %}
-                            <option value="{{ playlist }}">{{ playlist.name|title }}</option>
+
+                        {% for list in playlists %}
+                            <option value="{{ list }}"
+                                {% if list.name == playlist.name %}
+                                    style="font-weight: bold;"> {{ list.name|title }}
+                                {% else %}
+                                    > {{ list.name|title }}
+                                {% endif %}
+                            </option>
                         {% endfor %}
+
                     </select>
                     <input type="submit" value="Go" class="regular-button">
                 </form>
@@ -97,6 +105,10 @@
     </div>
 
     <script>
+        function selectAnotherPlaylist() {
+            
+        }
+
         function toggleDeleteFromPlaylistConfirmationDiv(techniqueId) {
             const removeDiv = document.getElementById(techniqueId + '-remove-div');
             const removeConfDiv = document.getElementById(techniqueId + '-remove-conf-div');
