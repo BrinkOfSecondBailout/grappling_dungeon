@@ -4,7 +4,13 @@
         <h2>All from Playlist:</h2>
         <a href="{% url 'edit_playlist' playlist_id %}"><h1>{{ playlist|title }} ({{ playlist_total }})</h1></a>
         <div>
-            <h4>"{{ playlist.description }}"</h4>
+            <h4>
+            {% if playlist.description %}
+                "{{ playlist.description }}"
+            {% else %}
+                No playlist description yet...
+            {% endif %}
+            </h4>
         </div>
         <button id="clear-button" onclick="clearResults()">Clear Search</button>
     </div>
@@ -31,14 +37,12 @@
                     </div>
 
                     <div id="{{technique.id}}-remove-div" class="remove-from-playlist" style="display:block;">
-                        <img class="remove-from-playlist-icon" src="{% static 'images/minus-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
+                        <img class="remove-from-playlist-icon" src="{% static 'images/x-icon.png' %}" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
                     </div>
 
                     <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;">
-                        <div>
-                            <p>Remove from playlist "{{ playlist|title }}"?</p>
-                        </div>
-                        <div>
+                        <p>Remove from playlist "{{ playlist|title }}"?</p>
+                        <div style="margin-top: 8px;">
                             <a href="{% url 'extract' technique.id playlist %}"><button class="delete-playlist-button">Remove</button></a>
                             <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
                         </div>

@@ -92,7 +92,7 @@ def extract_from_playlist(request, technique_id, playlist):
             print(f'Playlist {playlist} deleted since it has no items')
     else:
         print(f'Unauthorized actions')
-    return redirect('private')
+    return redirect(reverse('edit_playlist', args=[current_playlist.id]))
 
 
 @login_required
@@ -113,7 +113,7 @@ def edit_playlist(request, playlist_id):
             playlist_items = PlaylistItem.objects.filter(playlist=current_playlist).order_by('order')
             playlist_techniques = [item.technique for item in playlist_items]
             form = PlaylistChangeForm(instance=current_playlist)
-            return render(request, 'edit_playlist.html', {'playlist': playlist_techniques, 'form': form})
+            return render(request, 'edit_playlist.html', {'playlist_techniques': playlist_techniques, 'playlist': current_playlist, 'form': form})
         else:
             print(f'Unauthorized actions')
             return redirect('private')

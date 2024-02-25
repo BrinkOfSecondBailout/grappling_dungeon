@@ -31,7 +31,7 @@
         </form>
 
         <div class="all-techniques-div">
-            {% for technique in playlist %}
+            {% for technique in playlist_techniques %}
             <div class="one-technique">
                 <div class="technique-left">
                     <div class="one-video-player">
@@ -58,8 +58,16 @@
                             <p>{{ technique.note }}</p>
                         {% endif %}
                     </div>
-                    <div class="remove-from-playlist">
-                        <a href="{% url 'extract' technique.id playlist %}"><img src="{% static 'images/remove-icon3.png' %}" class="delete-icon"></a>
+                    <div id="{{technique.id}}-remove-div" class="remove-from-playlist"  style="display:block;">
+                        <img src="{% static 'images/x-icon.png' %}" class="delete-icon" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
+                    </div>
+
+                    <div id="{{technique.id}}-remove-conf-div" class="delete-confirmation-div" style="display: none;" >
+                        <p>Remove from playlist?</p>
+                        <div style="margin-top: 8px;">
+                            <a href="{% url 'extract' technique.id playlist.name %}"><button class="delete-playlist-button">Remove</button></a>
+                            <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -67,4 +75,19 @@
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        function toggleDeleteFromPlaylistConfirmationDiv(techniqueId) {
+            const removeDiv = document.getElementById(techniqueId + '-remove-div');
+            const removeConfDiv = document.getElementById(techniqueId + '-remove-conf-div');
+
+            if (removeDiv.style.display === 'block') {
+                removeDiv.style.display = 'none';
+                removeConfDiv.style.display = 'block';
+            } else {
+                removeDiv.style.display = 'block';
+                removeConfDiv.style.display = 'none';
+            }
+        }
+    </script>
 {% endblock %}
