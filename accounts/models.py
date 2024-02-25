@@ -16,6 +16,11 @@ class User(AbstractUser):
         if existing_profile_picture:
             existing_file_path = os.path.join(str(existing_profile_picture))
             
-            os.remove(existing_file_path)
+            if os.path.exists(existing_file_path):
+                os.remove(existing_file_path)
+                print(f'Removing existing profile picture at {existing_file_path}')
+            else:
+                print(f'Cannot find existing profile picture at {existing_file_path}')
 
         super().save(*args, **kwargs)
+        print('New profile picture saved')

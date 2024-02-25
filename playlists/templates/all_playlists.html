@@ -50,7 +50,7 @@
                             <p>No description yet...</p>
                         {% endif %}
                     </div>
-                    <div class="delete-icon-div">
+                    <div id="{{ playlist.id }}-delete-div" class="delete-icon-div">
                         <img id="" src="{% static 'images/remove-icon3.png' %}" alt="Delete" class="delete-icon"
                             onclick="toggleDeleteConfirmationDiv('{{playlist.id}}')">
                     </div>
@@ -69,11 +69,14 @@
 
 <script>
     function toggleDeleteConfirmationDiv(playlistId) {
+        const deleteDiv = document.getElementById(playlistId + '-delete-div');
         const confirmationDiv = document.getElementById(playlistId + '-confirmation-div');
 
         if(confirmationDiv.style.display === 'none') {
+            deleteDiv.style.display = 'none';
             confirmationDiv.style.display = 'flex';
         } else {
+            deleteDiv.style.display = 'block';
             confirmationDiv.style.display = 'none';
         }
     }

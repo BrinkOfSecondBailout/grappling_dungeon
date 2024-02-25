@@ -30,6 +30,22 @@
             </div>
         </form>
 
+        <div>
+            <h4>Choose another playlist:</h4>
+            <div id="playlist-box">
+                <form id="playlist-form" method="GET" action="{% url 'edit_playlist' playlist.id %}">
+                    {% csrf_token %}
+                    <select name="playlist" id="playlist-select" required>
+                        <option value="" selected disabled>----</option>
+                        {% for playlist in playlists %}
+                            <option value="{{ playlist }}">{{ playlist.name|title }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Go" class="regular-button">
+                </form>
+            </div>
+        </div>
+
         <div class="all-techniques-div">
             {% for technique in playlist_techniques %}
             <div class="one-technique">

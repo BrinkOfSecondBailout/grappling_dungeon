@@ -99,6 +99,7 @@ def extract_from_playlist(request, technique_id, playlist):
 def edit_playlist(request, playlist_id):
     user = request.user
     current_playlist = get_object_or_404(Playlist, id=playlist_id)
+    all_playlists = Playlist.objects.filter(owner=user)
 
     if request.method == 'POST':
         form = PlaylistChangeForm(request.POST, instance=current_playlist)
@@ -113,7 +114,7 @@ def edit_playlist(request, playlist_id):
             playlist_items = PlaylistItem.objects.filter(playlist=current_playlist).order_by('order')
             playlist_techniques = [item.technique for item in playlist_items]
             form = PlaylistChangeForm(instance=current_playlist)
-            return render(request, 'edit_playlist.html', {'playlist_techniques': playlist_techniques, 'playlist': current_playlist, 'form': form})
+            return render(request, 'edit_playlist.html', {'playlist_techniques': playlist_techniques, 'playlist': current_playlist, 'form': form, 'playlists': all_playlists})
         else:
             print(f'Unauthorized actions')
             return redirect('private')
