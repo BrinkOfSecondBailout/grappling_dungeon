@@ -35,13 +35,13 @@
         <div class="other-playlist-selection-div">
             <h4>Choose another playlist:</h4>
             <div id="playlist-box">
-                <form id="playlist-form" method="GET" data-url="{% url 'edit_playlist' playlist.id %}">
+                <form id="playlist-form" method="GET" action="">
                     {% csrf_token %}
                     <select name="playlist" id="playlist-select" required>
                         <option value="" selected disabled>----</option>
 
                         {% for list in playlists %}
-                            <option value="{{ list }}"
+                            <option value="{{ list.id }}"
                                 {% if list.name == playlist.name %}
                                     style="font-weight: bold;"> {{ list.name|title }}
                                 {% else %}
@@ -105,9 +105,16 @@
     </div>
 
     <script>
-        function selectAnotherPlaylist() {
-            
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const playlistSelect = document.getElementById('playlist-select');
+            const playlistForm = document.getElementById('playlist-form');
+
+            playlistSelect.addEventListener('change', function () {
+                const selectedPlaylistId = playlistSelect.value;
+                const formAction = '{% url 'edit_playlist' 0 %}'.replace('0', selectedPlaylistId);
+                playlistForm.action = formAction;
+            });
+        })
 
         function toggleDeleteFromPlaylistConfirmationDiv(techniqueId) {
             const removeDiv = document.getElementById(techniqueId + '-remove-div');
