@@ -17,6 +17,21 @@
         </div>
     {% endif %}
 
+    <div>
+        <img src="{% static 'images/new-playlist2.png' %}" alt="Add new" class="small-icon" style="cursor: pointer;" onclick="toggleNewPlaylistForm()">
+    </div>
+
+    <div id="new-playlist-form" class="new-playlist-name-div" style="display: none;">
+        <form id="{{ technique.id }}-add-playlist-form" class="playlist-name-form" method="POST" data-url="{% url 'add_to_playlist' %}">
+            {% csrf_token %}
+            <p>New playlist name</p>
+            <div>
+                <input name="name" id="name">
+                <button class="regular-button" onclick="addToNewPlaylist('{{ technique.id }}', event)">Submit</button>
+            </div>
+        </form>
+    </div>
+
     <div class="all-playlists">
         {% for playlist, technique in playlist_and_technique.items %}
             <div class="one-playlist">
@@ -68,6 +83,15 @@
 </div>
 
 <script>
+    function toggleNewPlaylistForm() {
+        const newPlaylistForm = document.getElementById('new-playlist-form');
+
+        if (newPlaylistForm.style.display === 'block') {
+            newPlaylistForm.style.display = 'none';
+        } else {
+            newPlaylistForm.style.display = 'block';
+        }
+    }
     function toggleDeleteConfirmationDiv(playlistId) {
         const deleteDiv = document.getElementById(playlistId + '-delete-div');
         const confirmationDiv = document.getElementById(playlistId + '-confirmation-div');
