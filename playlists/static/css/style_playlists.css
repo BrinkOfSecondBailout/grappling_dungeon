@@ -140,11 +140,12 @@ a {
     padding: 10px;
     font-size: 15px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 2px solid black;
     width: 360px;
     height: 130px;
     overflow-y: auto;
     overflow-x: hidden;
+    background-color: rgb(246, 224, 196);
 }
 
 .one-video-player {

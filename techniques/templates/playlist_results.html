@@ -37,16 +37,13 @@
                         <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                     </div>
 
-                    <div class="one-note-div" id="{{ technique.id }}-note-div" style="display:
-                        {% if technique.note %}
-                            block
-                        {% else %}
-                            none
-                        {% endif %}
-                    ;">
-
+                    <div class="one-note-div" id="{{ technique.id }}-note-div">
                         <div id="{{ technique.id }}-note" class="one-note">
-                            {{ technique.note }}
+                            {% if technique.note == None %}
+                                <p>No note yet...</p>
+                            {% else %}
+                                <p>{{ technique.note }}</p>
+                            {% endif %}
                         </div>
                         
                         <div id="{{ technique.id }}-note-edit-form" style="display: none;">
