@@ -11,16 +11,19 @@ class User(AbstractUser):
         return self.username
     
     def save(self, *args, **kwargs):
+        
         existing_profile_picture = User.objects.get(pk=self.pk).profile_picture if self.pk else None
         
-        if existing_profile_picture:
-            existing_file_path = os.path.join(str(existing_profile_picture))
-            
-            if os.path.exists(existing_file_path):
-                os.remove(existing_file_path)
-                print(f'Removing existing profile picture at {existing_file_path}')
-            else:
-                print(f'Cannot find existing profile picture at {existing_file_path}')
+        if existing_profile_picture != self.profile_picture:
+            if existing_profile_picture:
+                existing_file_path = os.path.join('media', str(existing_profile_picture))
+                
+                if os.path.exists(existing_file_path):
+                    os.remove(existing_file_path)
+                    print(f'Removing existing profile picture at {existing_file_path}')
+                    print('New profile picture saved')
+                else:
+                    print(f'Cannot find existing profile picture at {existing_file_path}')
+                    print('New profile picture saved')
 
         super().save(*args, **kwargs)
-        print('New profile picture saved')
