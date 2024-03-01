@@ -35,9 +35,9 @@
         </form>
 
         <div class="other-playlist-selection-div">
-            <h4>Choose another playlist:</h4>
+            <h4>Go to another playlist:</h4>
             <div id="playlist-box">
-                <form id="playlist-form" method="GET" action="">
+                <form id="playlist-form" method="GET">
                     {% csrf_token %}
                     <select name="playlist" id="playlist-select" required>
                         <option value="" selected disabled>----</option>

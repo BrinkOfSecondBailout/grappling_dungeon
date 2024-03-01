@@ -44,15 +44,15 @@
         <div id="playlist-div" style="display:none;">
             <h4>Select Playlist:</h4>
             <div id="playlist-box">
-                <form id="playlist-form" method="GET" data-url="{% url 'find_playlist' %}">
+                <form id="playlist-form" method="GET">
                     {% csrf_token %}
                     <select name="playlist" id="playlist-select" required>
                         <option value="" selected disabled>----</option>
                         {% for playlist in playlists %}
-                            <option value="{{ playlist }}">{{ playlist.name|title }}</option>
+                            <option value="{{ playlist.id }}">{{ playlist.name|title }}</option>
                         {% endfor %}
                     </select>
-                    <input type="submit" value="Go" onclick="selectPlaylist(event)" class="regular-button">
+                    <input type="submit" value="Go" class="regular-button">
                 </form>
             </div>
 
@@ -209,7 +209,8 @@
         const filterDiv = document.getElementById('filter-div');
         const playlistDiv = document.getElementById('playlist-div');
         const resultsContainer = document.getElementById('results-container');
-        const playlistContainer = document.getElementById('playlist-container');
+        const playlistSelect = document.getElementById('playlist-select');
+        const playlistForm = document.getElementById('playlist-form');
 
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
@@ -219,6 +220,12 @@
                 allTechniques.style.display = 'block';
                 showAllButton.style.display = 'block';
             }, 1000);
+
+            playlistSelect.addEventListener('change', function () {
+                const selectedPlaylistId = playlistSelect.value;
+                const formAction = '{% url 'edit_playlist' 0 %}'.replace('0', selectedPlaylistId);
+                playlistForm.action = formAction;
+            });
         })
 
 
@@ -232,13 +239,11 @@
                 showAllButton.innerText = 'Show All Techniques ({{total}})';
             }
             if (activePanel === 'search') {
-                playlistContainer.style.display = 'none';
                 allTechniques.style.display = 'none';
                 loadingDiv.style.display = 'none';
                 showAllButton.innerText = 'Show All Techniques ({{total}})';
             }
             if (activePanel === 'showAll') {
-                playlistContainer.style.display = 'none';
                 resultsContainer.style.display = 'none';
                 loadingDiv.style.display = 'none';
                 showAllButton.innerText = 'Hide All Techniques ({{total}})';
@@ -248,28 +253,6 @@
         function flashErrorMessage(message, div) {
             const errorMessage = document.getElementById(div + '-error-message');
             errorMessage.innerHTML = message;
-        }
-
-        function selectPlaylist(e) {
-            e.preventDefault();
-            const selectedPlaylist = document.getElementById('playlist-select').value;
-
-            if (selectedPlaylist !== "") {
-                const form = document.getElementById('playlist-form');
-                const url = form.getAttribute('data-url') + '?playlist=' + encodeURIComponent(selectedPlaylist);
-                const xhr = new XMLHttpRequest();
-                xhr.open(form.getAttribute('method'), url, true);
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        playlistContainer.style.display = 'block';
-                        closeAllOtherPanels('playlist');
-                        playlistContainer.innerHTML = xhr.responseText;
-                    }
-                }
-                xhr.send();
-            } else {
-                flashErrorMessage('Please make a selection', 'playlist')
-            }
         }
 
         function submitFilterForm(e) {
@@ -320,16 +303,12 @@
 
         function clearResults() {
             const categorySelect = document.getElementById('category-select');
-            const playlistSelect = document.getElementById('playlist-select');
             const searchKeywords = document.getElementById('keywords');
             const resultsContainer = document.getElementById('results-container');
-            const playlistContainer = document.getElementById('playlist-container');
 
             categorySelect.value = '';
-            playlistSelect.value = '';
             searchKeywords.value = '';
             resultsContainer.innerHTML = '';
-            playlistContainer.innerHTML = '';
         }
 
         function toggleAllTechniques() {
