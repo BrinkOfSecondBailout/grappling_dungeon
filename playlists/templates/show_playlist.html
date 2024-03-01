@@ -13,10 +13,14 @@
             {% endif %}
         </div>
 
-        <a href="{% url 'edit_playlist' playlist.id %}">Edit {{ playlist.name|title }}</a>
+        <a href="{% url 'edit_playlist' playlist.id %}">Edit this playlist</a>
 
         <div class="go-back-div">
             <a href="{% url 'private' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
+        </div>
+
+        <div>
+            <a href="{% url 'all_playlists' %}">All Playlists</a>
         </div>
 
         {% if messages %}
