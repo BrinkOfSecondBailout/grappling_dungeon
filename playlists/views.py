@@ -6,30 +6,21 @@ from .models import Playlist, PlaylistItem, Technique
 from django.contrib import messages
 
 # Create your views here.
-
 @login_required
-def find_playlist(request):
-    if request.method == 'GET':
-        user = request.user
-        playlist_name = request.GET.get('playlist')
+def show_playlist(request, playlist_id):
+    user = request.user
+    current_playlist = get_object_or_404(Playlist, id=playlist_id)
+    all_playlists = Playlist.objects.filter(owner=user)
 
-        if playlist_name:
-            playlist = Playlist.objects.filter(owner=user, name=playlist_name).first()
+    if current_playlist and current_playlist.owner == user:
+        playlist_items = PlaylistItem.objects.filter(playlist=current_playlist).order_by('order')
+        playlist_techniques = [item.technique for item in playlist_items]
+        form = PlaylistChangeForm(instance=current_playlist)
+        return render(request, 'show_playlist.html', {'playlist_techniques': playlist_techniques, 'playlist': current_playlist, 'form': form, 'playlists': all_playlists})
+    else:
+        print(f'Unauthorized actions')
+        return redirect('private')
 
-            if playlist:
-                playlist_items = PlaylistItem.objects.filter(playlist=playlist).order_by('order')
-                playlist_techniques = [item.technique for item in playlist_items]
-                playlist_total = len(playlist_techniques)
-                playlist_id = playlist.id
-
-                return render(request, 'playlist_results.html', {'playlist_techniques': playlist_techniques, 'playlist': playlist, 'playlist_total': playlist_total, 'playlist_id': playlist_id})
-            else:
-                messages.error(request, f'Playlist "{playlist_name}" does not exist.')
-        else:
-            messages.error(request, 'Please select a playlist.')
-
-
-    return render(request, 'playlist_results.html', {'playlist_techniques': [], 'playlist': playlist, 'playlist_total': 0})
 
 @login_required
 def add_to_playlist(request):

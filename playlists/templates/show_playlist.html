@@ -3,39 +3,32 @@
 
 {% block content %}
     <div class="edit-playlist-wrapper">
-        <h2>Edit Playlist</h2>
-
         <h1 style="text-decoration: underline;">"{{ playlist.name|title }}"</h1>
+        
+        <div class="playlist-description">
+            {% if playlist.description %}
+                <p>{{ playlist.description }}</p>
+            {% else %}
+                <p>No description yet...</p>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'edit_playlist' playlist.id %}">Edit {{ playlist.name|title }}</a>
 
         <div class="go-back-div">
             <a href="{% url 'private' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
         </div>
 
         {% if messages %}
-        <div class="error-message">
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        </div>
+            <div class="error-message">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
         {% endif %}
 
-        <form method="POST" action="">
-            {% csrf_token %}
-            <div class="form-label-and-field">
-                {{ form.name.label }}
-                {{ form.name }}
-            </div>
-            <div class="form-label-and-field">
-                {{ form.description.label }}
-                {{ form.description }}
-            </div>
-            <div>
-                <input type="submit" value="Save Changes" class="submit-button">
-            </div>
-        </form>
-
         <div class="other-playlist-selection-div">
-            <h4>Edit another playlist:</h4>
+            <h4>View another playlist:</h4>
             <div id="playlist-box">
                 <form id="playlist-form" method="GET">
                     {% csrf_token %}
@@ -112,7 +105,7 @@
 
             playlistSelect.addEventListener('change', function () {
                 const selectedPlaylistId = playlistSelect.value;
-                const formAction = '{% url 'edit_playlist' 0 %}'.replace('0', selectedPlaylistId);
+                const formAction = '{% url 'show_playlist' 0 %}'.replace('0', selectedPlaylistId);
                 playlistForm.action = formAction;
             });
         })

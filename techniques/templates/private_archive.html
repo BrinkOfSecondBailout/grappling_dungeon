@@ -223,7 +223,7 @@
 
             playlistSelect.addEventListener('change', function () {
                 const selectedPlaylistId = playlistSelect.value;
-                const formAction = '{% url 'edit_playlist' 0 %}'.replace('0', selectedPlaylistId);
+                const formAction = '{% url 'show_playlist' 0 %}'.replace('0', selectedPlaylistId);
                 playlistForm.action = formAction;
             });
         })
