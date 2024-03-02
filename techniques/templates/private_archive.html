@@ -329,14 +329,14 @@
             const editNoteDiv = document.getElementById(techniqueId + '-edit-note-div');
 
             if (noteButton.innerText === 'Note') {
+                noteButton.innerText = 'Hide Note';
                 noteDiv.style.display = 'block';
                 editNoteDiv.style.display = 'block';
-                noteButton.innerText = 'Hide Note';
             } else {
+                noteButton.innerText = 'Note';
                 noteDiv.style.display = 'none';
                 noteButton.innerText = 'Note';
                 noteForm.style.display = 'none';
-                noteButton.innerText = 'Note';
                 editNoteDiv.style.display = 'none';
             }
         }
