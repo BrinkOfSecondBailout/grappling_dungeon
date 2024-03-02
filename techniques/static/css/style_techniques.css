@@ -295,7 +295,6 @@ input {
     font-size: 15px;
     text-wrap: wrap;
     overflow-y: auto;
-    background-color: rgb(246, 224, 196);
 }
 
 .note-textarea {

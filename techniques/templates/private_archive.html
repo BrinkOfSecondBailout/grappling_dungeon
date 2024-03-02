@@ -42,7 +42,7 @@
         </div>
 
         <div id="playlist-div" style="display:none;">
-            <h4>Select Playlist:</h4>
+            <h4>Your Playlists:</h4>
             <div id="playlist-box">
                 <form id="playlist-form" method="GET">
                     {% csrf_token %}
@@ -111,7 +111,7 @@
                                 none
                             {% endif %}
                             ;">
-                            <div id="{{ technique.id }}-note" class="one-note">
+                            <div id="{{ technique.id }}-note" class="one-note" onclick="toggleNoteEdit('{{technique.id}}')">
                                 <p>{% if technique.note %}
                                         {{ technique.note }}
                                     {% else %}
@@ -124,17 +124,12 @@
                         <div id="{{ technique.id }}-note-edit-form" style="display: none;">
                             <form method="POST" action="{% url 'note' technique.id %}">
                                 {% csrf_token %}
-                                <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                                <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
                                 <div>
                                     <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
                                 </div>
                             </form>
                         </div>
-
-                        <div id="{{ technique.id }}-edit-note-div" {% if technique.note == None %} style="display:none;" {% endif %}>
-                            <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon" id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
-                        </div>
-
 
                         <div id="{{ technique.id }}-playlist-messages" class="playlist-error-message">
                         </div>
@@ -331,7 +326,6 @@
             const noteDiv = document.getElementById(techniqueId + '-note-div');
             const noteButton = document.getElementById(techniqueId + '-note-button');
             const noteForm = document.getElementById(techniqueId + '-note-edit-form');
-            const editNoteButton = document.getElementById(techniqueId + '-edit-note-button');
             const editNoteDiv = document.getElementById(techniqueId + '-edit-note-div');
 
             if (noteButton.innerText === 'Note') {
@@ -342,7 +336,6 @@
                 noteDiv.style.display = 'none';
                 noteButton.innerText = 'Note';
                 noteForm.style.display = 'none';
-                editNoteButton.src = "{% static 'images/edit-icon.png' %}"
                 noteButton.innerText = 'Note';
                 editNoteDiv.style.display = 'none';
             }
@@ -351,18 +344,16 @@
         function toggleNoteEdit(techniqueId) {
             const note = document.getElementById(techniqueId + '-note-div')
             const noteForm = document.getElementById(techniqueId + '-note-edit-form')
-            const editNoteButton = document.getElementById(techniqueId + '-edit-note-button')
             const noteButton = document.getElementById(techniqueId + '-note-button');
+            const noteTextarea = document.getElementById(techniqueId + '-note-text-area');
 
             if (note.style.display !== 'none') {
                 note.style.display = 'none';
                 noteForm.style.display = 'block';
                 noteButton.innerText = 'Hide Note';
-                editNoteButton.src = "{% static 'images/back-icon.png' %}"
             } else {
                 note.style.display = 'block';
                 noteForm.style.display = 'none';
-                editNoteButton.src = "{% static 'images/edit-icon.png' %}"
             }
         }
 
