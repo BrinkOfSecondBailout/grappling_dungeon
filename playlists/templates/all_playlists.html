@@ -53,7 +53,7 @@
                         <p>{{ playlist.name|title }}</p>
                     </div>
                     <div class="the-rest-div">
-                        <a class="the-rest-flex" href="{% url 'edit_playlist' playlist.id %}">
+                        <a class="the-rest-flex" href="{% url 'show_playlist' playlist.id %}">
                             <p>See more from this playlist</p>
                             <img src="{% static 'images/arrow-icon2.png' %}" class="arrow-icon">
                         </a>
