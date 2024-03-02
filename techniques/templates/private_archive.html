@@ -122,11 +122,15 @@
                         </div>
 
                         <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-                            <form method="POST" action="{% url 'note' technique.id %}">
+
+                            <div id="{{ technique.id }}-note-messages" class="playlist-error-message">
+                            </div>
+
+                            <form id="{{ technique.id }}-note-form" method="POST" data-url="{% url 'note' technique.id %}">
                                 {% csrf_token %}
                                 <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
                                 <div>
-                                    <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                                    <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon" onclick="submitNoteChange('{{ technique.id }}', event)">
                                 </div>
                             </form>
                         </div>
@@ -355,6 +359,32 @@
                 note.style.display = 'block';
                 noteForm.style.display = 'none';
             }
+        }
+
+        function submitNoteChange(techniqueId, e) {
+            e.preventDefault();
+            
+            const noteForm = document.getElementById(techniqueId + '-note-form'); 
+            const token = noteForm.elements['csrfmiddlewaretoken'].value;
+            const url = noteForm.getAttribute('data-url');
+            const noteValue = noteForm.elements['note'].value;
+            var messageDiv = document.getElementById(techniqueId + '-note-messages');
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('X-CSRFToken', token);
+
+            const formData = new URLSearchParams();
+            formData.append('note', noteValue);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    messageDiv.innerHTML = 'Note saved successfully!' + '<br><a style="cursor: pointer;" onclick="refreshPage()">Refresh page to see new changes</a>';
+                    console.log(xhr.status);
+                }
+            }
+            xhr.send(formData.toString());
         }
 
         
