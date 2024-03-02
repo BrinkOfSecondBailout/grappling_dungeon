@@ -145,7 +145,16 @@ a {
     height: 130px;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: rgb(246, 224, 196);
+}
+
+.edit-icon {
+    width: 25px;
+    border: none;
+}
+
+.note-textarea {
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .one-video-player {

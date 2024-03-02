@@ -77,13 +77,36 @@
                     <div class="technique-title">
                         <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                     </div>
-                    <div class="one-note">
+
+                    {% comment %} <div class="one-note">
                         {% if technique.note == None %}
                             <p>No note yet...</p>
                         {% else %}
                             <p>{{ technique.note }}</p>
                         {% endif %}
+                    </div> {% endcomment %}
+
+                    <div class="one-note-div" id="{{ technique.id }}-note-div" >
+                        <div id="{{ technique.id }}-note" class="one-note" onclick="toggleNoteEdit('{{technique.id}}')">
+                            <p>{% if technique.note %}
+                                    {{ technique.note }}
+                                {% else %}
+                                    No note yet.
+                                {% endif %}
+                            </p>
+                        </div>
                     </div>
+
+                    <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                        <form method="POST" action="{% url 'note' technique.id %}">
+                            {% csrf_token %}
+                            <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                            <div>
+                                <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
+                            </div>
+                        </form>
+                    </div>
+
                     <div id="{{technique.id}}-remove-div" class="remove-from-playlist"  style="display:block;">
                         <img src="{% static 'images/x-icon.png' %}" class="delete-icon" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
                     </div>
@@ -113,6 +136,22 @@
                 playlistForm.action = formAction;
             });
         })
+
+        function toggleNoteEdit(techniqueId) {
+            const note = document.getElementById(techniqueId + '-note-div')
+            const noteForm = document.getElementById(techniqueId + '-note-edit-form')
+            const noteButton = document.getElementById(techniqueId + '-note-button');
+            const noteTextarea = document.getElementById(techniqueId + '-note-text-area');
+
+            if (note.style.display !== 'none') {
+                note.style.display = 'none';
+                noteForm.style.display = 'block';
+                noteButton.innerText = 'Hide Note';
+            } else {
+                note.style.display = 'block';
+                noteForm.style.display = 'none';
+            }
+        }
 
         function toggleDeleteFromPlaylistConfirmationDiv(techniqueId) {
             const removeDiv = document.getElementById(techniqueId + '-remove-div');
