@@ -78,15 +78,7 @@
                         <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                     </div>
 
-                    {% comment %} <div class="one-note">
-                        {% if technique.note == None %}
-                            <p>No note yet...</p>
-                        {% else %}
-                            <p>{{ technique.note }}</p>
-                        {% endif %}
-                    </div> {% endcomment %}
-
-                    <div class="one-note-div" id="{{ technique.id }}-note-div" >
+                    <div class="one-note-div" id="{{ technique.id }}-note-div">
                         <div id="{{ technique.id }}-note" class="one-note" onclick="toggleNoteEdit('{{technique.id}}')">
                             <p>{% if technique.note %}
                                     {{ technique.note }}
@@ -95,6 +87,18 @@
                                 {% endif %}
                             </p>
                         </div>
+                    </div>
+
+                    <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                        <div id="{{ technique.id }}-note-messages" class="playlist-error-message">
+                        </div>
+                        <form id="{{ technique.id }}-note-form" method="POST" data-url="{% url 'note' technique.id %}">
+                            {% csrf_token %}
+                            <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                            <div>
+                                <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon" onclick="submitNoteChange('{{ technique.id }}', event)">
+                            </div>
+                        </form>
                     </div>
 
                     <div id="{{ technique.id }}-note-edit-form" style="display: none;">
@@ -164,6 +168,32 @@
                 removeDiv.style.display = 'block';
                 removeConfDiv.style.display = 'none';
             }
+        }
+
+        function submitNoteChange(techniqueId, e) {
+            e.preventDefault();
+            
+            const noteForm = document.getElementById(techniqueId + '-note-form'); 
+            const token = noteForm.elements['csrfmiddlewaretoken'].value;
+            const url = noteForm.getAttribute('data-url');
+            const noteValue = noteForm.elements['note'].value;
+            var messageDiv = document.getElementById(techniqueId + '-note-messages');
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('X-CSRFToken', token);
+
+            const formData = new URLSearchParams();
+            formData.append('note', noteValue);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    messageDiv.innerHTML = 'Note saved successfully!';
+                    console.log(xhr.status);
+                }
+            }
+            xhr.send(formData.toString());
         }
     </script>
 {% endblock %}

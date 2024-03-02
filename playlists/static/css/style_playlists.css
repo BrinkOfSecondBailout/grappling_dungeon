@@ -147,6 +147,12 @@ a {
     overflow-x: hidden;
 }
 
+.playlist-error-message {
+    color: red;
+    padding: 5px;
+    font-size: 15px;
+}
+
 .edit-icon {
     width: 25px;
     border: none;

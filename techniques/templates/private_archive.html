@@ -122,10 +122,8 @@
                         </div>
 
                         <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-
                             <div id="{{ technique.id }}-note-messages" class="playlist-error-message">
                             </div>
-
                             <form id="{{ technique.id }}-note-form" method="POST" data-url="{% url 'note' technique.id %}">
                                 {% csrf_token %}
                                 <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
