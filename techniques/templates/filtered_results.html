@@ -24,28 +24,33 @@
                 {% endif %}
             </div>
         
-            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display: none;">
-                <div id="{{ technique.id }}-note" class="one-note">
-                    {% if technique.note == None %}
-                        <p>No note yet.</p>
-                    {% endif %}
-                    {% if technique.note != None %}
-                        <p>{{ technique.note }}</p>
-                    {% endif %}
+            <div class="one-note-div" id="{{ technique.id }}-note-div" style="display:
+                {% if technique.note %}
+                    block
+                {% else %}
+                    none
+                {% endif %}
+                ;">
+                <div id="{{ technique.id }}-note" class="one-note" onclick="toggleNoteEdit('{{technique.id}}')">
+                    <p>{% if technique.note %}
+                            {{ technique.note }}
+                        {% else %}
+                            No note yet.
+                        {% endif %}
+                    </p>
                 </div>
-                <div id="{{ technique.id }}-note-edit-form" style="display: none;">
-                    <form method="POST" action="{% url 'note' technique.id %}">
-                        {% csrf_token %}
-                        <textarea class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
-                        <div>
-                            <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon">
-                        </div>
-                    </form>
+            </div>
+
+            <div id="{{ technique.id }}-note-edit-form" style="display: none;">
+                <div id="{{ technique.id }}-note-messages" class="playlist-error-message">
                 </div>
-                <div class="edit-note-div">
-                    <img src="{% static 'images/edit-icon.png' %}" alt="Edit" class="edit-icon"
-                        id="{{ technique.id }}-edit-note-button" onclick="toggleNoteEdit('{{technique.id}}')">
-                </div>
+                <form id="{{ technique.id }}-note-form" method="POST" data-url="{% url 'note' technique.id %}">
+                    {% csrf_token %}
+                    <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                    <div>
+                        <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon" onclick="submitNoteChange('{{ technique.id }}', event)">
+                    </div>
+                </form>
             </div>
         
         
