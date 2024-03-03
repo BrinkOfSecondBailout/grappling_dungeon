@@ -6,7 +6,7 @@
     <h1>Create New Playlist</h1>
     
     <div class="go-back-div">
-        <a href="{% url 'private' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
+        <a href="{% url 'all_playlists' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
     </div>
 
     {% if messages %}
@@ -23,8 +23,14 @@
             <p>Playlist Name:</p>
             <div>
                 <input name="name" id="name">
+
+                <div style="padding: 10px; margin-top: 4vh;">
+                    <h4>Add techniques to playlist:</h4>
+                </div>
+
+                <div class="all-techniques-form">
                 {% for technique in all_techniques %}
-                    <div>
+                    <div class="one-technique-form">
                         <label>
                             <input type="checkbox" name="{{ technique.id }}" value="{{ technique.id }}">
                             {{ technique.name }}
@@ -36,10 +42,10 @@
 
                         <div id="{{ technique.id }}-video-div" class="one-video-player" style="display:none;">
                             {% if technique.video_option == 'full' %}
-                                <iframe width="500" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                                <iframe width="420" height="240" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
                             {% endif %}
                             {% if technique.video_option == 'cropped' %}
-                                <video width="500" height="280" controls>
+                                <video width="420" height="240" controls>
                                     <source src="../../{{ technique.cropped_video }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
@@ -48,6 +54,7 @@
 
                     </div>
                 {% endfor %}
+                </div>
                 <button class="regular-button" onclick="submitNewPlaylist(event)">Submit</button>
             </div>
         </form>

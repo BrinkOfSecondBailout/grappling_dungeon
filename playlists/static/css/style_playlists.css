@@ -338,3 +338,27 @@ input {
     padding-top: 4vh;
     padding-bottom: 4vh;
 }
+
+.all-techniques-form {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+.one-technique-form {
+    padding: 10px;
+    text-align: left;
+    align-items: center;
+    width: 400px;
+}
+
+.one-technique-form input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+
+.one-video-player {
+    
+}
