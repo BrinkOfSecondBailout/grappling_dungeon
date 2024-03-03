@@ -21,6 +21,7 @@
         <a style="cursor: pointer;" href="{% url 'new_playlist' %}">Create New Playlist</a>
     </div>
 
+
     <div class="all-playlists">
         {% for playlist, technique in playlist_and_technique.items %}
             <div class="one-playlist">
@@ -72,15 +73,6 @@
 </div>
 
 <script>
-    {% comment %} function toggleNewPlaylistForm() {
-        const newPlaylistForm = document.getElementById('new-playlist-form');
-
-        if (newPlaylistForm.style.display === 'block') {
-            newPlaylistForm.style.display = 'none';
-        } else {
-            newPlaylistForm.style.display = 'block';
-        }
-    } {% endcomment %}
 
     function toggleDeleteConfirmationDiv(playlistId) {
         const deleteDiv = document.getElementById(playlistId + '-delete-div');

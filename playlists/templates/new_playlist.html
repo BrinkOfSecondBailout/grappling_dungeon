@@ -17,11 +17,63 @@
         </div>
     {% endif %}
 
+    <div id="new-playlist-form" class="new-playlist-name-div">
+        <form id="" class="playlist-name-form" method="POST" data-url="">
+            {% csrf_token %}
+            <p>Playlist Name:</p>
+            <div>
+                <input name="name" id="name">
+                {% for technique in all_techniques %}
+                    <div>
+                        <label>
+                            <input type="checkbox" name="{{ technique.id }}" value="{{ technique.id }}">
+                            {{ technique.name }}
+                        </label>
+
+                        <div>
+                            <a style="cursor:pointer;" onclick="toggleVideoDiv('{{ technique.id }}')">See video</a>
+                        </div>
+
+                        <div id="{{ technique.id }}-video-div" class="one-video-player" style="display:none;">
+                            {% if technique.video_option == 'full' %}
+                                <iframe width="500" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                            {% endif %}
+                            {% if technique.video_option == 'cropped' %}
+                                <video width="500" height="280" controls>
+                                    <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                {% endfor %}
+                <button class="regular-button" onclick="submitNewPlaylist(event)">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div>
+    </div>
+
     
 </div>
 
 <script>
+    function toggleVideoDiv(techniqueId) {
+        const videoDiv = document.getElementById(techniqueId + '-video-div');
 
+        if (videoDiv.style.display === 'none') {
+            videoDiv.style.display = 'block';
+        } else {
+            videoDiv.style.display = 'none';
+        }
+    }
+
+    function submitNewPlaylist(e) {
+        e.preventDefault();
+        console.log('yo')
+    }
 </script>
 
 {% endblock %}

@@ -92,15 +92,15 @@
                             <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                         </div>
                         <div class="one-video-player">
-                        {% if technique.video_option == 'full' %}
-                            <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                        {% endif %}
-                        {% if technique.video_option == 'cropped' %}
-                            <video width="560" height="315" controls>
-                                <source src="../../{{ technique.cropped_video }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        {% endif %}
+                            {% if technique.video_option == 'full' %}
+                                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                            {% endif %}
+                            {% if technique.video_option == 'cropped' %}
+                                <video width="560" height="315" controls>
+                                    <source src="../../{{ technique.cropped_video }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            {% endif %}
                         </div>
 
 
