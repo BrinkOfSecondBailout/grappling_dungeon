@@ -1,0 +1,27 @@
+{% extends 'base_playlists.html' %}
+{% load static %}
+
+{% block content %}
+<div class="new-playlist-wrapper">
+    <h1>Create New Playlist</h1>
+    
+    <div class="go-back-div">
+        <a href="{% url 'private' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
+    </div>
+
+    {% if messages %}
+        <div class="error-message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

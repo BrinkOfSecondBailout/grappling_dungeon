@@ -317,10 +317,24 @@ input {
 
 /* show_playlist.html */
 
+.show-playlist-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
 .playlist-description {
     padding: 20px;
     width: 400px;
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+/* new_playlist.html */
+
+.new-playlist-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 }

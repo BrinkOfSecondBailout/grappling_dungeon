@@ -119,15 +119,23 @@ def all_playlists(request):
     for playlist in playlists:
         item = PlaylistItem.objects.filter(playlist_id=playlist.id).first()
         technique = get_object_or_404(Technique, id=item.technique_id)
-
         playlist_and_technique[playlist] = technique
 
     context = {
         'playlist_and_technique': playlist_and_technique,
     }
 
-    
     return render(request, 'all_playlists.html', context)
+
+@login_required
+def new_playlist(request):
+    user = request.user
+    all_techniques = Technique.objects.filter(uploaded_by=user)
+    
+    context = {
+        'all_techniques': all_techniques
+    }
+    return render(request, 'new_playlist.html', context)
 
 @login_required
 def delete_whole_playlist(request, playlist_id):
