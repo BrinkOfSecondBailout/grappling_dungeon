@@ -86,9 +86,19 @@
         const playlistForm = document.getElementById('new-playlist-form');
         const playlistName = document.getElementById('name').value;
         const messageDiv = document.getElementById('error-messages');
+        const checkboxes = playlistForm.querySelectorAll('input[type="checkbox"]');
+        const selectedTechniqueIds = [];
 
         if (playlistName === '') {
             messageDiv.innerHTML = 'Please input a name for your playlist';
+        } else {
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    selectedTechniqueIds.push(checkbox.value);
+                }
+            });
+
+            console.log(selectedTechniqueIds);
         }
 
     }
