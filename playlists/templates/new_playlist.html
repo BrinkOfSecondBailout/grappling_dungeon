@@ -18,7 +18,7 @@
     {% endif %}
 
     <div id="new-playlist-form" class="new-playlist-name-div">
-        <form id="" class="playlist-name-form" method="POST" data-url="">
+        <form id="new-playlist-form" class="playlist-name-form" method="POST" data-url="">
             {% csrf_token %}
             <p>Playlist Name:</p>
             <div>
@@ -55,6 +55,10 @@
                     </div>
                 {% endfor %}
                 </div>
+
+                <div id="error-messages">
+                </div>
+                
                 <button class="regular-button" onclick="submitNewPlaylist(event)">Submit</button>
             </div>
         </form>
@@ -79,7 +83,14 @@
 
     function submitNewPlaylist(e) {
         e.preventDefault();
-        console.log('yo')
+        const playlistForm = document.getElementById('new-playlist-form');
+        const playlistName = document.getElementById('name').value;
+        const messageDiv = document.getElementById('error-messages');
+
+        if (playlistName === '') {
+            messageDiv.innerHTML = 'Please input a name for your playlist';
+        }
+
     }
 </script>
 

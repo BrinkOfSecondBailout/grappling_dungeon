@@ -339,6 +339,12 @@ input {
     padding-bottom: 4vh;
 }
 
+#error-messages {
+    padding: 10px;
+    color: red;
+    font-size: 16px;
+}
+
 .all-techniques-form {
     padding: 10px;
     display: flex;
