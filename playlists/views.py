@@ -130,12 +130,16 @@ def all_playlists(request):
 @login_required
 def new_playlist(request):
     user = request.user
-    all_techniques = Technique.objects.filter(uploaded_by=user)
-    
-    context = {
-        'all_techniques': all_techniques
-    }
-    return render(request, 'new_playlist.html', context)
+
+    if request.method == 'POST':
+        pass
+
+    else:
+        all_techniques = Technique.objects.filter(uploaded_by=user)
+        context = {
+            'all_techniques': all_techniques
+        }
+        return render(request, 'new_playlist.html', context)
 
 @login_required
 def delete_whole_playlist(request, playlist_id):

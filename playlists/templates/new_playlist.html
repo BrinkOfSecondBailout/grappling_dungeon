@@ -31,10 +31,12 @@
                 <div class="all-techniques-form">
                 {% for technique in all_techniques %}
                     <div class="one-technique-form">
+                        <div class="technique-title">
                         <label>
                             <input type="checkbox" name="{{ technique.id }}" value="{{ technique.id }}">
                             {{ technique.name }}
                         </label>
+                        </div>
 
                         <div>
                             <a style="cursor:pointer;" onclick="toggleVideoDiv('{{ technique.id }}')">See video</a>
@@ -91,6 +93,9 @@
 
         if (playlistName === '') {
             messageDiv.innerHTML = 'Please input a name for your playlist';
+        } 
+        if (selectedTechniqueIds.length === 0) {
+            messageDiv.innerHTML = 'Please select at least one technique';
         } else {
             checkboxes.forEach(function (checkbox) {
                 if (checkbox.checked) {
@@ -100,6 +105,8 @@
 
             console.log(selectedTechniqueIds);
         }
+
+        
 
     }
 </script>
