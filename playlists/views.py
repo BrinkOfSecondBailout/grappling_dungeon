@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import PlaylistForm, PlaylistChangeForm
 from .models import Playlist, PlaylistItem, Technique
 from django.contrib import messages
+from django.http import JsonResponse
 
 # Create your views here.
 @login_required
@@ -132,7 +133,10 @@ def new_playlist(request):
     user = request.user
 
     if request.method == 'POST':
-        pass
+        playlist_name = request.POST.get('name')
+        techniques = request.POST.get('techniques')
+        print(techniques)
+        return JsonResponse({'success': True})
 
     else:
         all_techniques = Technique.objects.filter(uploaded_by=user)

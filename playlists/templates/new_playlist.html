@@ -18,7 +18,7 @@
     {% endif %}
 
     <div id="new-playlist-form" class="new-playlist-name-div">
-        <form id="new-playlist-form" class="playlist-name-form" method="POST" data-url="">
+        <form id="new-playlist-form" class="playlist-name-form" method="POST" data-url="{% url 'new_playlist' %}">
             {% csrf_token %}
             <p>Playlist Name:</p>
             <div>
@@ -33,7 +33,7 @@
                     <div class="one-technique-form">
                         <div class="technique-title">
                         <label>
-                            <input type="checkbox" name="{{ technique.id }}" value="{{ technique.id }}">
+                            <input type="checkbox" name="techniques[]" value="{{ technique.id }}">
                             {{ technique.name }}
                         </label>
                         </div>
@@ -89,24 +89,43 @@
         const playlistName = document.getElementById('name').value;
         const messageDiv = document.getElementById('error-messages');
         const checkboxes = playlistForm.querySelectorAll('input[type="checkbox"]');
-        const selectedTechniqueIds = [];
-
+        const token = playlistForm.elements['csrfmiddlewaretoken'].value;
+        const url = playlistForm.getAttribute('data-url');
+        const techniqueIds = [];
+        
         if (playlistName === '') {
             messageDiv.innerHTML = 'Please input a name for your playlist';
-        } 
-        if (selectedTechniqueIds.length === 0) {
-            messageDiv.innerHTML = 'Please select at least one technique';
         } else {
             checkboxes.forEach(function (checkbox) {
                 if (checkbox.checked) {
-                    selectedTechniqueIds.push(checkbox.value);
+                    techniqueIds.push(checkbox.value);
                 }
             });
 
-            console.log(selectedTechniqueIds);
+            if (techniqueIds.length === 0) {
+                messageDiv.innerHTML = 'Please select at least one technique';
+            } else {
+                console.log(techniqueIds);
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.setRequestHeader('X-CSRFToken', token);
+
+                const formData = {
+                    name: playlistName,
+                    techniques: techniqueIds,
+                };
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        messageDiv.innerHTML = 'Successfully created new playlist ' + playlistName ;
+                        console.log(xhr.status);
+                    }
+                }
+                xhr.send(JSON.stringify(formData));
+            };
         }
 
-        
 
     }
 </script>
