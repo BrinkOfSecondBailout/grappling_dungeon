@@ -118,7 +118,7 @@
 
                 xhr.onload = function () {
                     if (xhr.status === 200) {
-                        messageDiv.innerHTML = 'Successfully created new playlist ' + playlistName ;
+                        messageDiv.innerHTML = 'Successfully created a new playlist called "' + playlistName + '"!' + '<br><a href="{% url 'all_playlists' %}">See All Playlists</a>';
                         console.log(xhr.status);
                     }
                 }

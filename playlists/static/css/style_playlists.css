@@ -351,6 +351,9 @@ input {
     padding: 10px;
     color: red;
     font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .all-techniques-form {
