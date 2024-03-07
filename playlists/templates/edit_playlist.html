@@ -34,6 +34,10 @@
             </div>
         </form>
 
+        <div style="padding: 5px;">
+            <a href="{% url 'delete_playlist' playlist.id %}"><button class="delete-playlist">Delete Playlist</button></a>
+        </div>
+
         <div class="other-playlist-selection-div">
             <h4>Edit another playlist:</h4>
             <div id="playlist-box">

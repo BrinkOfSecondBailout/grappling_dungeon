@@ -55,6 +55,14 @@ a {
     padding: 15px;
 }
 
+.delete-playlist {
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 2px 1px black;
+}
+
 .error-message {
     color: red;
     padding: 10px;
