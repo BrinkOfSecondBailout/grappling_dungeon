@@ -18,7 +18,7 @@
     {% endif %}
 
     <div id="new-playlist-form" class="new-playlist-name-div">
-        <form id="new-playlist-form" class="playlist-name-form" method="POST" data-url="{% url 'new_playlist' %}">
+        <form id="new-playlist-form" class="playlist-name-form" data-url="{% url 'add_to_playlist' %}">
             {% csrf_token %}
             <p>Playlist Name:</p>
             <div>
@@ -89,7 +89,7 @@
         const playlistName = document.getElementById('name').value;
         const messageDiv = document.getElementById('error-messages');
         const checkboxes = playlistForm.querySelectorAll('input[type="checkbox"]');
-        const token = playlistForm.elements['csrfmiddlewaretoken'].value;
+        const token = playlistForm.querySelector('[name="csrfmiddlewaretoken"]').value;
         const url = playlistForm.getAttribute('data-url');
         const techniqueIds = [];
         
@@ -105,24 +105,43 @@
             if (techniqueIds.length === 0) {
                 messageDiv.innerHTML = 'Please select at least one technique';
             } else {
-                console.log(techniqueIds);
+
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', url, true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.setRequestHeader('X-CSRFToken', token);
 
-                const formData = {
-                    name: playlistName,
-                    techniques: techniqueIds,
-                };
+                const formData = new URLSearchParams();
+                formData.append('name', playlistName);
 
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        messageDiv.innerHTML = 'Successfully created new playlist ' + playlistName ;
-                        console.log(xhr.status);
+                techniqueIds.forEach(function (id) {
+                    formData.append('technique', id);
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            messageDiv.innerHTML = 'Successfully created new playlist ' + playlistName;
+                            console.log(xhr.status);
+                        }
                     }
-                }
-                xhr.send(JSON.stringify(formData));
+                    xhr.send(formData.toString());
+                });
+
+                // const xhr = new XMLHttpRequest();
+                // xhr.open('POST', url, true);
+                // xhr.setRequestHeader('Content-Type', 'application/json');
+                // xhr.setRequestHeader('X-CSRFToken', token);
+
+                // const formData = {
+                //     name: playlistName,
+                //     techniques: techniqueIds,
+                // };
+
+                // xhr.onload = function () {
+                //     if (xhr.status === 200) {
+                //         messageDiv.innerHTML = 'Successfully created new playlist ' + playlistName ;
+                //         console.log(xhr.status);
+                //     }
+                // }
+                // xhr.send(JSON.stringify(formData));
             };
         }
 

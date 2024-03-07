@@ -5,6 +5,7 @@ from .forms import PlaylistForm, PlaylistChangeForm
 from .models import Playlist, PlaylistItem, Technique
 from django.contrib import messages
 from django.http import JsonResponse
+import json
 
 # Create your views here.
 @login_required
@@ -133,8 +134,9 @@ def new_playlist(request):
     user = request.user
 
     if request.method == 'POST':
+        print('hi')
         playlist_name = request.POST.get('name')
-        techniques = request.POST.get('techniques')
+        techniques = json.loads(request.body)['techniques']
         print(techniques)
         return JsonResponse({'success': True})
 
