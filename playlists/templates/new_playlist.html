@@ -17,7 +17,7 @@
         </div>
     {% endif %}
 
-    <div id="new-playlist-form" class="new-playlist-name-div">
+    <div class="new-playlist-name-div">
         <form id="new-playlist-form" class="playlist-name-form" data-url="{% url 'add_to_playlist' %}">
             {% csrf_token %}
             <p>Playlist Name:</p>
@@ -111,37 +111,20 @@
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.setRequestHeader('X-CSRFToken', token);
 
-                const formData = new URLSearchParams();
-                formData.append('name', playlistName);
 
                 techniqueIds.forEach(function (id) {
+                    const formData = new URLSearchParams();
+                    formData.append('name', playlistName);
                     formData.append('technique', id);
                     xhr.onload = function () {
                         if (xhr.status === 200) {
-                            messageDiv.innerHTML = 'Successfully created new playlist ' + playlistName;
+                            
                             console.log(xhr.status);
                         }
                     }
                     xhr.send(formData.toString());
                 });
 
-                // const xhr = new XMLHttpRequest();
-                // xhr.open('POST', url, true);
-                // xhr.setRequestHeader('Content-Type', 'application/json');
-                // xhr.setRequestHeader('X-CSRFToken', token);
-
-                // const formData = {
-                //     name: playlistName,
-                //     techniques: techniqueIds,
-                // };
-
-                // xhr.onload = function () {
-                //     if (xhr.status === 200) {
-                //         messageDiv.innerHTML = 'Successfully created new playlist ' + playlistName ;
-                //         console.log(xhr.status);
-                //     }
-                // }
-                // xhr.send(JSON.stringify(formData));
             };
         }
 

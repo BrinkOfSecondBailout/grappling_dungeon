@@ -83,6 +83,7 @@ def extract_from_playlist(request, technique_id, playlist):
         if PlaylistItem.objects.filter(playlist=current_playlist).count() == 0:
             current_playlist.delete()
             print(f'Playlist {playlist} deleted since it has no items')
+            return redirect('all_playlists')
     else:
         print(f'Unauthorized actions')
     return redirect(reverse('edit_playlist', args=[current_playlist.id]))
