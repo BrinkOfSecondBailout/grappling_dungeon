@@ -135,11 +135,21 @@ def new_playlist(request):
     user = request.user
 
     if request.method == 'POST':
-        print('hi')
-        playlist_name = request.POST.get('name')
-        techniques = json.loads(request.body)['techniques']
-        print(techniques)
+        data = json.loads(request.body.decode('utf-8'))
+        playlist_name = data['name']
+        techniques = data['techniques']
+        new_playlist = Playlist(owner=user, name=playlist_name)
+        new_playlist.save()
+
+        order = 1
+        for technique_id in techniques:
+            technique = get_object_or_404(Technique,id=technique_id)
+            playlistItem = PlaylistItem(playlist=new_playlist, technique=technique, order=order)
+            playlistItem.save()
+            order += 1
+
         return JsonResponse({'success': True})
+
 
     else:
         all_techniques = Technique.objects.filter(uploaded_by=user)

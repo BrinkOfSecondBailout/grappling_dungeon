@@ -18,7 +18,7 @@
     {% endif %}
 
     <div class="new-playlist-name-div">
-        <form id="new-playlist-form" class="playlist-name-form" data-url="{% url 'add_to_playlist' %}">
+        <form id="new-playlist-form" class="playlist-name-form" data-url="{% url 'new_playlist' %}">
             {% csrf_token %}
             <p>Playlist Name:</p>
             <div>
@@ -108,22 +108,21 @@
 
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', url, true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.setRequestHeader('X-CSRFToken', token);
 
+                const formData = {
+                    name: playlistName,
+                    techniques: techniqueIds,
+                };
 
-                techniqueIds.forEach(function (id) {
-                    const formData = new URLSearchParams();
-                    formData.append('name', playlistName);
-                    formData.append('technique', id);
-                    xhr.onload = function () {
-                        if (xhr.status === 200) {
-                            
-                            console.log(xhr.status);
-                        }
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        messageDiv.innerHTML = 'Successfully created new playlist ' + playlistName ;
+                        console.log(xhr.status);
                     }
-                    xhr.send(formData.toString());
-                });
+                }
+                xhr.send(JSON.stringify(formData));
 
             };
         }
