@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="new-playlist-wrapper">
-    <h1>Create New Playlist</h1>
+    <h1>New Playlist</h1>
     
     <div class="go-back-div">
         <a href="{% url 'all_playlists' %}"><img src="{% static 'images/go-back.png' %}" class="small-icon"></a>
@@ -20,11 +20,15 @@
     <div class="new-playlist-name-div">
         <form id="new-playlist-form" class="playlist-name-form" data-url="{% url 'new_playlist' %}">
             {% csrf_token %}
-            <p>Playlist Name:</p>
             <div>
-                <input name="name" id="name">
+                <div class="flex-with-gap">
+                    <p>Playlist Name:</p>
+                    <input name="name" id="name">
+                    <p>Description (optional):</p>
+                    <textarea class="note-textarea" name="description" id="description" rows="5" cols="30" name="note"></textarea>
+                </div>
 
-                <div style="padding: 10px; margin-top: 4vh;">
+                <div style="padding: 10px; margin-top: 2vh;">
                     <h4>Add techniques to playlist:</h4>
                 </div>
 
@@ -87,6 +91,7 @@
         e.preventDefault();
         const playlistForm = document.getElementById('new-playlist-form');
         const playlistName = document.getElementById('name').value;
+        const playlistDescription = document.getElementById('description').value;
         const messageDiv = document.getElementById('error-messages');
         const checkboxes = playlistForm.querySelectorAll('input[type="checkbox"]');
         const token = playlistForm.querySelector('[name="csrfmiddlewaretoken"]').value;
@@ -113,6 +118,7 @@
 
                 const formData = {
                     name: playlistName,
+                    description: playlistDescription,
                     techniques: techniqueIds,
                 };
 

@@ -356,6 +356,12 @@ input {
     gap: 5px;
 }
 
+.flex-with-gap {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
 .all-techniques-form {
     padding: 10px;
     display: flex;

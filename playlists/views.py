@@ -139,7 +139,8 @@ def new_playlist(request):
         data = json.loads(request.body.decode('utf-8'))
         playlist_name = data['name']
         techniques = data['techniques']
-        new_playlist = Playlist(owner=user, name=playlist_name)
+        description = data['description']
+        new_playlist = Playlist(owner=user, name=playlist_name, description=description)
         new_playlist.save()
 
         order = 1
