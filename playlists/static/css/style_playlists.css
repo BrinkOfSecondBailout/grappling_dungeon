@@ -140,7 +140,7 @@ a {
 .technique-right {
     display: flex;
     flex-direction: column;
-    width: 360px;
+    width: 420px;
     gap: 10px;
 }
 
