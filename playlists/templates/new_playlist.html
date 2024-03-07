@@ -28,7 +28,31 @@
                     <textarea class="note-textarea" name="description" id="description" rows="5" cols="30" name="note"></textarea>
                 </div>
 
-                <div style="padding: 10px; margin-top: 2vh;">
+                <div class="other-playlist-selection-div">
+                    <h4>View another playlist:</h4>
+                    <div id="playlist-box">
+                        <form id="playlist-form" method="GET">
+                            {% csrf_token %}
+                            <select name="playlist" id="playlist-select" required>
+                                <option value="" selected disabled>----</option>
+
+                                {% for list in playlists %}
+                                    <option value="{{ list.id }}"
+                                        {% if list.name == playlist.name %}
+                                            style="font-weight: bold;"> {{ list.name|title }}
+                                        {% else %}
+                                            > {{ list.name|title }}
+                                        {% endif %}
+                                    </option>
+                                {% endfor %}
+
+                                </select>
+                            <input type="submit" value="Go" class="regular-button">
+                        </form>
+                    </div>
+                </div>
+
+                <div style="padding: 10px;">
                     <h4>Add techniques to playlist:</h4>
                 </div>
 

@@ -155,8 +155,11 @@ def new_playlist(request):
 
     else:
         all_techniques = Technique.objects.filter(uploaded_by=user)
+        all_playlists = Playlist.objects.filter(owner=user)
+
         context = {
-            'all_techniques': all_techniques
+            'all_techniques': all_techniques,
+            'playlists': all_playlists
         }
         return render(request, 'new_playlist.html', context)
 
