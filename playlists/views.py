@@ -69,9 +69,6 @@ def add_to_playlist(request):
             print(f'Name for playlist is required')
             return redirect('private')
 
-    # else:
-    #     pass
-
 
 @login_required
 def extract_from_playlist(request, technique_id, playlist):
@@ -81,6 +78,8 @@ def extract_from_playlist(request, technique_id, playlist):
     if (current_playlist.owner == user):
         playlist_item = get_object_or_404(PlaylistItem, playlist=current_playlist, technique=technique)
         playlist_item.delete()
+        current_playlist.total_items -= 1
+        current_playlist.save()
 
         print(f'Technique {technique.name} removed from playlist {playlist}')
 
