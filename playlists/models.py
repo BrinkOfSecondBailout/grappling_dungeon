@@ -12,6 +12,8 @@ class Playlist(models.Model):
     techniques = models.ManyToManyField(Technique, through='PlaylistItem')
     owner = models.ForeignKey(user_model, on_delete=models.SET_NULL, null=True)
 
+    total_items = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return self.name
 
