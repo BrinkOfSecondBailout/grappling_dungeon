@@ -40,16 +40,20 @@ def add_to_playlist(request):
                     print(f'This technique already exists in playlist: {playlist_name}')
                     messages.error(request, f'This technique already exists in playlist: {playlist_name}')
                     return redirect('private')
+                
+                else:
+                    playlist.total_items += 1
+                    playlist.save()
+                    order = PlaylistItem.objects.filter(playlist=playlist).count() + 1
 
-                order = PlaylistItem.objects.filter(playlist=playlist).count() + 1
-
-                playlist_item = PlaylistItem(playlist=playlist, technique=technique, order=order)
-                playlist_item.save()
-                messages.info(request, f'Technique added to existing playlist: {playlist_name}')
-                print(f'Technique added to existing playlist: {playlist_name}')
+                    playlist_item = PlaylistItem(playlist=playlist, technique=technique, order=order)
+                    playlist_item.save()
+                    messages.info(request, f'Technique added to existing playlist: {playlist_name}')
+                    print(f'Technique added to existing playlist: {playlist_name}')
 
             else:
                 new_playlist = Playlist(owner=user, name=playlist_name)
+                new_playlist.total_items += 1
                 new_playlist.save()
 
                 order = 1
@@ -65,8 +69,8 @@ def add_to_playlist(request):
             print(f'Name for playlist is required')
             return redirect('private')
 
-    else:
-        pass
+    # else:
+    #     pass
 
 
 @login_required
