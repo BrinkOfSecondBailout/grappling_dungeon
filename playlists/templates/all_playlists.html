@@ -42,6 +42,11 @@
                     <div class="playlist-name-div">
                         <p>{{ playlist.name|title }}</p>
                     </div>
+                    
+                    <div style="margin-top: -3px;">
+                        <p style="font-style: italic;">({{ playlist.total_items }}) item(s)</p>
+                    </div>
+
                     <div class="the-rest-div">
                         <a class="the-rest-flex" href="{% url 'show_playlist' playlist.id %}">
                             <p>See more from this playlist</p>
