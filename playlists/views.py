@@ -42,24 +42,25 @@ def add_to_playlist(request):
                     return redirect('private')
                 
                 else:
-                    playlist.total_items += 1
-                    playlist.save()
                     order = PlaylistItem.objects.filter(playlist=playlist).count() + 1
 
                     playlist_item = PlaylistItem(playlist=playlist, technique=technique, order=order)
                     playlist_item.save()
+                    playlist.total_items = PlaylistItem.objects.filter(playlist=playlist).count()
+                    playlist.save()
                     messages.info(request, f'Technique added to existing playlist: {playlist_name}')
                     print(f'Technique added to existing playlist: {playlist_name}')
 
             else:
                 new_playlist = Playlist(owner=user, name=playlist_name)
-                new_playlist.total_items += 1
                 new_playlist.save()
 
                 order = 1
 
                 playlist_item = PlaylistItem(playlist=new_playlist, technique=technique, order=order)
                 playlist_item.save()
+                new_playlist.total_items = PlaylistItem.objects.filter(playlist=new_playlist).count()
+                new_playlist.save()
                 messages.info(request, f'Technique added to new playlist: {playlist_name}')
                 print(f'Technique added to new playlist: {playlist_name}')
 
@@ -78,9 +79,9 @@ def extract_from_playlist(request, technique_id, playlist):
     if (current_playlist.owner == user):
         playlist_item = get_object_or_404(PlaylistItem, playlist=current_playlist, technique=technique)
         playlist_item.delete()
-        current_playlist.total_items -= 1
+        current_playlist.total_items = PlaylistItem.objects.filter(playlist=current_playlist).count()
         current_playlist.save()
-
+        messages.info(request, f'Successfully removed "{technique.name}" from playlist "{playlist}"')
         print(f'Technique {technique.name} removed from playlist {playlist}')
 
         if PlaylistItem.objects.filter(playlist=current_playlist).count() == 0:
@@ -152,6 +153,9 @@ def new_playlist(request):
             playlistItem = PlaylistItem(playlist=new_playlist, technique=technique, order=order)
             playlistItem.save()
             order += 1
+        
+        new_playlist.total_items = PlaylistItem.objects.filter(playlist=new_playlist).count()
+        new_playlist.save()
 
         return JsonResponse({'success': True})
 
