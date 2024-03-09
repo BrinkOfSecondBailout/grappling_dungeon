@@ -80,6 +80,13 @@
                         <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                     </div>
 
+                    <div style="font-size: 14px; padding: 5px; margin-top: -7px;">
+                        {% if technique.athlete %}
+                            <p>by: <u>{{ technique.athlete|title }}</u></p>
+                        {% endif %}
+                        <p>category: <u>{{ technique.category|title }}</u></p>
+                    </div>
+
                     <div class="one-note-div" id="{{ technique.id }}-note-div">
                         <div id="{{ technique.id }}-note" class="one-note" onclick="toggleNoteEdit('{{technique.id}}')">
                             <p>{% if technique.note %}
@@ -96,7 +103,7 @@
                         </div>
                         <form id="{{ technique.id }}-note-form" method="POST" data-url="{% url 'note' technique.id %}">
                             {% csrf_token %}
-                            <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                            <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="5" cols="40" name="note">{{ technique.note }}</textarea>
                             <div>
                                 <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon" onclick="submitNoteChange('{{ technique.id }}', event)">
                             </div>
@@ -113,7 +120,7 @@
                         </form>
                     </div>
 
-                    <div id="{{technique.id}}-remove-div" class="remove-from-playlist"  style="display:block;">
+                    {% comment %} <div id="{{technique.id}}-remove-div" class="remove-from-playlist"  style="display:block;">
                         <img src="{% static 'images/x-icon.png' %}" class="delete-icon" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">
                     </div>
 
@@ -123,7 +130,7 @@
                             <a href="{% url 'extract' technique.id playlist.name %}"><button class="delete-playlist-button">Remove</button></a>
                             <button class="cancel-button" onclick="toggleDeleteFromPlaylistConfirmationDiv('{{technique.id}}')">Cancel</button>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 
             </div>
@@ -159,7 +166,7 @@
             }
         }
 
-        function toggleDeleteFromPlaylistConfirmationDiv(techniqueId) {
+        {% comment %} function toggleDeleteFromPlaylistConfirmationDiv(techniqueId) {
             const removeDiv = document.getElementById(techniqueId + '-remove-div');
             const removeConfDiv = document.getElementById(techniqueId + '-remove-conf-div');
 
@@ -170,7 +177,7 @@
                 removeDiv.style.display = 'block';
                 removeConfDiv.style.display = 'none';
             }
-        }
+        } {% endcomment %}
 
         function submitNoteChange(techniqueId, e) {
             e.preventDefault();
