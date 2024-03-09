@@ -80,7 +80,7 @@
                         <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                     </div>
 
-                    <div id="{{ technique.id }}-misc-info" style="font-size: 14px; padding: 5px; margin-top: -7px;">
+                    <div id="{{ technique.id }}-misc-info" style="font-size: 14px; padding: 5px; margin-top: -7px; color:grey;">
                         {% if technique.athlete %}
                             <p>by: <u>{{ technique.athlete|title }}</u></p>
                         {% endif %}

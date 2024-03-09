@@ -12,6 +12,12 @@
             <div class="technique-title">
                 <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
             </div>
+
+            <div id="{{ technique.id }}-misc-info" style="font-size: 15px; padding: 5px; margin-top: -7px; color:grey;">
+                <p>by: <u>{{ technique.athlete|title }}</u></p>
+                <p>category: <u>{{ technique.category|title }}</u></p>
+            </div>
+            
             <div class="one-video-player">
                 {% if technique.video_option == 'full' %}
                     <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
