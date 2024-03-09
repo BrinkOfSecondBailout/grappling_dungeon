@@ -80,7 +80,7 @@
                         <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                     </div>
 
-                    <div style="font-size: 14px; padding: 5px; margin-top: -7px;">
+                    <div id="{{ technique.id }}-misc-info" style="font-size: 14px; padding: 5px; margin-top: -7px;">
                         {% if technique.athlete %}
                             <p>by: <u>{{ technique.athlete|title }}</u></p>
                         {% endif %}
@@ -107,7 +107,7 @@
                             <div style="display: flex; width: 70px;">
                                 <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon" onclick="submitNoteChange('{{ technique.id }}', event)">
                                 <div style="margin-top: 7px;">
-                                    <img src="{% static 'images/cancel-icon.jpg' %}" alt="Cancel" class="edit-icon" onclick="toggleNoteEdit('{{technique.id}}')">
+                                    <img style="cursor:pointer;" src="{% static 'images/cancel-icon.jpg' %}" alt="Cancel" class="edit-icon" onclick="toggleNoteEdit('{{technique.id}}')">
                                 </div>
                             </div>
                         </form>
@@ -158,13 +158,16 @@
             const noteForm = document.getElementById(techniqueId + '-note-edit-form')
             const noteButton = document.getElementById(techniqueId + '-note-button');
             const noteTextarea = document.getElementById(techniqueId + '-note-text-area');
+            const miscDiv = document.getElementById(techniqueId + '-misc-info');
 
             if (note.style.display !== 'none') {
                 note.style.display = 'none';
+                miscDiv.style.display = 'none';
                 noteForm.style.display = 'block';
                 noteButton.innerText = 'Hide Note';
             } else {
                 note.style.display = 'block';
+                miscDiv.style.display = 'block';
                 noteForm.style.display = 'none';
             }
         }
