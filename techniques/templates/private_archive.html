@@ -91,6 +91,12 @@
                         <div class="technique-title">
                             <a href="{% url 'edit' technique.id %}">{{ technique.name|title }}</a>
                         </div>
+
+                        <div id="{{ technique.id }}-misc-info" style="font-size: 15px; padding: 5px; margin-top: -7px;">
+                            <p>by: <u>{{ technique.athlete|title }}</u></p>
+                            <p>category: <u>{{ technique.category|title }}</u></p>
+                        </div>
+
                         <div class="one-video-player">
                             {% if technique.video_option == 'full' %}
                                 <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
@@ -127,8 +133,11 @@
                             <form id="{{ technique.id }}-note-form" method="POST" data-url="{% url 'note' technique.id %}">
                                 {% csrf_token %}
                                 <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
-                                <div>
+                                <div style="display: flex; width: 70px;">
                                     <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon" onclick="submitNoteChange('{{ technique.id }}', event)">
+                                    <div style="margin-top: 7px;">
+                                        <img style="cursor:pointer;" src="{% static 'images/cancel-icon.jpg' %}" alt="Cancel" class="edit-icon" onclick="toggleNoteEdit('{{technique.id}}')">
+                                    </div>
                                 </div>
                             </form>
                         </div>
