@@ -103,9 +103,12 @@
                         </div>
                         <form id="{{ technique.id }}-note-form" method="POST" data-url="{% url 'note' technique.id %}">
                             {% csrf_token %}
-                            <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="5" cols="40" name="note">{{ technique.note }}</textarea>
-                            <div>
+                            <textarea id="{{ technique.id }}-note-text-area" class="note-textarea" rows="6" cols="40" name="note">{{ technique.note }}</textarea>
+                            <div style="display: flex; width: 70px;">
                                 <input type="image" src="{% static 'images/save-icon.png' %}" alt="Save" class="edit-icon" onclick="submitNoteChange('{{ technique.id }}', event)">
+                                <div style="margin-top: 7px;">
+                                    <img src="{% static 'images/cancel-icon.jpg' %}" alt="Cancel" class="edit-icon" onclick="toggleNoteEdit('{{technique.id}}')">
+                                </div>
                             </div>
                         </form>
                     </div>

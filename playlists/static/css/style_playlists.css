@@ -150,7 +150,7 @@ a {
     border-radius: 5px;
     border: 2px solid black;
     width: 360px;
-    height: 130px;
+    height: 110px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -163,6 +163,7 @@ a {
 
 .edit-icon {
     width: 25px;
+    height: 25px;
     border: none;
 }
 
@@ -178,6 +179,7 @@ a {
 .technique-title {
     font-size: 18px;
     padding: 5px;
+    margin-top: -7px;
 }
 
 .other-playlist-selection-div {
@@ -386,8 +388,3 @@ input {
     width: 20px;
     height: 20px;
 }
-
-
-/* .one-video-player {
-    
-} */
