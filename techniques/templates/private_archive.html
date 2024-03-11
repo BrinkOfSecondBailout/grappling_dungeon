@@ -93,7 +93,7 @@
                         </div>
 
                         <div id="{{ technique.id }}-misc-info" style="font-size: 15px; padding: 5px; margin-top: -7px; color:grey;">
-                            <p>by: <u>{{ technique.athlete|title }}</u></p>
+                            <p>by: {% if technique.athlete %}<u>{{ technique.athlete|title }}</u>{% else %} None {% endif %}</p>
                             <p>category: <u>{{ technique.category|title }}</u></p>
                         </div>
 
