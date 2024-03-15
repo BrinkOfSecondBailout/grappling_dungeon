@@ -5,10 +5,10 @@ from accounts.models import User
 
 class Inbox(models.Model):
     user_model = settings.AUTH_USER_MODEL
-    owner = models.ForeignKey(user_model, on_delete=models.SET_NULL, null=True)
 
-    new_items = models.PositiveIntegerField(default=0)
-    total_items = models.PositiveIntegerField(default=0)
+    owner = models.ForeignKey(user_model, on_delete=models.SET_NULL, null=True)
+    new_messages = models.PositiveIntegerField(default=0)
+    total_threads = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.owner.username}'s Inbox"
@@ -16,8 +16,8 @@ class Inbox(models.Model):
 class Thread(models.Model):
     inbox = models.ForeignKey(Inbox, on_delete=models.CASCADE, related_name='threads')
     correspondence = models.ForeignKey(User, on_delete=models.CASCADE)
+    unread = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-
 
     def __str__(self):
         return f"Threads in {self.inbox.owner.name}'s Inbox"
