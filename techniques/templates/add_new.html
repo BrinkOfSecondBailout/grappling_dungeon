@@ -32,14 +32,14 @@
                     {{ tech_form.privacy_status}}
                 </div>
                 <div class="form-label-and-field">
-                    <p style="color: red; font-size: 15px;">Youtube Shorts currently not supported</p>
+                    {% comment %} <p style="color: red; font-size: 15px;">Youtube Shorts currently not supported</p> {% endcomment %}
                     {{ tech_form.youtube_url.label}}
                     {{ tech_form.youtube_url}}
                 </div>
-                <div class="form-label-and-field">
+                {% comment %} <div class="form-label-and-field">
                     {{ tech_form.video_option.label}}
                     {{ tech_form.video_option}}
-                </div>
+                </div> {% endcomment %}
                 <div class="form-label-and-field">
                     {{ tech_form.note.label}}
                     {{ tech_form.note}}
@@ -48,7 +48,7 @@
                     {{ tech_form.keywords.label}}
                     {{ tech_form.keywords}}
                 </div>
-                <div id="start_time_field" class="form-label-and-field">
+                {% comment %} <div id="start_time_field" class="form-label-and-field">
                     {{ tech_form.start_time.label}}
                     <div class="instruction-text">
                         <p>* Required if you want to crop video</p>
@@ -65,7 +65,7 @@
                         <p>* Maximum video length: 1 minute</p>
                     </div>
                     {{ tech_form.end_time}}
-                </div>
+                </div> {% endcomment %}
                 <div>
                     <input type="submit" value="Add Technique" class="submit-button" onclick="loadLoader()">
                 </div>
@@ -79,7 +79,7 @@
 
     <script>
 
-        const startTimeField = document.getElementById('start_time_field');
+        {% comment %} const startTimeField = document.getElementById('start_time_field');
         const endTimeField = document.getElementById('end_time_field');
 
         document.getElementById('id_video_option').addEventListener('change', function() {
@@ -93,7 +93,7 @@
                 startTimeField.style.display = 'none';
                 endTimeField.style.display = 'none';
             }
-        });
+        }); {% endcomment %}
 
         function loadLoader() {
             const formDiv = document.getElementById('form-div');

@@ -4,7 +4,8 @@ from .models import Technique
 class CustomTechniqueCreationForm(forms.ModelForm):
     class Meta:
         model = Technique
-        fields = ['name', 'athlete', 'category', 'privacy_status', 'video_option', 'youtube_url', 'note', 'keywords', 'start_time', 'end_time']
+        # fields = ['name', 'athlete', 'category', 'privacy_status', 'video_option', 'youtube_url', 'note', 'keywords', 'start_time', 'end_time']
+        fields = ['name', 'athlete', 'category', 'privacy_status', 'youtube_url', 'note', 'keywords', 'start_time', 'end_time']
         widgets = {
             'start_time': forms.TextInput(attrs={'placeholder': 'Example: 55 or 1:20'}),
             'end_time': forms.TextInput(attrs={'placeholder': 'Example: 150 or 2:30'}),

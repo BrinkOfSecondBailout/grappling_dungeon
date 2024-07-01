@@ -98,15 +98,15 @@
                         </div>
 
                         <div class="one-video-player">
-                            {% if technique.video_option == 'full' %}
-                                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
-                            {% endif %}
-                            {% if technique.video_option == 'cropped' %}
-                                <video width="560" height="315" controls>
+                            {% comment %} {% if technique.video_option == 'full' %} {% endcomment %}
+                            <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                            {% comment %} {% endif %} {% endcomment %}
+                            {% comment %} {% if technique.video_option == 'cropped' %} {% endcomment %}
+                                {% comment %} <video width="560" height="315" controls>
                                     <source src="../../{{ technique.cropped_video }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                         </div>
 
 

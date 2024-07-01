@@ -16,81 +16,81 @@ import uuid
 @login_required
 def add(request):
     if request.method == 'POST':
-        if request.POST['start_time']:
-            if ':' in request.POST['start_time']:
-                start_minutes, start_seconds = map(int, request.POST['start_time'].split(':'))
-                new_start_time = start_minutes * 60 + start_seconds
-            if request.POST['start_time'].isdigit():
-                new_start_time = int(request.POST['start_time'])
-            else:
-                messages.error(request, 'Please input the correct start and end time, ex: 55 or 1:25')
-                return redirect('add')
+        # if request.POST['start_time']:
+        #     if ':' in request.POST['start_time']:
+        #         start_minutes, start_seconds = map(int, request.POST['start_time'].split(':'))
+        #         new_start_time = start_minutes * 60 + start_seconds
+        #     if request.POST['start_time'].isdigit():
+        #         new_start_time = int(request.POST['start_time'])
+        #     else:
+        #         messages.error(request, 'Please input the correct start and end time, ex: 55 or 1:25')
+        #         return redirect('add')
 
-        if request.POST['end_time']:
-            if ':' in request.POST['end_time']:
-                end_minutes, end_seconds = map(int, request.POST['end_time'].split(':'))
-                new_end_time = end_minutes * 60 + end_seconds
-            if request.POST['end_time'].isdigit():
-                new_end_time = int(request.POST['end_time'])
-            else:
-                messages.error(request, 'Please input the correct start and end time, ex: 55 or 1:25')
-                return redirect('add')
+        # if request.POST['end_time']:
+        #     if ':' in request.POST['end_time']:
+        #         end_minutes, end_seconds = map(int, request.POST['end_time'].split(':'))
+        #         new_end_time = end_minutes * 60 + end_seconds
+        #     if request.POST['end_time'].isdigit():
+        #         new_end_time = int(request.POST['end_time'])
+        #     else:
+        #         messages.error(request, 'Please input the correct start and end time, ex: 55 or 1:25')
+        #         return redirect('add')
 
-        if request.POST['start_time'] and request.POST['end_time']:
-            if new_end_time - new_start_time > 60:
-                messages.error(request, 'Please ensure video is cropped to be maximum 1 minute long')
-                return redirect('add')
+        # if request.POST['start_time'] and request.POST['end_time']:
+        #     if new_end_time - new_start_time > 60:
+        #         messages.error(request, 'Please ensure video is cropped to be maximum 1 minute long')
+        #         return redirect('add')
 
-            modified_form = {
-                'csrfmiddlewaretoken': request.POST['csrfmiddlewaretoken'],
-                'name': request.POST['name'],
-                'athlete': request.POST['athlete'],
-                'category': request.POST['category'],
-                'privacy_status': request.POST['privacy_status'],
-                'youtube_url': request.POST['youtube_url'],
-                'video_option': request.POST['video_option'],
-                'note': request.POST['note'],
-                'keywords': request.POST['keywords'],
-                'start_time': new_start_time,
-                'end_time': new_end_time,
-            }
-            tech_form = CustomTechniqueCreationForm(modified_form)
+        #     modified_form = {
+        #         'csrfmiddlewaretoken': request.POST['csrfmiddlewaretoken'],
+        #         'name': request.POST['name'],
+        #         'athlete': request.POST['athlete'],
+        #         'category': request.POST['category'],
+        #         'privacy_status': request.POST['privacy_status'],
+        #         'youtube_url': request.POST['youtube_url'],
+        #         'video_option': request.POST['video_option'],
+        #         'note': request.POST['note'],
+        #         'keywords': request.POST['keywords'],
+        #         'start_time': new_start_time,
+        #         'end_time': new_end_time,
+        #     }
+        #     tech_form = CustomTechniqueCreationForm(modified_form)
 
-        if request.POST['video_option'] == 'cropped' and not request.POST['start_time'] and not request.POST['end_time']:
-            messages.error(request, 'To crop the video, please specify start and end time')
-            return redirect('add')
+        # if request.POST['video_option'] == 'cropped' and not request.POST['start_time'] and not request.POST['end_time']:
+        #     messages.error(request, 'To crop the video, please specify start and end time')
+        #     return redirect('add')
 
-        else:
-            tech_form = CustomTechniqueCreationForm(request.POST)
+        # else:
+        tech_form = CustomTechniqueCreationForm(request.POST)
 
         if tech_form.is_valid():
             technique = tech_form.save(commit=False)
             user = request.user
             technique.uploaded_by = user
 
-            if technique.video_option == 'full':
-                if 'youtube.com' in technique.youtube_url:
-                    video_id = technique.youtube_url.split('v=')[1]
-                    if '&' in video_id:
-                        video_id = video_id.split('&')[0]
-                    embed_url = f'https://www.youtube.com/embed/{video_id}'
-                    technique.embed_url = embed_url
-                else:
-                    messages.error(request, 'Error uploading technique. Check the URL and ensure a valid Youtube link')
-                    return redirect('add')
+            # if technique.video_option == 'full':
+            if 'youtube.com' in technique.youtube_url:
+                video_id = technique.youtube_url.split('v=')[1]
+                if '&' in video_id:
+                    video_id = video_id.split('&')[0]
+                embed_url = f'https://www.youtube.com/embed/{video_id}'
+                technique.embed_url = embed_url
+            else:
+                messages.error(request, 'Error uploading technique. Check the URL and ensure a valid Youtube link')
+                return redirect('add')
 
-            if technique.video_option == 'cropped':
-                start_time = technique.start_time
-                end_time = technique.end_time
+            # if technique.video_option == 'cropped':
+            #     start_time = technique.start_time
+            #     end_time = technique.end_time
 
-                video_url = technique.youtube_url
-                cropped_video_path = crop_video(video_url, start_time, end_time)
+            #     video_url = technique.youtube_url
+            #     cropped_video_path = crop_video(video_url, start_time, end_time)
 
-                if not cropped_video_path:
-                    messages.error(request, 'Timeout: File not downloaded within allotted time')
-                    return redirect('add')
-                
-                technique.cropped_video = cropped_video_path
+            #     if not cropped_video_path:
+            #         messages.error(request, 'Timeout: File not downloaded within allotted time')
+            #         return redirect('add')
+            
+            #     technique.cropped_video = cropped_video_path
             
             technique.save()
             messages.info(request, 'Successfully added new technique')

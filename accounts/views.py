@@ -21,7 +21,6 @@ def register(request):
         if register_form.is_valid():
             user = register_form.save()
             auth_login(request, user)
-            print(user.email)
             return redirect('dashboard')
         else:
             for field, errors in register_form.errors.items():
