@@ -16,7 +16,7 @@ class Technique(models.Model):
 
     PRIVACY_CHOICES = [
         ('private', 'Private'),
-        ('public', 'Public'),
+        # ('public', 'Public'),
     ]
 
     VIDEO_CHOICES = [

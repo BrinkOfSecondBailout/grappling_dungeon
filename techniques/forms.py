@@ -29,15 +29,15 @@ class CustomTechniqueCreationForm(forms.ModelForm):
 
         cleaned_data['keywords'] = all_keywords
 
-        if video_option == 'cropped' and (start_time is None or end_time is None):
-            raise forms.ValidationError("Start time and end time are required for cropped videos.")
+        # if video_option == 'cropped' and (start_time is None or end_time is None):
+        #     raise forms.ValidationError("Start time and end time are required for cropped videos.")
         
 
-        if video_option == 'cropped':
-            duration = end_time - start_time
-            max_length_minutes = self.MAX_CROPPED_VIDEO_LENGTH
-            if duration > max_length_minutes * 60:
-                raise forms.ValidationError(f"Cropped videos must be no longer than {max_length_minutes} minutes.")
+        # if video_option == 'cropped':
+        #     duration = end_time - start_time
+        #     max_length_minutes = self.MAX_CROPPED_VIDEO_LENGTH
+        #     if duration > max_length_minutes * 60:
+        #         raise forms.ValidationError(f"Cropped videos must be no longer than {max_length_minutes} minutes.")
         
         return cleaned_data
     
