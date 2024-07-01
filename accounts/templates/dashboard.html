@@ -11,9 +11,9 @@
             <div>
                 <a href="{% url 'private' %}"><button class="dash-button">Private Archive ({{ total_private }})</button></a>
             </div>
-            <div>
+            {% comment %} <div>
                 <a href="{% url 'public' %}"><button class="dash-button">Public Archive</button></a>
-            </div>
+            </div> {% endcomment %}
         </div>
 
         <div class="dashboard-body-div">
