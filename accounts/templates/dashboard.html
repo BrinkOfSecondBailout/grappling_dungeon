@@ -22,7 +22,7 @@
                 {% for user in all_users %}
                     <div class="one-user">
 
-                        <a href="{% url 'user' user.id %}">{{ user.username }}</a>
+                        <a class="one-user-name" href="{% url 'user' user.id %}">{{ user.username }}</a>
 
                         <a href="{% url 'user' user.id %}">
                             <img class="profile-picture-sm" src=

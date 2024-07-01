@@ -231,6 +231,10 @@ a {
     gap: 10px;
 }
 
+.one-user-name {
+    width: 200px;
+}
+
 .profile-picture-sm {
     width: 120px;
     height: 120px;
