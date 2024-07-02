@@ -49,6 +49,11 @@ a {
     padding: 10px;
 }
 
+.demo-info {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 10px;
+}
 
 .form-label-and-field {
     display: flex;
@@ -90,12 +95,12 @@ a {
 
 
 #user-buttons {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .returning-user-button, .new-user-button {
     width: 160px;
-    height: 45px;
+    height: 60px;
     padding: 7px;
     border-radius: 5px;
     box-shadow: 0 2px 1px black;

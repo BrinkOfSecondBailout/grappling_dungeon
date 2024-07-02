@@ -4,10 +4,11 @@
 {% block content %}
     <div class="index-wrapper">
         <h1>Welcome!</h1>
+        <p style="font-size: 13px;">(Demo account provided, select <u>"Returning User"</u>)</p>
         <img src="{% static 'images/ryu-and-ken.gif' %}" alt="Ryu Ken Gif">
         <div id="user-buttons">
-            <a href="{% url 'login' %}"><button class="returning-user-button">Returning User</button></a>
-            <a href="{% url 'register' %}"><button class="new-user-button">New User</button></a>
+            <a href="{% url 'login' %}"><button class="returning-user-button"><p>Returning User</p></button></a>
+            <a href="{% url 'register' %}"><button class="new-user-button"><p>New User</p></button></a>
         </div>
     </div>
 {% endblock %}
