@@ -37,10 +37,10 @@
                 {% for technique in all_techniques %}
                     <div class="one-technique-form">
                         <div class="technique-title">
-                        <label>
-                            <input type="checkbox" name="techniques[]" value="{{ technique.id }}">
-                            {{ technique.name }}
-                        </label>
+                            <label>
+                                <input type="checkbox" name="techniques[]" value="{{ technique.id }}">
+                                {{ technique.name }}
+                            </label>
                         </div>
 
                         <div>
@@ -49,7 +49,7 @@
 
                         <div id="{{ technique.id }}-video-div" class="one-video-player" style="display:none;">
                             {% comment %} {% if technique.video_option == 'full' %} {% endcomment %}
-                            <iframe width="420" height="240" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                            <iframe class="video-player" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
                             {% comment %} {% endif %}
                             {% if technique.video_option == 'cropped' %}
                                 <video width="420" height="240" controls>

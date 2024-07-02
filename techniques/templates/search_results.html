@@ -20,7 +20,7 @@
             
             <div class="one-video-player">
                 {% comment %} {% if technique.video_option == 'full' %} {% endcomment %}
-                <iframe width="560" height="315" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-player" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
                 {% comment %} {% endif %}
                 {% if technique.video_option == 'cropped' %}
                     <video width="560" height="315" controls>

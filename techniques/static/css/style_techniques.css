@@ -285,6 +285,7 @@ input {
 .video-player {
     width: 560px;
     height: 316px;
+    border-radius: 5px;
 }
 
 .one-note-div {

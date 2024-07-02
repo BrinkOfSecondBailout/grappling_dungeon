@@ -3,6 +3,11 @@
         height: 100px;
     }
 
+    .video-player {
+        width: 450px;
+        height: 250px;
+    }
+
     .one-playlist {
         flex-direction: column;
     }
@@ -40,6 +45,14 @@
     }
 
     .technique-right , .technique-title {
+        width: 100%;
+    }
+
+    .all-techniques-form {
+        width: 100%;
+    }
+
+    .one-technique-form {
         width: 100%;
     }
 

@@ -179,6 +179,7 @@ a {
 .video-player {
     width: 560px;
     height: 316px;
+    border-radius: 5px;
 }
 
 .technique-title {
@@ -373,7 +374,6 @@ input {
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    width: 50%;
 }
 
 .technique-title {
