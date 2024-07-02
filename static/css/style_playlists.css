@@ -1,0 +1,395 @@
+* {
+    padding: 0;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: underline;
+    color: rgba(0, 132, 247, 0.882);
+}
+
+#main-logo {
+    height: 140px;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    height: 110px;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bar {
+    display: flex;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
+
+/* edit_playlist.html */
+
+.edit-playlist-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+.go-back-div {
+    padding: 15px;
+}
+
+.delete-playlist {
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 2px 1px black;
+}
+
+.error-message {
+    color: red;
+    padding: 10px;
+}
+
+.remove-icon {
+    width: 35px;
+}
+
+.remove-from-playlist a {
+    text-decoration: none;
+}
+
+.remove-from-playlist-button {
+    border-radius: 5px;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.form-label-and-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.form-label-and-field input {
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.form-label-and-field select {
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.form-label-and-field textarea {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.submit-button {
+    height: fit-content;
+    width: fit-content;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 2px 1px black;
+}
+
+#all-techniques {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.all-techniques-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.one-technique {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.technique-left {
+
+}
+
+.technique-right {
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    gap: 10px;
+}
+
+.one-note {
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 360px;
+    height: 110px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.playlist-error-message {
+    color: red;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.edit-icon {
+    width: 25px;
+    height: 25px;
+    border: none;
+}
+
+.note-textarea {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.one-video-player {
+    padding: 10px;
+}
+
+.video-player {
+    width: 560px;
+    height: 316px;
+    border-radius: 5px;
+}
+
+.technique-title {
+    font-size: 18px;
+    padding: 5px;
+    margin-top: -7px;
+}
+
+.other-playlist-selection-div {
+    margin-top: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#playlist-box {
+    padding: 15px;
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+}
+
+#playlist-box select,
+input {
+    border-radius: 5px;
+    padding: 7px;
+    width: fit-content;
+    border: 2px solid black;
+}
+
+/* all_playlists.html */
+.all-playlists {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.new-playlist-name-div {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.playlist-name-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.regular-button {
+    width: 75px;
+    padding: 7px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.small-icon {
+    width: 40px;
+}
+
+.one-playlist {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.playlist-left {
+
+}
+
+.playlist-right {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    gap: 10px;
+}
+
+.playlist-name-div {
+    padding: 10px;
+    font-size: 25px;
+    text-decoration: underline;
+}
+
+.description-div {
+    padding: 10px;
+    font-size: 15px;
+    width: 300px;
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.delete-icon-div {
+    padding: 10px;
+}
+
+.delete-confirmation-div {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.delete-playlist-button {
+    padding: 7px;
+    border-radius: 7px;
+    width: 80px;
+    background-color: rgb(255, 37, 37);
+    color: white;
+    box-shadow: 0 1px 1px black;
+    cursor: pointer;
+}
+
+
+.cancel-button {
+    padding: 7px;
+    width: 80px;
+    border-radius: 7px;
+    box-shadow: 0 1px 1px black;
+    cursor: pointer;
+}
+
+.delete-icon {
+    width: 50px;
+}
+
+.delete-icon:hover {
+    transform: scale(1.1);
+}
+
+.the-rest-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.the-rest-div {
+}
+
+.the-rest-div a{
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.arrow-icon {
+    width: 13px;
+}
+
+/* show_playlist.html */
+
+.show-playlist-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+.playlist-description {
+    padding: 20px;
+    width: 400px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* new_playlist.html */
+
+.new-playlist-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+#error-messages {
+    padding: 10px;
+    color: red;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.flex-with-gap {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.all-techniques-form {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.technique-title {
+    width: 400px;
+    font-size: 18px;
+}
+
+.one-technique-form {
+    padding: 10px;
+    text-align: left;
+    align-items: center;
+    width: 400px;
+    font-size: 16px;
+}
+
+.one-technique-form input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}

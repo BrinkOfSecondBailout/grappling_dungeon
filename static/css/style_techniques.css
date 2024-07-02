@@ -1,0 +1,465 @@
+* {
+    padding: 0;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: underline;
+    color: rgba(0, 132, 247, 0.882);
+}
+
+
+#main-logo {
+    height: 140px;
+}
+
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    height: 110px;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bar {
+    display: flex;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
+
+
+.error-message {
+    color: red;
+    padding: 10px;
+}
+
+.small-icon {
+    width: 40px;
+}
+
+.form-label-and-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.form-label-and-field input {
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.form-label-and-field select {
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.form-label-and-field textarea {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.submit-button {
+    height: fit-content;
+    width: fit-content;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 2px 1px black;
+}
+
+
+/* public_archive.html */
+
+.public-archive-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+/* edit-technique.html */
+
+.edit-technique-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 10vh;
+}
+
+.go-back-div {
+    padding: 15px;
+}
+
+/* add_new.html */
+
+#loading-div {
+    padding: 10px;
+}
+
+#form-div {
+    padding: 10px;
+}
+
+.add-technique-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 10vh;
+}
+
+.instruction-text {
+    font-size: 13px;
+    padding: 10px;
+}
+
+#start_time_field, #end_time_field {
+    display: none;
+}
+
+
+/* private_archive.html */
+
+.private-archive-wrapper {
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+}
+
+#loading-div {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#loading-bar {
+    width: 220px;
+    height: 110px;
+    object-fit: cover;
+}
+
+#loading-img {
+    border-radius: 10px;
+}
+
+#filter-error-message {
+    color: red;
+    padding: 10px;
+    font-size: 14px;
+}
+
+#playlist-error-message {
+    color: red;
+    padding: 5px;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.playlist-error-message {
+    color: red;
+    padding: 5px;
+    font-size: 15px;
+}
+
+#filter-div {
+    padding: 10px;
+    border: 1px solid black;
+    width: fit-content;
+    border-radius: 5px;
+    margin-top: 12px;
+}
+
+#filter-box {
+    padding: 15px;
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+}
+
+#filter-box select,
+input {
+    border-radius: 5px;
+    padding: 7px;
+    border: 2px solid black;
+}
+
+#playlist-div {
+    padding: 10px;
+    margin-top: 12px;
+}
+
+#playlist-box {
+    padding: 15px;
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+}
+
+#playlist-box select,
+input {
+    border-radius: 5px;
+    padding: 7px;
+    width: fit-content;
+    border: 2px solid black;
+}
+
+.playlist-selection-div {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.playlist-add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 7;
+    font-size: 16px;
+}
+
+.playlist-add-form select,
+input {
+    border-radius: 5px;
+    padding: 7px;
+    width: fit-content;
+    border: 2px solid black;
+}
+
+.playlist-name-div {
+    padding: 5px;
+}
+
+.playlist-name-form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.regular-button {
+    width: 75px;
+    padding: 7px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#show-all-button-div {
+    padding: 10px;
+    margin-top: 15px;
+}
+
+#show-all-button {
+    padding: 7px;
+    border-radius: 10px;
+    box-shadow: 0 2px 1px black;
+    width: 150px;
+}
+
+#all-techniques {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.all-techniques-div {
+    display: flex; 
+    flex-wrap: wrap; 
+}
+
+.one-video-player {
+    padding: 10px;
+}
+
+.video-player {
+    width: 560px;
+    height: 316px;
+    border-radius: 5px;
+}
+
+.one-note-div {
+    padding: 10px;
+}
+
+.one-note {
+    border: 2px solid black;
+    padding: 10px;
+    max-width: 340px;
+    height: 100px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-wrap: wrap;
+    overflow-y: auto;
+}
+
+.note-textarea {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.edit-note-div {
+    margin-top: 10px;
+}
+
+.save-button {
+    height: fit-content;
+    width: 100px;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.note-and-delete-buttons {
+    display: flex;
+    width: fit-content;
+    padding: 10px;
+    gap: 10px;
+}
+
+.delete-button-div {
+    padding: 20px;
+}
+
+.delete-button {
+    padding: 7px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    width: 70px;
+    height: 40px;
+    border: 1px solid black;
+    box-shadow: 0 2px 5px black;
+}
+
+.delete-button2 {
+    padding: 7px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    width: 65px;
+    height: 40px;
+    border: 1px solid black;
+    box-shadow: 0 2px 5px black;
+}
+
+.see-note-button {
+    padding: 7px;
+    border-radius: 5px;
+    background-color: rgb(255, 196, 0);
+    color: rgb(0, 0, 0);
+    width: 90px;
+    height: 40px;
+    border: 1px solid black;
+    box-shadow: 0 2px 5px black;
+}
+
+.add-to-playlist-button {
+    padding: 7px;
+    border-radius: 5px;
+    background-color: rgb(255, 196, 0);
+    color: rgb(0, 0, 0);
+    width: 100px;
+    height: 40px;
+    border: 1px solid black;
+    box-shadow: 0 2px 5px black;
+    font-size: 13px;
+}
+
+.remove-from-playlist a {
+    text-decoration: none;
+}
+
+.remove-from-playlist-button {
+    border-radius: 5px;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remove-from-playlist-icon {
+    width: 40px;
+    cursor: pointer;
+}
+
+.delete-confirmation-div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.delete-playlist-button {
+    padding: 7px;
+    border-radius: 7px;
+    width: 80px;
+    background-color: rgb(255, 37, 37);
+    color: white;
+    box-shadow: 0 1px 1px black;
+    cursor: pointer;
+}
+
+
+.cancel-button {
+    padding: 7px;
+    width: 80px;
+    border-radius: 7px;
+    box-shadow: 0 1px 1px black;
+    cursor: pointer;
+}
+.edit-icon {
+    width: 25px;
+    border: none;
+}
+
+.delete-icon {
+    width: 45px;
+}
+
+.delete-icon:hover {
+    transform: scale(1.1);
+}
+
+/* results.html */
+
+.filtered-results-wrapper {
+    padding: 10px;
+}
+
+.remove-from-playlist {
+    padding: 5px;
+    font-size: 15px;
+}
+
+.results-div {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#clear-button {
+    padding: 7px;
+    width: 120px;
+    border-radius: 5px;
+}
+
+.one-technique {
+    padding: 20px;
+}
+
+.technique-title {
+    font-size: 20px;
+    padding: 10px;
+}

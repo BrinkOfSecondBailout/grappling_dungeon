@@ -1,0 +1,41 @@
+@media (max-width: 770px) {
+    #main-logo {
+        height: 100px;
+    }
+    .edit-profile-columns {
+        width: 80%;
+    }
+}
+
+@media (max-width: 403px) {
+    #main-logo {
+        height: 80px;
+    }
+
+    .nav-bar {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        font-size: 17px;
+        gap: 25px;
+    }
+
+    .edit-profile-columns {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .edit-profile-right {
+        width: 100%;
+    }
+
+    .profile-picture {
+        width: 250px;
+        height: 280px;
+    }
+
+    .user-profile-div {
+    }
+}
