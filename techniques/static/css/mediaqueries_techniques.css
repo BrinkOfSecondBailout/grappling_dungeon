@@ -1,0 +1,20 @@
+@media (max-width: 770px) {
+    #main-logo {
+        height: 100px;
+    }
+}
+
+@media (max-width: 403px) {
+    #main-logo {
+        height: 80px;
+    }
+
+    .nav-bar {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        font-size: 17px;
+        gap: 25px;
+    }
+}

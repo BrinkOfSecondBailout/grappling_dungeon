@@ -1,0 +1,28 @@
+@media (max-width: 770px) {
+    #main-logo {
+        height: 100px;
+    }
+
+    .one-playlist {
+        flex-direction: column;
+    }
+
+    .one-technique {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 403px) {
+    #main-logo {
+        height: 80px;
+    }
+
+    .nav-bar {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        font-size: 17px;
+        gap: 25px;
+    }
+}
