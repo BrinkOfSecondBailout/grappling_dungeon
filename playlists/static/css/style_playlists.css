@@ -176,6 +176,11 @@ a {
     padding: 10px;
 }
 
+.video-player {
+    width: 560px;
+    height: 316px;
+}
+
 .technique-title {
     font-size: 18px;
     padding: 5px;
@@ -208,7 +213,7 @@ input {
 .all-playlists {
     display: flex;
     flex-wrap: wrap;
-    width: 60%;
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
 }

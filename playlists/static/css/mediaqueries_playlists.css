@@ -25,4 +25,22 @@
         font-size: 17px;
         gap: 25px;
     }
+
+    .video-player {
+        width: 320px;
+        height: 180px;
+    }
+
+    .one-note {
+        width: 250px;
+    }
+
+    .all-techniques-div {
+        display: block;
+    }
+
+    .technique-right , .technique-title {
+        width: 100%;
+    }
+
 }

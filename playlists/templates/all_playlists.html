@@ -28,7 +28,7 @@
                 <div class="playlist-left">
                     <div class="one-video-player">
                         {% comment %} {% if technique.video_option == 'full' %} {% endcomment %}
-                        <iframe width="400" height="280" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="video-player" src="{{ technique.embed_url }}" frameborder="0" allowfullscreen></iframe>
                         {% comment %} {% endif %}
                         {% if technique.video_option == 'cropped' %}
                             <video width="400" height="280" controls>
