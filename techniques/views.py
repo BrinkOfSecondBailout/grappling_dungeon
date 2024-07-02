@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from .forms import CustomTechniqueCreationForm, CustomTechniqueChangeForm, CustomNoteChangeForm
-from moviepy.video.io.VideoFileClip import VideoFileClip
+# from moviepy.video.io.VideoFileClip import VideoFileClip
 from .models import Technique
 from playlists.models import Playlist, PlaylistItem
 from django.contrib import messages
 from django.urls import reverse
-from pytube import YouTube
+# from pytube import YouTube
 import os
 import time
 import uuid
@@ -106,44 +106,44 @@ def add(request):
     return render(request, 'add_new.html', context)
 
 
-def crop_video(video_url, start_time, end_time):
-    try:
-        youtube_video = YouTube(video_url)
-        video_stream = youtube_video.streams.filter(file_extension='mp4').first()
-        custom_name = 'temp_video'
+# def crop_video(video_url, start_time, end_time):
+#     try:
+#         youtube_video = YouTube(video_url)
+#         video_stream = youtube_video.streams.filter(file_extension='mp4').first()
+#         custom_name = 'temp_video'
 
-        video_stream.download(output_path='media/temp/', filename=f'{custom_name}.mp4')
+#         video_stream.download(output_path='media/temp/', filename=f'{custom_name}.mp4')
 
-        temp_download_path = f'media/temp/{custom_name}.mp4'
+#         temp_download_path = f'media/temp/{custom_name}.mp4'
 
-        max_wait_time = 20
-        waited_time = 0
+#         max_wait_time = 20
+#         waited_time = 0
 
-        while not os.path.exists(temp_download_path) and waited_time < max_wait_time:
-            time.sleep(1)
-            waited_time += 1
+#         while not os.path.exists(temp_download_path) and waited_time < max_wait_time:
+#             time.sleep(1)
+#             waited_time += 1
 
-        if os.path.exists(temp_download_path):
-            video_clip = VideoFileClip(temp_download_path)
-            cropped_video_clip = video_clip.subclip(start_time, end_time)
+#         if os.path.exists(temp_download_path):
+#             video_clip = VideoFileClip(temp_download_path)
+#             cropped_video_clip = video_clip.subclip(start_time, end_time)
 
-            cropped_video_name = f'{uuid.uuid4()}.mp4'
-            cropped_video_path = f'media/cropped_videos/{cropped_video_name}'
-            cropped_video_clip.write_videofile(codec='libx264', audio_codec='aac', filename=cropped_video_path)
+#             cropped_video_name = f'{uuid.uuid4()}.mp4'
+#             cropped_video_path = f'media/cropped_videos/{cropped_video_name}'
+#             cropped_video_clip.write_videofile(codec='libx264', audio_codec='aac', filename=cropped_video_path)
 
-            video_clip.reader.close()
-            video_clip.audio.reader.close_proc()
-            os.remove(temp_download_path)
-            print(cropped_video_path)
-            return cropped_video_path
-        else:
-            print('Timeout: File not downloaded within allotted time')
-            return None
+#             video_clip.reader.close()
+#             video_clip.audio.reader.close_proc()
+#             os.remove(temp_download_path)
+#             print(cropped_video_path)
+#             return cropped_video_path
+#         else:
+#             print('Timeout: File not downloaded within allotted time')
+#             return None
 
 
-    except Exception as e:
-        print(f'Error: {e}')
-        return None
+#     except Exception as e:
+#         print(f'Error: {e}')
+#         return None
 
 
 @login_required
