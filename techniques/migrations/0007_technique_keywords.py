@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='technique',
             name='keywords',
-            field=models.CharField(max_length=50, blank=True, null=True),
-            # field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=50), blank=True, null=True, size=None),
+            # field=models.CharField(max_length=50, blank=True, null=True),
+            field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=50), blank=True, null=True, size=None),
         ),
     ]
