@@ -274,12 +274,17 @@ input {
 }
 
 .all-techniques-div {
-    display: flex;
-    flex-wrap: wrap;
+    display: flex; 
+    flex-wrap: wrap; 
 }
 
 .one-video-player {
     padding: 10px;
+}
+
+.video-player {
+    width: 560px;
+    height: 316px;
 }
 
 .one-note-div {

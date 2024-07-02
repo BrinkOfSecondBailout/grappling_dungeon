@@ -17,4 +17,36 @@
         font-size: 17px;
         gap: 25px;
     }
+
+    #loading-bar {
+        width: 350px;
+    }
+    #loading-img {
+        width: 350px;
+    }
+
+    #filter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #search-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .all-techniques-div {
+        flex-direction: column;
+    }
+
+    .one-technique {
+        /* width: 70%; */
+    }
+
+    .video-player {
+        width: 300px;
+        height: 180px;
+    }
 }
