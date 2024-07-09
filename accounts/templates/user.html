@@ -13,6 +13,11 @@
                     <img class="profile-picture" src="{% static 'images/no-profile.png' %}" alt="No profile picture">
                 {% endif %}
             </div>
+
+            {% if user1.id == user.id %}
+                <div><a href="{% url 'edit' %}">Edit Your Profile</a></div>
+            {% endif %}
+
             <div class="profile-name-div">
                 <div>
                     <h3>{{ user.username }}</h3>

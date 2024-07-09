@@ -64,8 +64,9 @@ def dashboard(request):
 
 @login_required
 def user(request, user_id):
+    user1 = request.user
     user = get_object_or_404(User, id=user_id)
-    return render(request, 'user.html', {'user': user})
+    return render(request, 'user.html', {'user': user, 'user1': user1})
 
 
 def edit(request):
