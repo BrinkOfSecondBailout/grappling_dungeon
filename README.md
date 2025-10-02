@@ -23,30 +23,27 @@ git clone https://github.com/BrinkOfSecondBailout/grappling_dungeon.git
 cd grappling_dungeon
 
 # Create a virtual environment
-
 python -m venv venv
 
 # Activate virtual environment
 # Windows
-
 venv\Scripts\activate
 
 # Unix or MacOS
-
 source venv/bin/activate
 
 # Install Dependencies
-
 pip install -r requirements.txt
 
 # Apply database Migrations
-
+python manage.py makemigrations
 python manage.py migrate
 
+# Create superuser if needed
+python manage.py createsuperuser
+
 # Run server
-
 python manage.py runserver
-
 
 ## Questions
 
